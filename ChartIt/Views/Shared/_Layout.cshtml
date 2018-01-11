@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html>
+<html  class="has-navbar-fixed-top night"  ng-app="cryptobuddy" ng-controller="mainCtrl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/NgAnimate.css">
+    <link rel="stylesheet"  href="~/Content/stockCharts.css"  />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="site">
+
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <button type="button" class="button navbar-burger" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-item logo" href="/">
+                    <img src="/img/cb-logo.png" alt="" width="205" height="60">
+                </a>
+
+            </div>
+            <div class="navbar-brand global-stats">
+                <span class="navbar-item global-stat">
+                    Market Cap: {{ global.MarketCapUsd | currency}}
+                </span>
+                <span class="navbar-item global-stat">
+                    Volume: {{ global.Volume24hUsd | currency}}
+                </span>
+                <span class="navbar-item global-stat">
+                    Currencies: {{ global.ActiveCurrencies }}
+                </span>
+                <span class="navbar-item global-stat">
+                    Markets: {{ global.ActiveMarkets }}
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="container site-content">
+        @RenderBody()
+        <div class="slide-top" ng-view></div>
+
+    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year CryptoBuddy</p>
+        </div>
+
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/amcharts.js"></script>
+    <script src="~/Scripts/serial.js"></script>
+    <script src="~/Scripts/amstock.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.8/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.8/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-touch/1.6.8/angular-touch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
+    <script src="~/Scripts/angular-nvd3.js"></script>
+    <script src="~/Scripts/angular-stockchart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css" />
+    <script src="~/Scripts/angular-tablesort.js"></script>
+    <script>
+        var cb = angular.module('cryptobuddy', ['ngRoute', 'ngAnimate', 'tableSort', 'nvd3', 'amCharts', 'ui.bootstrap'])
+            .config(['tableSortConfigProvider', function (tableSortConfigProvider) {
+                 /* Template Tokens - all are replaced by Angular expressions
+             * TOTAL_COUNT         - The number for the total count of items in the table
+             * FILTERED_COUNT      - The number for the total count of items in the table after the filter has been applied
+             * FILTER_STRING       - The string used for the `ng-model` of the text filter
+             * PER_PAGE_OPTIONS    - The array of numbers for the verious page size options
+             * ITEMS_PER_PAGE      - The number for the selected number of items to display per page (the selected item from PER_PAGE_OPTIONS)
+             * CURRENT_PAGE_NUMBER - The number for the page that is currently being viewed
+             * CURRENT_PAGE_RANGE  - The number for the current viewable range of pages
+             * ITEM_NAME_SINGULAR  - The singular version of the name of the items being iterated over
+             * ITEM_NAME_PLURAL    - The plural version of the name of the items being iterated over
+             */
+                var filterString =  " <div class='filtering fa fa-search search-wrapper'>" +
+                                        "<input type='text' placeholder='filter {{ITEM_NAME_PLURAL}}' ng-model='FILTER_STRING' />"+
+                                     "</div>"
+                tableSortConfigProvider.perPageOptions = [20, 50, 100]
+                tableSortConfigProvider.perPageDefault = 20
+              
+                tableSortConfigProvider.filterTemplate = filterString;
+                var pagerString = "<div class='table-footer'>" +
+                                    
+                                   
+                                    "<div class='form-group table-per-page' style='display:block; float:left'>" +
+                                        "<select class='form-control' ng-model='ITEMS_PER_PAGE' ng-options='opt as (opt + \" per page\") for opt in PER_PAGE_OPTIONS'></select>" +
+                                    "</div>" +
+                                    "<small class='text-muted'>Showing {{CURRENT_PAGE_RANGE}} {{FILTERED_COUNT === 0 ? '' : 'of'}} " +
+                                    "<span ng-if='FILTERED_COUNT === TOTAL_COUNT'>{{TOTAL_COUNT  | number}} {{TOTAL_COUNT  === 1 ? ITEM_NAME_SINGULAR : ITEM_NAME_PLURAL}}</span>" +
+                                    "<span ng-if='FILTERED_COUNT !==  TOTAL_COUNT'>{{FILTERED_COUNT | number}} {{FILTERED_COUNT === 1 ? ITEM_NAME_SINGULAR : ITEM_NAME_PLURAL}} (filtered from {{TOTAL_COUNT  | number}})</span>" +
+                                    "</small> " +
+                                    "<nav class='pagination' role='navigation' aria-label='pagination'>" +
+                                    "<ul class='pagination-list' uib-pagination style='vertical-align:middle;' ng-if='ITEMS_PER_PAGE <  TOTAL_COUNT' ng-model='CURRENT_PAGE_NUMBER' total-items='FILTERED_COUNT' boundary-links='true' items-per-page='ITEMS_PER_PAGE' max-size='5' force-ellipses='true'></ul>" +
+                                    "</nav>" +
+                                "</div>";
+            tableSortConfigProvider.paginationTemplate = pagerString;
+        } ]);
+
+        cb.controller('mainCtrl', function ($scope, $http, $interval) {
+            $scope.ticker = [];
+            $scope.global = {};
+
+            refreshTicker();
+
+            $interval(function () {
+                refreshTicker();
+            }, 30000);
+
+            $scope.urlFriendly = function (name) {
+                return name.toLowerCase().replace(/ /g, '-');
+            }
+            $scope.isDefaultDate = function (d) {
+                return d === new Date('Jan 18, 1970')
+            };
+
+            $scope.filters = {
+                coinFilter: ''
+            };
+            
+
+
+            function refreshTicker() {
+                $http.get('/api/getticker').then(
+                    function (response) {
+                        $scope.ticker = response.data;
+                    },
+                    function () {
+
+                    }
+                );
+            }
+
+            $http.get('/api/getglobalstats').then(
+                function (response) {
+                    $scope.global = response.data;
+                },
+                function () {
+
+                }
+            );
+            $scope.state = {
+                isLoaded: false
+            };
+        });
+
+        cb.controller('homeCtrl', function ($scope, $http, $interval) {
+
+        });
+        cb.controller('currencyCtrl', function ($scope, $http, $interval, $routeParams, $sce, $q, $timeout) {
+            $scope.$parent.state.isLoaded = false;
+            $scope.id = $routeParams.id;
+            $scope.symbol = $routeParams.symbol;
+            $scope.meta = {};
+            $scope.coin = {};
+
+            $scope.bottomTabs = {
+                panel: 'charts'
+            };
+            $scope.chartData = {
+                minutes:[],
+                hours: [],
+                days: []
+            };
+            $scope.config = {
+                stockChart: $timeout(function () {
+                    return {
+                        type: "stock",
+                        categoryAxesSettings: {
+                            minPeriod: "mm"
+                        },
+                        dataSets: [{
+                            title: $scope.symbol.toUpperCase() + ' 1 Day',
+                            fieldMappings: [{
+                                fromField: "open",
+                                toField: "open"
+                            }, {
+                                fromField: "close",
+                                toField: "close"
+                            }, {
+                                fromField: "high",
+                                toField: "high"
+                            }, {
+                                fromField: "low",
+                                toField: "low"
+                            }, {
+                                fromField: "volume",
+                                toField: "volume"
+                            }],
+
+                            color: "#7f8da9",
+                            dataProvider: $scope.chartData.days,
+
+                            categoryField: "date"
+                        },
+                            {
+                                title: $scope.symbol.toUpperCase() + ' 1 hour',
+                            fieldMappings: [{
+                                fromField: "open",
+                                toField: "open"
+                            }, {
+                                fromField: "close",
+                                toField: "close"
+                            }, {
+                                fromField: "high",
+                                toField: "high"
+                            }, {
+                                fromField: "low",
+                                toField: "low"
+                            }, {
+                                fromField: "volume",
+                                toField: "volume"
+                            }],
+
+                            color: "#7f8da9",
+                            dataProvider: $scope.chartData.hours,
+
+                            categoryField: "date"
+                            }, {
+                                title: $scope.symbol.toUpperCase() + ' 1 Minute',
+                                fieldMappings: [{
+                                    fromField: "open",
+                                    toField: "open"
+                                }, {
+                                    fromField: "close",
+                                    toField: "close"
+                                }, {
+                                    fromField: "high",
+                                    toField: "high"
+                                }, {
+                                    fromField: "low",
+                                    toField: "low"
+                                }, {
+                                    fromField: "volume",
+                                    toField: "volume"
+                                }],
+
+                                color: "#7f8da9",
+                                dataProvider: $scope.chartData.minutes,
+                                categoryField: "date"
+                            }
+                            ],
+
+                        panels: [{
+                            title: "Value",
+                            showCategoryAxis: false,
+                            percentHeight: 70,
+                            valueAxes: [{
+                                id: "v1",
+                                dashLength: 0,
+                                axisColor: '#323c45',
+                                color: '#9ea694',
+                                gridColor: '#323c45',
+                                position: "right"
+                            }],
+
+                            categoryAxis: {
+                                dashLength: 0,
+                                color: '#9ea694',
+                                gridAlpha: 0
+                            },
+
+                            stockGraphs: [{
+                                type: "candlestick",
+                                id: "g1",
+                                openField: "open",
+                                closeField: "close",
+                                highField: "high",
+                                lowField: "low",
+                                valueField: "close",
+                                lineColor: "#9EFF20",
+                                fillColors: "#9EFF20",
+                                negativeLineColor: "#ff207d",
+                                negativeFillColors: "#ff207d",
+                                fillAlphas: 1,
+                                useDataSetColors: false,
+                                comparable: false,
+                                compareField: "value",
+                                showBalloon: false
+                            }],
+
+                            stockLegend: {
+                                valueTextRegular: undefined,
+                                periodValueTextComparing: "[[percents.value.close]]%",
+                                color: '#9ea694',
+                            }
+                        },
+
+                        {
+                            title: "Volume",
+                            percentHeight: 30,
+                            marginTop: 1,
+                            showCategoryAxis: true,
+                            valueAxes: [{
+                                id: "v2",
+                                dashLength: 0,
+                                axisColor: '#323c45',
+                                color: '#9ea694',
+                                gridColor: '#1b1b1b',
+                                position: "right"
+                            }],
+
+                            categoryAxis: {
+                                dashLength: 0,
+                                color: '#9ea694',
+                                gridAlpha: 0
+                            },
+
+                            stockGraphs: [{
+                                valueField: "volume",
+                                type: "column",
+                                showBalloon: false,
+                                fillAlphas: 1,
+                                lineColor: "#21ebff",
+                                fillColors: "#21ebff"
+                            }],
+
+                            stockLegend: {
+                                markerType: "none",
+                                color: '#9ea694',
+                                markerSize: 0,
+                                labelText: "",
+                                periodValueTextRegular: "[[value.close]]"
+                            }
+                        }
+                        ],
+
+                        chartCursorSettings: {
+                            valueLineEnabled: true,
+                            valueLineBalloonEnabled: true,
+                            cursorColor: '#9ea694',
+                            categoryBalloonColor: '#9ea694',
+                            categoryBalloonAlpha: 0.25,
+                            valueLineAlpha: 0.25,
+                            cursorAlpha: 0.25,
+                            pan: true
+                        },
+
+
+                        chartScrollbarSettings: {
+                            graph: "g1",
+                            graphType: "line",
+                            usePeriod: "WW",
+                            updateOnReleaseOnly: false,
+                            backgroundColor: '#0d1013',
+                            graphFillColor: '#323c45',
+                            graphLineAlpha: 0.25,
+                            gridColor: '#1b1b1b',
+                            selectedBackgroundColor: '#1FECFF',
+                            selectedBackgroundAlpha: '0.1'
+                        },
+                        dataSetSelector: {
+                            position: 'top',
+                            selectText: '',
+                            compareText: ''
+                        },
+                        periodSelector: {
+                            position: "bottom",
+                            periods: [{
+                                period: "DD",
+                                count: 10,
+                                label: "10 days"
+                            }, {
+                                period: "MM",
+                                selected: true,
+                                count: 1,
+                                label: "1 month"
+                            }, {
+                                period: "YYYY",
+                                count: 1,
+                                label: "1 year"
+                            }, {
+                                period: "YTD",
+                                label: "YTD"
+                            }, {
+                                period: "MAX",
+                                label: "MAX"
+                            }]
+                        }
+                    }
+                },3000)
+            };
+
+
+
+
+            var _metaLoaded = false;
+            var _infoLoaded = false;
+
+            $scope.tabs = {
+                panel: 'general'
+            };
+
+            $scope.urlFriendly = function (name) {
+                if (!name)
+                    return '';
+                return name.toLowerCase().replace(/ /g, '-');
+            }
+            $scope.getAge = function (startDate) {
+                if (!startDate)
+                    return '';
+
+                var today = new Date();
+
+                var start = new Date(startDate);
+
+
+                var monthsOld = diff_months(today, start);
+                if (monthsOld < 12)
+                    return monthsOld + ' Months';
+                else if (monthsOld < 24)
+                    return '1 Year and ' + (monthsOld % 12) + ' Months';
+                else
+                    return Math.floor(monthsOld / 12) + ' Years and ' + (monthsOld % 12) + ' Months';
+            }
+
+            function diff_months(dt2, dt1) {
+
+                var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+                diff /= (60 * 60 * 24 * 7 * 4);
+                return Math.abs(Math.round(diff));
+
+            }
+            getMetadata();
+            function getMetadata() {
+
+                $http.get('/api/getcoinmeta?symbol=' + $scope.symbol + '&id=' + $scope.id).then(
+                    function (response) {
+
+                        if (!response.data)
+                            return;
+
+                        $scope.meta = response.data.Metadata;
+                        $scope.coin = response.data.Details;
+                        $scope.socialStats = response.data.SocialStats;
+
+                        if (response.data.CandleData) {
+                            response.data.CandleData.Minute.map(function (d) {
+                                d.date = new Date(d.date);
+                            })
+                            response.data.CandleData.Hour.map(function (d) {
+                                d.date = new Date(d.date);
+                            })
+                            response.data.CandleData.Day.map(function (d) {
+                                d.date = new Date(d.date);
+                            })
+
+
+
+                            $scope.chartData.minutes = response.data.CandleData.Minute;
+                            $scope.chartData.hours = response.data.CandleData.Hour;
+                            $scope.chartData.days = response.data.CandleData.Day;
+                        }
+                        $scope.CandleData = response.data.CandleData;
+                        if ($scope.meta) {
+
+                        
+                        $scope.meta.Technology = $sce.trustAsHtml($scope.meta.Technology);
+                        $scope.meta.Features = $sce.trustAsHtml($scope.meta.Features);
+                        $scope.meta.Description = $sce.trustAsHtml($scope.meta.Description);
+                        $scope.meta.ICO.Description = $sce.trustAsHtml($scope.meta.ICO.Description);
+                        $scope.meta.ICO.Blog = $sce.trustAsHtml($scope.meta.ICO.Blog);
+                        $scope.meta.Website = $sce.trustAsHtml($scope.meta.Website);
+                        $scope.meta.ICO.Website = $sce.trustAsHtml($scope.meta.ICO.Website);
+                        $scope.meta.ICO.WhitePaper = $sce.trustAsHtml($scope.meta.ICO.WhitePaper);
+                        }
+                        $scope.$parent.state.isLoaded = true;
+                    },
+                    function (msg) {
+
+                    }
+                );
+
+            }
+
+        });
+
+        cb.config(function ($routeProvider, $locationProvider) {
+            $locationProvider.hashPrefix('');
+            $routeProvider
+                .when("/", {
+                    templateUrl: "/Content/angular-templates/main.html",
+                    controller: 'homeCtrl'
+                })
+                .when("/currency/:id/:symbol", {
+                    templateUrl: "/Content/angular-templates/currency.html",
+                    controller: 'currencyCtrl'
+                })
+
+        });
+    </script>
+</body>
+</html>

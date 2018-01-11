@@ -1,0 +1,110 @@
+﻿<div>
+    <div class="coin-loader rotate-in" ng-show="!$parent.state.isLoaded"></div>
+    <div class="currency-details slide-top" ng-if="$parent.state.isLoaded">
+
+        <h1 class="title clearfix ">
+            <a href="#/" class="button is-dark back-button"><</a>
+            <img class="currency-logo" width="32" height="32" ng-src="https://files.coinmarketcap.com/static/img/coins/32x32/{{ urlFriendly(coin.Id) }}.png" alt="{{coin.Name}}" />
+            {{meta && meta.H1Text ? meta.H1Text : coin.Name + ' (' + coin.Symbol +  ')'}}
+
+        </h1>
+
+        <div class="columns">
+            <div class="column is-one-quarter">
+                <div class="card">
+                    <div class="card-content currency-profile-info">
+                        <div class="general-info">
+
+                            <div ng-if="meta && meta.StartDate">Age: {{ getAge(meta.StartDate) }}</div>
+                            <div ng-if="meta && meta.Website"><i class="fa fa-home"></i><span ng-bind-html="meta.Website"></span> </div>
+                            <div ng-if="meta && meta.Twitter">
+                                <img class="icon-label" width="24" height="24" src="/img/twitter-icon.png" srcset="/img/twitter-icon.png 1x, /img/twitter-icon@2x.png 2x" alt="Twitter icon" />
+                                <a ng-href="https://www.twitter.com/{{meta.Twitter.replace('@', '')}}">{{meta.Twitter}}</a>
+                            </div>
+                            <div ng-if="socialStats.FacebookLink">
+                                <i class="fa fa-facebook"></i> <a href="{{socialStats.FacebookLink}}">Facebook</a>
+                            </div>
+                            <div ng-if="meta.ICO.Blog"><i class="fa fa-rss"></i><span ng-bind-html="meta.ICO.Blog"></span></div>
+                            <div ng-if="meta.ICO.WhitePaper"><i class="fa fa-book" aria-hidden="true"></i><span ng-bind-html="meta.ICO.WhitePaper"></span></div>
+                            <div ng-if="socialStats.CodeRepos && socialStats.CodeRepos.length">
+                                <i class="fa fa-code-fork" aria-hidden="true"></i> <a href="{{socialStats.CodeRepos[0].Url}}">Repository</a>
+                            </div>
+                            <div>Last Updated: {{coin.LastUpdated | date}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="currency-price">
+                    <span class="title-rank"><span class="title-rank-label">Rank</span>{{coin.Rank | number}} </span>
+
+                    <div class="currency-main-price">
+                        <span ng-if="coin.PriceUsd > 0.01"> {{coin.PriceUsd | currency}} USD</span>
+                        <span ng-if="coin.PriceUsd < 0.01"> {{coin.PriceUsd.toFixed(8)}} USD</span>
+                        <span ng-class="{positive: coin.PercentChange24h > 0,  negative: coin.PercentChange24h < 0,  neutral: coin.PercentChange24h === 0}" class="currency-main-price-change">({{coin.PercentChange24h}}%)</span>
+                    </div>
+                    <div>{{coin.PriceBtc }} BTC</div>
+                </div>
+
+                <div class="currency-general-info" ng-class="{active: tabs.panel === 'general'}">
+                    <div class="columns currency-main-stats">
+                        <div class="column"><div class="main-stat-label">Market Cap</div>{{coin.MarketCapUsd | currency}} USD</div>
+                        <div class="column"><div class="main-stat-label">Volume</div>{{coin.Volume24hUsd | currency}} USD</div>
+                        <div class="column"><div class="main-stat-label">Available Supply</div>{{coin.AvailableSupply | number }} {{coin.Symbol}}</div>
+                        <div class="column"><div class="main-stat-label">Total Supply</div>{{coin.TotalSupply | number}} {{coin.Symbol}}</div>
+                    </div>
+                    <div ng-if="meta">
+                        <span ng-bind-html="meta.Description"></span>
+                        <div>Coins Mined: {{meta.TotalCoinsMined | number}}</div>
+                        <div ng-if="meta.Technology" ng-bind-html="meta.Technology"></div> 
+                        <div ng-if="meta.ProofType">Proof Type: {{meta.ProofType}}</div> 
+                        <div ng-if="meta.Features">Features: <span ng-bind-html="meta.Features"></span></div>
+                        <div ng-if="meta.DifficultyAdjustment">Difficulty Adjustment: {{meta.DifficultyAdjustment}}</div>
+                        <div ng-if="meta.Algorithm">Algorithm: {{meta.Algorithm}}</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="tabs">
+            <ul>
+                <li ng-click="bottomTabs.panel = 'charts'" ng-class="{'is-active': bottomTabs.panel === 'charts'}"><a>Charts</a></li>
+                <li ng-click="bottomTabs.panel = 'exchanges'" ng-class="{'is-active': bottomTabs.panel === 'exchanges'}"><a>Exchanges</a></li>
+                <li ng-click="bottomTabs.panel = 'ico'" ng-class="{'is-active': bottomTabs.panel === 'ico'}"><a>ICO Info</a></li>
+            </ul>
+        </div>
+        <div class="tab-panel" ng-class="{active: bottomTabs.panel === 'charts'}">
+            <div class="chart-wrapper">
+                <stock-chart id="test" options="config.stockChart" style="width:100%; height:600px;" ng-if="$parent.state.isLoaded"></stock-chart>
+            </div>
+        </div>
+        <div class="tab-panel" ng-class="{active: bottomTabs.panel === 'exchanges'}">
+            Exchanges
+        </div>
+        <div class="tab-panel currency-ico-info" ng-class="{active: bottomTabs.panel === 'ico'}">
+            <div ng-if="!isDefaultDate(meta.ICO.date)">{{ meta.ICO.Date | date }}</div>
+            <div ng-if="!isDefaultDate(meta.ICO.EndDate)">{{ meta.ICO.EndDate | date }}</div>
+            <div>Features: {{ meta.ICO.Features }}</div>
+            <div>Funding Cap: {{ meta.ICO.FundingCap }}</div>
+            <div>Target: {{ meta.ICO.FundingTarget }}</div>
+            <div>Funds Raised: {{ meta.ICO.FundsRaisedList }}</div>
+            <div>Funds Raised USD: {{ meta.ICO.FundsRaisedUSD | currency }}</div>
+            <div>ICO Token Supply: {{ meta.ICO.ICOTokenSupply | number }}</div>
+            <div>Jurisdiction: {{ meta.ICO.Jurisdiction }}</div>
+            <div>Legal Advisors: {{ meta.ICO.LegalAdvisers }}</div>
+            <div>Legal Form: {{ meta.ICO.LegalForm }}</div>
+            <div>Payment Method: {{ meta.ICO.PaymentMethod }}</div>
+            <div>Public Portfolio ID: {{ meta.ICO.PublicPortfolioId }}</div>
+            <div>Public Portfolio URL: {{ meta.ICO.PublicPortfolioUrl }}</div>
+            <div>Security Audit Company: {{ meta.ICO.SecurityAuditCompany }}</div>
+            <div>Start Price:  {{ meta.ICO.StartPrice }} {{ meta.ICO.StartPriceCurrency }}</div>
+            <div>ICO Status: {{ meta.ICO.Status }}</div>
+            <div>Investor Cut: {{ meta.ICO.TokenPercentageForInvestors }}</div>
+            <div>Reserve: {{ meta.ICO.TokenReserveSplit }}</div>
+            <div>Token Supply Post ICO: {{ meta.ICO.TokenSupplyPostICO }}</div>
+            <div>Token Type: {{ meta.ICO.TokenType }}</div>
+            <div>ICO Site: <span ng-bind-html="meta.ICO.Website"></span></div>
+            <div>Whitepaper: <span ng-bind-html="meta.ICO.WhitePaper"></span></div>
+        </div>
+    </div>
+</div>

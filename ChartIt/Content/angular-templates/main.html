@@ -1,0 +1,39 @@
+﻿<div>
+   
+    <table class="cb-ticker table" ts-filter-fields="Id,Name,Symbol" ts-no-data-text="Nothing to see here..." ts-wrapper ts-display-filtering="true" ts-filter-function="customFilterFn" ts-no-data-text="Nothing to see here!">
+        <thead>
+            <tr>
+                <th ts-criteria="Rank" ts-default>#</th>
+                <th ts-criteria="Name|lowercase">Coin</th>
+                <th ts-criteria="PriceUsd">Price USD</th>
+                <th ts-criteria="PriceBtc">Price BTC</th>
+                <th ts-criteria="MarketCapUsd">Market Cap</th>
+                <th ts-criteria="Volume24hUsd">Volume</th>
+                <th ts-criteria="PercentChange1h">Change (1h)</th>
+                <th ts-criteria="PercentChange24h">Change (24h)</th>
+                <th ts-criteria="PercentChange7d">Change (1w)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="coin in ticker track by coin.Name" ts-repeat>
+                <td>{{coin.Rank}}</td>
+                <td>
+                    <img class="crypto-logo" width="24" height="24" ng-src="https://files.coinmarketcap.com/static/img/coins/32x32/{{ urlFriendly(coin.Id) }}.png" alt="{{coin.Name}}" />
+                    <a ng-href="#/currency/{{coin.Id}}/{{coin.Symbol}}">
+                        {{coin.Name}}
+                        <span class="cb-symbol">({{coin.Symbol}})</span>
+                    </a>
+                </td>
+                <td ng-class="{positive: coin.PercentChange1h  > 0,  negative: coin.PercentChange1h  < 0,  neutral: coin.PercentChange1h === 0}">
+                    ${{coin.PriceUsd > 1 ? coin.PriceUsd.toFixed(2) : coin.PriceUsd.toFixed(6)}}
+                </td>
+                <td>฿{{coin.PriceBtc <= 1 ? coin.PriceBtc : coin.PriceBtc.toFixed(8)}}</td>
+                <td>{{coin.MarketCapUsd | currency}}</td>
+                <td>{{coin.Volume24hUsd | currency}}</td>
+                <td ng-class="{positive: coin.PercentChange1h  > 0,  negative: coin.PercentChange1h  < 0,  neutral: coin.PercentChange1h === 0}">{{coin.PercentChange1h.toFixed(2)}}%</td>
+                <td ng-class="{positive: coin.PercentChange24h > 0,  negative: coin.PercentChange24h < 0,  neutral: coin.PercentChange24h === 0}">{{coin.PercentChange24h.toFixed(2)}}%</td>
+                <td ng-class="{positive: coin.PercentChange7d  > 0,  negative: coin.PercentChange7d  < 0,  neutral: coin.PercentChange7d === 0}">{{coin.PercentChange7d.toFixed(2)}}%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
