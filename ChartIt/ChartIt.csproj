@@ -186,6 +186,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="img\cb-logo.png" />
     <Content Include="img\coin-flip.gif" />
+    <Content Include="img\robot-loader.gif" />
     <Content Include="img\twitter-icon%402x.png" />
     <Content Include="img\twitter-icon.png" />
     <Content Include="Scripts\amcharts.js" />

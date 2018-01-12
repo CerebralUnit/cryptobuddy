@@ -2,8 +2,8 @@
 <html  class="has-navbar-fixed-top night"  ng-app="cryptobuddy" ng-controller="mainCtrl">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>@ViewBag.Title - cryptobuddy - </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/NgAnimate.css">
     <link rel="stylesheet"  href="~/Content/stockCharts.css"  />
@@ -11,15 +11,11 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="site">
-
+    <div class="coin-loader" ng-show="!state.isLoaded"></div>
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
-                <button type="button" class="button navbar-burger" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+
                 <a class="navbar-item logo" href="/">
                     <img src="/img/cb-logo.png" alt="" width="205" height="60">
                 </a>
@@ -71,7 +67,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css" />
     <script src="~/Scripts/angular-tablesort.js"></script>
     <script>
-        var cb = angular.module('cryptobuddy', ['ngRoute', 'ngAnimate', 'tableSort', 'nvd3', 'amCharts', 'ui.bootstrap'])
+        var cb = angular.module('cryptobuddy', ['ngRoute', 'ngTouch','ngAnimate', 'tableSort', 'nvd3', 'amCharts', 'ui.bootstrap'])
             .config(['tableSortConfigProvider', function (tableSortConfigProvider) {
                  /* Template Tokens - all are replaced by Angular expressions
              * TOTAL_COUNT         - The number for the total count of items in the table
@@ -89,11 +85,11 @@
                                      "</div>"
                 tableSortConfigProvider.perPageOptions = [20, 50, 100]
                 tableSortConfigProvider.perPageDefault = 20
-              
+
                 tableSortConfigProvider.filterTemplate = filterString;
                 var pagerString = "<div class='table-footer'>" +
-                                    
-                                   
+
+
                                     "<div class='form-group table-per-page' style='display:block; float:left'>" +
                                         "<select class='form-control' ng-model='ITEMS_PER_PAGE' ng-options='opt as (opt + \" per page\") for opt in PER_PAGE_OPTIONS'></select>" +
                                     "</div>" +
@@ -107,17 +103,35 @@
                                 "</div>";
             tableSortConfigProvider.paginationTemplate = pagerString;
         } ]);
-
+        cb.directive("ngTap", [function () {
+            return function (scope, elem, attrs) {
+                var touchmoved;
+                elem.on('touchend', function (e) {
+                    if (touchmoved != true) {
+                        scope.$apply(attrs["ngTap"]);
+                    }
+                }).on('touchmove', function (e) {
+                    touchmoved = true;
+                }).on('touchstart', function () {
+                    touchmoved = false;
+                });
+               
+            }
+        }])
         cb.controller('mainCtrl', function ($scope, $http, $interval) {
             $scope.ticker = [];
             $scope.global = {};
-
+            $scope.state = {
+                isLoaded: false
+            };
             refreshTicker();
 
             $interval(function () {
                 refreshTicker();
             }, 30000);
-
+            $scope.goTo = function (url) {
+                window.location = url;
+            };
             $scope.urlFriendly = function (name) {
                 return name.toLowerCase().replace(/ /g, '-');
             }
@@ -128,16 +142,18 @@
             $scope.filters = {
                 coinFilter: ''
             };
-            
+
 
 
             function refreshTicker() {
                 $http.get('/api/getticker').then(
                     function (response) {
+                        $scope.state.isLoaded = true;
                         $scope.ticker = response.data;
                     },
-                    function () {
-
+                    function (err) {
+                        $scope.state.isLoaded = true;
+                        console.log(err)
                     }
                 );
             }
@@ -150,9 +166,7 @@
 
                 }
             );
-            $scope.state = {
-                isLoaded: false
-            };
+           
         });
 
         cb.controller('homeCtrl', function ($scope, $http, $interval) {
@@ -164,7 +178,10 @@
             $scope.symbol = $routeParams.symbol;
             $scope.meta = {};
             $scope.coin = {};
-
+            $scope.showAllGeneralInfo = false;
+            $scope.toggleGeneralInfo = function () {
+                $scope.showAllGeneralInfo = !$scope.showAllGeneralInfo;
+            }
             $scope.bottomTabs = {
                 panel: 'charts'
             };
@@ -437,7 +454,7 @@
 
                 $http.get('/api/getcoinmeta?symbol=' + $scope.symbol + '&id=' + $scope.id).then(
                     function (response) {
-
+                        
                         if (!response.data)
                             return;
 
@@ -465,7 +482,7 @@
                         $scope.CandleData = response.data.CandleData;
                         if ($scope.meta) {
 
-                        
+
                         $scope.meta.Technology = $sce.trustAsHtml($scope.meta.Technology);
                         $scope.meta.Features = $sce.trustAsHtml($scope.meta.Features);
                         $scope.meta.Description = $sce.trustAsHtml($scope.meta.Description);
@@ -478,7 +495,7 @@
                         $scope.$parent.state.isLoaded = true;
                     },
                     function (msg) {
-
+                        $scope.$parent.state.isLoaded = true;
                     }
                 );
 

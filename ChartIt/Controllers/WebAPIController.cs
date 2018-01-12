@@ -47,5 +47,20 @@ namespace ChartIt.Controllers
             var Details = await CoinAPI.GetCandleData(symbol, symbol2);
             return Details;
         }
+
+        [Route("api/gethashtagstats")]
+        public TwitterHashtagStats GetHashtagStats([FromUri] string hashtag)
+        {
+            var Stats = Social.GetHashtagData(hashtag);
+            return Stats;
+        }
+
+        [Route("api/getsentiment")]
+        public string GetSentiment([FromUri] string q)
+        {
+            var Stats = Social.GetSentiment(q);
+            return Stats;
+        }
     }
+
 }

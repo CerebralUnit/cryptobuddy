@@ -24,7 +24,7 @@ namespace ChartIt.Data
     public class CoinAPI
     {
         private static IReadOnlyDictionary<string, CoinInfo> _coinList;
-
+        private static List<string> TopLevelCoins = new List<string>() { "BTC", "ETH", "LIT", "USDT" };
         public async static Task<List<CoinDetails>> GetTicker()
         {
             var Coins = new List<CoinDetails>();
@@ -147,6 +147,15 @@ namespace ChartIt.Data
         }
         public async static Task<CoinCandleCharts> GetCandleData(string symbol1, string symbol2)
         {
+            if(symbol1 == symbol2 && TopLevelCoins.Contains(symbol1))
+            {
+                symbol2 = "USDT";
+            }
+            else if(symbol1 == symbol2)
+            {
+                symbol2 = "BTC";
+            }
+
             var Response      = new CoinCandleCharts();
             var client        = new CryptoCompareClient();
             var History       =  client.History.DayAsync(symbol1, symbol2, null, null, null);
