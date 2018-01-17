@@ -201,6 +201,24 @@
     </Content>
     <None Include="Properties\PublishProfiles\coinbuddy - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\canvas-js\anew.js" />
+    <Content Include="Scripts\canvas-js\anew_ex.js" />
+    <Content Include="Scripts\canvas-js\anew_neg.js" />
+    <Content Include="Scripts\canvas-js\colour.js" />
+    <Content Include="Scripts\canvas-js\draw.js" />
+    <Content Include="Scripts\canvas-js\dup.js" />
+    <Content Include="Scripts\canvas-js\global-var.js" />
+    <Content Include="Scripts\canvas-js\happiness.js" />
+    <Content Include="Scripts\canvas-js\info_dlg.js" />
+    <Content Include="Scripts\canvas-js\neg.js" />
+    <Content Include="Scripts\canvas-js\porter.js" />
+    <Content Include="Scripts\canvas-js\pos_trim.js" />
+    <Content Include="Scripts\canvas-js\query.js" />
+    <Content Include="Scripts\canvas-js\sentiment-graph.js" />
+    <Content Include="Scripts\canvas-js\sentiment-main.js" />
+    <Content Include="Scripts\canvas-js\tfidf.js" />
+    <Content Include="Scripts\canvas-js\topic.js" />
+    <Content Include="Scripts\canvas-js\uniq.js" />
     <Content Include="Scripts\d3.min.js" />
     <Content Include="Scripts\images\dragIcon.gif" />
     <Content Include="Scripts\images\dragIconBlack.gif" />
@@ -267,11 +285,14 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.qtip-2.0.1.css" />
+    <Content Include="Scripts\jquery.qtip-2.0.1.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\serial.js" />
@@ -293,6 +314,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Sentiment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

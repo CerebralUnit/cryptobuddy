@@ -40,6 +40,11 @@
     <Reference Include="CoinMarketCap, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CoinMarketCapClient.1.0.2\lib\net45\CoinMarketCap.dll</HintPath>
     </Reference>
+    <Reference Include="CryptoCompare, Version=0.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CryptoCompare\bin\Debug\net45\CryptoCompare.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
       <HintPath>..\packages\TweetMoaSharp.4.0.3\lib\4.5\Hammock.ClientProfile.dll</HintPath>
     </Reference>
@@ -146,10 +151,6 @@
     <ProjectReference Include="..\ChartIt.Entities\ChartIt.Entities.csproj">
       <Project>{866f6027-8a36-479f-84bf-0a78feb053c9}</Project>
       <Name>ChartIt.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CryptoCompare\CryptoCompare.csproj">
-      <Project>{4170cf50-1620-4432-a211-832e99b7972e}</Project>
-      <Name>CryptoCompare</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

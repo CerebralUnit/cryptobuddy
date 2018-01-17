@@ -56,10 +56,10 @@ namespace ChartIt.Controllers
         }
 
         [Route("api/getsentiment")]
-        public string GetSentiment([FromUri] string q)
+        public dynamic GetSentiment([FromUri] string q)
         {
-            var Stats = Social.GetSentiment(q);
-            return Stats;
+            var Stats = Social.GetSentiment(q).Trim(new char[2] { ')', '(' });
+            return JsonConvert.DeserializeObject( Stats );
         }
     }
 

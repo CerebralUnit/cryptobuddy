@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="sentiment-tab" class="clearfix">
+
+    <div class="fa fa-search search-wrapper chart-query-wrapper">
+        <input id="query-inp" size="50" type="text" data-hasqtip="true" oldtitle="Keywords:" title="" placeholder="Search keyword/hashtag/cashtag to Analyze sentiment">
+    </div>
+    <div class="sentiment-chart clearfix">
+        <canvas id="tweet-legend" width="79" height="352"></canvas>
+        <canvas id="tweet-canvas" width="800" height="352">
+            <p style="align: center">
+                This application requires IE 9, Firefox 3.6, Chrome 17.0, or Safari 5.0
+            </p>
+        </canvas>
+    </div>
+</div>
+@section scripts{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/Scripts/jquery.qtip-2.0.1.css" /> 
+
+
+    <script>
+        var PHP_location ="http://" + window.location.hostname + "/api/getsentiment";
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.qtip-2.0.1.js"></script>
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/global-var.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/anew.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/anew_ex.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/anew_neg.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/colour.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/info_dlg.js"></script>
+
+    <script type="text/javascript" src="/scripts/canvas-js/draw.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/dup.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/happiness.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/sentiment-main.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/neg.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/porter.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/pos_trim.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/query.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/sentiment-graph.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/tfidf.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/topic.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/uniq.js"></script>
+
+}

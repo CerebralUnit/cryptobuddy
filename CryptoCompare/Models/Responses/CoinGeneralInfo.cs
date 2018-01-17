@@ -12,13 +12,13 @@ namespace CryptoCompare
 
         public string BaseAngularUrl { get; set; }
 
-        public long BlockNumber { get; set; }
+        public string BlockNumber { get; set; }
 
-        public long BlockReward { get; set; }
+        public string BlockReward { get; set; }
 
         public string BlockRewardReduction { get; set; }
 
-        public long BlockTime { get; set; }
+        public string BlockTime { get; set; }
 
         public string DangerTop { get; set; }
 

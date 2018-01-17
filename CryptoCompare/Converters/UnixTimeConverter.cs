@@ -17,13 +17,33 @@ namespace CryptoCompare
             object existingValue,
             JsonSerializer serializer)
         {
-            if (reader.Value == null)
+            if (String.IsNullOrWhiteSpace( reader.Value.ToString() ) )
             {
-                return null;
-            }
-            return Convert.ToInt64(reader.Value).FromUnixTime();
-        }
+                
 
+                return GetMin();
+            }
+
+            try
+            {
+               var val = Convert.ToInt64(reader.Value).FromUnixTime();
+                return val;
+            }
+            catch
+            {
+                return GetMin();
+            }
+        }
+         private object GetMin()
+        {
+            var Parsed = DateTime.MinValue;
+            var epoc = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            var delta = Parsed.ToUniversalTime() - epoc;
+
+            var ticks = (long)delta.TotalSeconds;
+
+            return Convert.ToInt64(ticks).FromUnixTime();
+        }
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var Parsed = DateTime.MinValue;

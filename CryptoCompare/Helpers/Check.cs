@@ -9,8 +9,7 @@ namespace CryptoCompare
 {
     /// <summary>
     /// Null checking utilities.
-    /// </summary>
-    [DebuggerStepThrough]
+    /// </summary> 
     internal static class Check
     {
         /// <summary>

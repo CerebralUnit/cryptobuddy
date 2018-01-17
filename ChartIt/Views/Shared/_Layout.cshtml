@@ -66,6 +66,39 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css" />
     <script src="~/Scripts/angular-tablesort.js"></script>
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/Scripts/jquery.qtip-2.0.1.css" />
+
+
+    <script>
+        var PHP_location = "http://" + window.location.hostname + "/api/getsentiment";
+    </script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.qtip-2.0.1.js"></script>
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/global-var.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/anew.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/anew_ex.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/anew_neg.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/colour.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/info_dlg.js"></script> 
+    <script type="text/javascript" src="/scripts/canvas-js/draw.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/dup.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/happiness.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/sentiment-main.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/neg.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/porter.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/pos_trim.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/query.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/sentiment-graph.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/tfidf.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/topic.js"></script>
+    <script type="text/javascript" src="/scripts/canvas-js/uniq.js"></script>
+
+
     <script>
         var cb = angular.module('cryptobuddy', ['ngRoute', 'ngTouch','ngAnimate', 'tableSort', 'nvd3', 'amCharts', 'ui.bootstrap'])
             .config(['tableSortConfigProvider', function (tableSortConfigProvider) {
@@ -115,7 +148,7 @@
                 }).on('touchstart', function () {
                     touchmoved = false;
                 });
-               
+
             }
         }])
         cb.controller('mainCtrl', function ($scope, $http, $interval) {
@@ -166,7 +199,7 @@
 
                 }
             );
-           
+
         });
 
         cb.controller('homeCtrl', function ($scope, $http, $interval) {
@@ -418,7 +451,7 @@
             $scope.tabs = {
                 panel: 'general'
             };
-
+            $scope.tabs.panel = 'general';
             $scope.urlFriendly = function (name) {
                 if (!name)
                     return '';
@@ -450,11 +483,21 @@
 
             }
             getMetadata();
+
+            $scope.resize_tweet = resize_canvas;
+            function initSentiment() {
+                init_tweet();				// Initialize scatterplot  
+                init_progress_dlg();			// Initialize progress dialog  
+                draw_legend();			// Draw sentiment tab's legend
+                draw_tweet();				// Draw sentiment tab's axes
+
+                query_twitter_v_1_1($scope.symbol + ' ' + $scope.id, 15);
+            }
             function getMetadata() {
 
                 $http.get('/api/getcoinmeta?symbol=' + $scope.symbol + '&id=' + $scope.id).then(
                     function (response) {
-                        
+
                         if (!response.data)
                             return;
 
@@ -493,6 +536,11 @@
                         $scope.meta.ICO.WhitePaper = $sce.trustAsHtml($scope.meta.ICO.WhitePaper);
                         }
                         $scope.$parent.state.isLoaded = true;
+
+                        $timeout(function () {
+                            initSentiment();
+
+                        }, 1000);
                     },
                     function (msg) {
                         $scope.$parent.state.isLoaded = true;

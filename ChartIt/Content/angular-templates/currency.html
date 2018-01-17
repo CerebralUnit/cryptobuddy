@@ -82,6 +82,7 @@
             <div class="tabs">
                 <ul>
                     <li ng-click="bottomTabs.panel = 'charts'" ng-class="{'is-active': bottomTabs.panel === 'charts'}"><a>Charts</a></li>
+                    <li ng-click="bottomTabs.panel = 'sentiment';resize_tweet();" ng-class="{'is-active': bottomTabs.panel === 'sentiment'}"><a>Sentiment</a></li>
                     <li ng-click="bottomTabs.panel = 'exchanges'" ng-class="{'is-active': bottomTabs.panel === 'exchanges'}"><a>Exchanges</a></li>
                     <li ng-click="bottomTabs.panel = 'ico'" ng-class="{'is-active': bottomTabs.panel === 'ico'}"><a>ICO Info</a></li>
                 </ul>
@@ -89,6 +90,12 @@
             <div class="tab-panel" ng-class="{active: bottomTabs.panel === 'charts'}">
                 <div class="chart-wrapper">
                     <stock-chart id="test" options="config.stockChart" style="width:100%; height:600px;" ng-if="$parent.state.isLoaded"></stock-chart>
+                </div>
+            </div>
+            <div id="sentiment-tab" class=" tab-panel" ng-class="{active: bottomTabs.panel === 'sentiment'}"> 
+                <div class="sentiment-chart clearfix">
+                    <canvas id="tweet-legend" width="79" height="352"></canvas>
+                    <canvas id="tweet-canvas" width="800" height="352"> </canvas>
                 </div>
             </div>
             <div class="tab-panel" ng-class="{active: bottomTabs.panel === 'exchanges'}">

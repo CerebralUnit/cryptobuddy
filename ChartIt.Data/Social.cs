@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Compat.Web;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -161,7 +162,7 @@ namespace ChartIt.Data
         //    }]
         //}
         public static string GetSentiment(string q){
-            var url = "https://www.csc2.ncsu.edu/faculty/healey/tweet_viz/tweet_app/php/recent.php?q=" + q + "&pg=3";
+            var url = "https://www.csc2.ncsu.edu/faculty/healey/tweet_viz/tweet_app/php/recent.php?q=" + System.Uri.EscapeDataString(q) + "&pg=3";
             var request = WebRequest.Create(url);
 
             WebResponse response = request.GetResponse();

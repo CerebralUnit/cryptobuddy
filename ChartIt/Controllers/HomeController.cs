@@ -28,5 +28,11 @@ namespace ChartIt.Controllers
 
             return View();
         }
+
+        public ActionResult Sentiment()
+        {
+        
+            return View();
+        }
     }
 }
