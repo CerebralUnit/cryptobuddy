@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoinAllTimeHigh.cs" />
     <Compile Include="CoinCandleData.cs" />
     <Compile Include="CoinFullDetails.cs" />
     <Compile Include="CoinInfo.cs" />

@@ -61,6 +61,23 @@ namespace ChartIt.Controllers
             var Stats = Social.GetSentiment(q).Trim(new char[2] { ')', '(' });
             return JsonConvert.DeserializeObject( Stats );
         }
+
+
+        [Route("api/getATH")]
+        public async Task<Dictionary<string, CoinAllTimeHigh>> getATH()
+        {
+            var ATH = await CoinAPI.GetATHList();
+            return ATH;
+        }
+
+        [Route("api/getexchangedata")]
+        public async Task<Dictionary<string, CoinAllTimeHigh>> getexchangedata(string symbol, string id, string exchanges)
+        {
+            var Exchanges = exchanges.Split(new char[1] { ';' }).ToList();
+            var ATH = await CoinAPI.GetExchangeData(symbol, id, Exchanges);
+            return ATH;
+        }
+        
     }
 
 }

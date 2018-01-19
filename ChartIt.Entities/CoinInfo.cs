@@ -44,5 +44,11 @@ namespace ChartIt.Entities
          
         public double? Volume24hUsd { get; set; }
 
+        public int? DaysOld { get; set; }
+
+        public float? ATH { get; set; }
+
+        public DateTime? LastATH { get; set; }
+
     }
 }

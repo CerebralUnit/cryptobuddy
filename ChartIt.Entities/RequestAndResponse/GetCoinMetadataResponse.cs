@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace ChartIt.Entities
-{ 
+{
     public class GetCoinMetadataResponse
     {
         public CoinDetails Details { get; set; }
@@ -11,5 +11,6 @@ namespace ChartIt.Entities
         public CoinMetadata Metadata { get; set; }
         public CoinCandleCharts CandleData { get; set; }
         public CoinSocialStats SocialStats { get; set; }
+        public List<string> Exchanges { get; set; }
     }
 }

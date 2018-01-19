@@ -462,6 +462,10 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "brave", stem: "brave",
     avg: [ 6.15, 7.15 ], std: [ 2.45, 1.64 ], fq: 24
   },
+  "break out": {
+    dict: "anew", word: "break out", stem: "break out",
+    avg: [ 7.73, 7.48 ], std: [ 0.62, 0.91 ], fq: 51
+  },
   "breast": {
     dict: "anew", word: "breast", stem: "breast",
     avg: [ 5.37, 6.5 ], std: [ 2.39, 1.78 ], fq: 11
@@ -494,6 +498,10 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "building", stem: "build",
     avg: [ 3.92, 5.29 ], std: [ 1.94, 1.15 ], fq: 160
   },
+   "bullish": {
+    dict: "anew", word: "bullish", stem: "bullish",
+    avg: [ 7.9, 7.95 ], std: [ 1.85, 1.65 ], fq: 21
+  },
   "bullet": {
     dict: "anew", word: "bullet", stem: "bullet",
     avg: [ 5.33, 3.29 ], std: [ 2.48, 2.06 ], fq: 28
@@ -512,7 +520,19 @@ var  anew_term = {			// ANEW terms, indexed by word
   },
   "burn": {
     dict: "anew", word: "burn", stem: "burn",
-    avg: [ 6.22, 2.73 ], std: [ 1.91, 1.72 ], fq: 15
+    avg: [ 5.4, 5.73 ], std: [ 2.46, 1.87 ], fq: 42
+  },
+  "burned": {
+    dict: "anew", word: "burned", stem: "burn",
+    avg: [ 5.4, 5.73 ], std: [ 2.46, 1.87 ], fq: 42
+  },
+  "burning": {
+    dict: "anew", word: "burning", stem: "burn",
+    avg: [ 5.4, 5.73 ], std: [ 2.46, 1.87 ], fq: 42
+  },
+  "coin burn": {
+    dict: "anew", word: "coin burn", stem: "coin burn",
+    avg: [ 5.4, 6.73 ], std: [ 2.46, 1.87 ], fq: 42
   },
   "bus": {
     dict: "anew", word: "bus", stem: "bus",
@@ -774,6 +794,10 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "corpse", stem: "corps",
     avg: [ 4.74, 2.18 ], std: [ 2.94, 1.48 ], fq: 7
   },
+  "correction": {
+    dict: "anew", word: "correction", stem: "correction",
+    avg: [ 3.63, 1.88 ], std: [ 2.41, 1.14 ], fq: 17
+  },
   "corridor": {
     dict: "anew", word: "corridor", stem: "corridor",
     avg: [ 3.63, 4.88 ], std: [ 2.41, 1.14 ], fq: 17
@@ -804,7 +828,7 @@ var  anew_term = {			// ANEW terms, indexed by word
   },
   "crash": {
     dict: "anew", word: "crash", stem: "crash",
-    avg: [ 6.95, 2.31 ], std: [ 2.44, 1.44 ], fq: 20
+     avg: [ 0.5, 0.8 ], std: [ 0.06, 0.04 ], fq: 19
   },
   "crime": {
     dict: "anew", word: "crime", stem: "crime",
@@ -908,7 +932,7 @@ var  anew_term = {			// ANEW terms, indexed by word
   },
   "dead": {
     dict: "anew", word: "dead", stem: "dead",
-    avg: [ 5.73, 1.94 ], std: [ 2.73, 1.76 ], fq: 174
+    avg: [ 5.73, 0.94 ], std: [ 2.73, 1.76 ], fq: 174
   },
   "death": {
     dict: "anew", word: "death", stem: "death",
@@ -945,6 +969,10 @@ var  anew_term = {			// ANEW terms, indexed by word
   "delayed": {
     dict: "anew", word: "delayed", stem: "delay",
     avg: [ 5.62, 3.07 ], std: [ 2.39, 1.74 ], fq: 25
+  },
+  "delist": {
+    dict: "anew", word: "delist", stem: "delist",
+    avg: [ 2.62, 1.07 ], std: [ 2.39, 1.74 ], fq: 25
   },
   "delight": {
     dict: "anew", word: "delight", stem: "delight",
@@ -1025,6 +1053,10 @@ var  anew_term = {			// ANEW terms, indexed by word
   "dinner": {
     dict: "anew", word: "dinner", stem: "dinner",
     avg: [ 5.43, 7.16 ], std: [ 2.14, 1.5 ], fq: 91
+  },
+  "dip": {
+    dict: "anew", word: "dip", stem: "dip",
+    avg: [ 1.25, 1.32 ], std: [ 1.4, 1.68 ], fq: 30
   },
   "diploma": {
     dict: "anew", word: "diploma", stem: "diploma",
@@ -1136,7 +1168,11 @@ var  anew_term = {			// ANEW terms, indexed by word
   },
   "dump": {
     dict: "anew", word: "dump", stem: "dump",
-    avg: [ 4.12, 3.21 ], std: [ 2.36, 1.87 ], fq: 4
+    avg: [ 2.67, 0.73 ], std: [ 1.06, 1.82 ], fq: 31
+  },
+  "dumped": {
+    dict: "anew", word: "dumped", stem: "dump",
+    avg: [ 0.67, 0.73 ], std: [ 0.06, 0.82 ], fq: 66
   },
   "dustpan": {
     dict: "anew", word: "dustpan", stem: "dustpan",
@@ -1233,6 +1269,10 @@ var  anew_term = {			// ANEW terms, indexed by word
   "evil": {
     dict: "anew", word: "evil", stem: "evil",
     avg: [ 6.39, 3.23 ], std: [ 2.44, 2.64 ], fq: 72
+  },
+  "evaporate": {
+    dict: "anew", word: "evaporate", stem: "evaporat",
+    avg: [ 0.67, 0.19 ], std: [ 2.82, 1.8 ], fq: 21
   },
   "excellence": {
     dict: "anew", word: "excellence", stem: "excel",
@@ -1457,6 +1497,14 @@ var  anew_term = {			// ANEW terms, indexed by word
   "fur": {
     dict: "anew", word: "fur", stem: "fur",
     avg: [ 4.18, 4.51 ], std: [ 2.44, 1.88 ], fq: 13
+  },
+    "fud": {
+    dict: "anew", word: "fud", stem: "fud",
+    avg: [ 4.91, 0.62 ], std: [ 0.45, 0.43 ], fq: 22
+  },
+   "fomo": {
+    dict: "anew", word: "fomo", stem: "fomo",
+    avg: [ 4.91, 6.62 ], std: [ 0.45, 0.43 ], fq: 22
   },
   "game": {
     dict: "anew", word: "game", stem: "game",
@@ -1694,6 +1742,10 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "hell", stem: "hell",
     avg: [ 5.38, 2.24 ], std: [ 2.62, 1.62 ], fq: 95
   },
+   "help": {
+    dict: "anew", word: "helpless", stem: "helpless",
+    avg: [ 0.34, 0.2 ], std: [ 2.52, 0.42 ], fq: 21
+  },
   "helpless": {
     dict: "anew", word: "helpless", stem: "helpless",
     avg: [ 5.34, 2.2 ], std: [ 2.52, 1.42 ], fq: 21
@@ -1725,6 +1777,10 @@ var  anew_term = {			// ANEW terms, indexed by word
   "holiday": {
     dict: "anew", word: "holiday", stem: "holiday",
     avg: [ 6.59, 7.55 ], std: [ 2.73, 2.14 ], fq: 17
+  },
+   "hodl": {
+    dict: "anew", word: "hodl", stem: "hodl",
+    avg: [ 5.33, 2.61 ], std: [ 2.06, 3.04 ], fq: 19
   },
   "home": {
     dict: "anew", word: "home", stem: "home",
@@ -2220,7 +2276,11 @@ var  anew_term = {			// ANEW terms, indexed by word
   },
   "lost": {
     dict: "anew", word: "lost", stem: "lost",
-    avg: [ 5.82, 2.82 ], std: [ 2.62, 1.83 ], fq: 173
+    avg: [ 5.82, 0.12 ], std: [ 0.62, 0.83 ], fq: 173
+  },
+  "lost money": {
+    dict: "anew", word: "lost money", stem: "lost money",
+    avg: [ 1.82, 0.12 ], std: [ 0.62, 0.83 ], fq: 173
   },
   "lottery": {
     dict: "anew", word: "lottery", stem: "lotteri",
@@ -2446,6 +2506,10 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "moody", stem: "moodi",
     avg: [ 4.18, 3.2 ], std: [ 2.38, 1.58 ], fq: 5
   },
+   "moon": {
+    dict: "anew", word: "moon", stem: "moon",
+    avg: [ 7.43, 7 ], std: [ 0.27, 0.88 ], fq: 88
+  },
   "moral": {
     dict: "anew", word: "moral", stem: "moral",
     avg: [ 4.49, 6.2 ], std: [ 2.28, 1.85 ], fq: 142
@@ -2590,6 +2654,10 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "nonsense", stem: "nonsens",
     avg: [ 4.17, 4.61 ], std: [ 2.02, 1.63 ], fq: 13
   },
+  "noob": {
+    dict: "anew", word: "noob", stem: "noob",
+    avg: [ 5.33, 0.23 ], std: [ 2.39, 1.82 ], fq: 21
+  },
   "noose": {
     dict: "anew", word: "noose", stem: "noos",
     avg: [ 4.39, 3.76 ], std: [ 2.08, 1.64 ], fq: 3
@@ -2718,9 +2786,21 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "pancakes", stem: "pancak",
     avg: [ 4.06, 6.08 ], std: [ 2.13, 1.83 ], fq: 0
   },
-  "panic": {
+   "panic": {
     dict: "anew", word: "panic", stem: "panic",
-    avg: [ 7.02, 3.12 ], std: [ 2.02, 1.84 ], fq: 22
+    avg: [ 7.33, 1.61 ], std: [ 0.06, 0.04 ], fq: 55
+  },
+   "panic sell": {
+    dict: "anew", word: "panic sell", stem: "panic sell",
+    avg: [ 7.33, 0.61 ], std: [ 0.06, 0.04 ], fq: 55
+  },
+   "panic seller": {
+    dict: "anew", word: "panic seller", stem: "panic seller",
+    avg: [ 7.33, 0.61 ], std: [ 0.06, 0.04 ], fq: 55
+  },
+   "panic sellers": {
+    dict: "anew", word: "panic sellers", stem: "panic sellers",
+    avg: [ 7.33, 0.61 ], std: [0.06, 0.04 ], fq: 55
   },
   "paper": {
     dict: "anew", word: "paper", stem: "paper",
@@ -2870,6 +2950,10 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "poison", stem: "poison",
     avg: [ 6.05, 1.98 ], std: [ 2.82, 1.44 ], fq: 10
   },
+  "ponzi": {
+    dict: "anew", word: "ponzi", stem: "ponzi",
+    avg: [ 3.05, 0.98 ], std: [ 1.82, 0.44 ], fq: 25
+  },
   "politeness": {
     dict: "anew", word: "politeness", stem: "polit",
     avg: [ 3.74, 7.18 ], std: [ 2.37, 1.5 ], fq: 5
@@ -2934,9 +3018,9 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "privacy", stem: "privaci",
     avg: [ 4.12, 5.88 ], std: [ 1.83, 1.5 ], fq: 12
   },
-  "profit": {
+ "profit": {
     dict: "anew", word: "profit", stem: "profit",
-    avg: [ 6.68, 7.63 ], std: [ 1.78, 1.3 ], fq: 28
+    avg: [ 7.24, 7.95 ], std: [ 1.84, 1.83 ], fq: 31
   },
   "progress": {
     dict: "anew", word: "progress", stem: "progress",
@@ -2973,6 +3057,10 @@ var  anew_term = {			// ANEW terms, indexed by word
   "putrid": {
     dict: "anew", word: "putrid", stem: "putrid",
     avg: [ 5.74, 2.38 ], std: [ 2.26, 1.71 ], fq: 0
+  },
+   "pump and dump": {
+    dict: "anew", word: "pump and dump", stem: "pump and dump",
+    avg: [ 3.43, 2.2 ], std: [ 1.96, 1.38 ], fq: 21
   },
   "python": {
     dict: "anew", word: "python", stem: "python",
@@ -3250,6 +3338,22 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "scared", stem: "scare",
     avg: [ 6.82, 2.78 ], std: [ 2.03, 1.99 ], fq: 21
   },
+   "scam": {
+    dict: "anew", word: "scam", stem: "scam",
+    avg: [ 0.64, 0.53 ], std: [ 0.03, 0.87 ], fq: 20
+  },
+  "scammer": {
+    dict: "anew", word: "scammer", stem: "scam",
+    avg: [ 0.64, 0.53 ], std: [ 0.03, 0.87 ], fq: 20
+  },
+  "scammed": {
+    dict: "anew", word: "scammed", stem: "scam",
+    avg: [ 0.64, 0.53 ], std: [ 0.03, 0.87 ], fq: 20
+  },
+  "scamming": {
+    dict: "anew", word: "scamming", stem: "scam",
+    avg: [ 0.14, 0.13 ], std: [ 0.03, 0.87 ], fq: 20
+  },
   "scholar": {
     dict: "anew", word: "scholar", stem: "scholar",
     avg: [ 5.12, 7.26 ], std: [ 2.46, 1.42 ], fq: 15
@@ -3302,6 +3406,26 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "selfish", stem: "selfish",
     avg: [ 5.5, 2.42 ], std: [ 2.62, 1.62 ], fq: 8
   },
+  "sell wall": {
+    dict: "anew", word: "sell wall", stem: "sell wall",
+    avg: [ 2.83, 2.74 ], std: [ 1.23, 1.56 ], fq: 58
+  },
+  "sell": {
+    dict: "anew", word: "sell", stem: "sell",
+    avg: [ 0.83, 0.74 ], std: [ 1.23, 1.56 ], fq: 18
+  },
+  "selling": {
+    dict: "anew", word: "selling", stem: "selling",
+    avg: [ 0.83, 0.74 ], std: [ 0.23, 0.56 ], fq: 88
+  },
+  "buy": {
+    dict: "anew", word: "buy", stem: "buy",
+    avg: [ 6.83, 7.74 ], std: [ 1.23, 1.56 ], fq: 18
+  },
+  "buying": {
+    dict: "anew", word: "buying", stem: "buying",
+    avg: [ 6.83, 7.74 ], std: [ 1.23, 1.56 ], fq: 18
+  },
   "sentiment": {
     dict: "anew", word: "sentiment", stem: "sentiment",
     avg: [ 4.41, 5.98 ], std: [ 2.3, 1.71 ], fq: 23
@@ -3341,6 +3465,14 @@ var  anew_term = {			// ANEW terms, indexed by word
   "ship": {
     dict: "anew", word: "ship", stem: "ship",
     avg: [ 4.38, 5.55 ], std: [ 2.29, 1.4 ], fq: 83
+  },
+   "shitcoin": {
+    dict: "anew", word: "shitcoin", stem: "shitcoin",
+    avg: [ 7.67, 0.91 ], std: [ 2.69, 2.27 ], fq: 21
+  },
+   "shit coin": {
+    dict: "anew", word: "shit coin", stem: "shit coin",
+    avg: [ 7.67, 0.91 ], std: [ 2.69, 2.27 ], fq: 21
   },
   "shotgun": {
     dict: "anew", word: "shotgun", stem: "shotgun",
@@ -3518,6 +3650,10 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "square", stem: "squar",
     avg: [ 3.18, 4.74 ], std: [ 1.76, 1.02 ], fq: 143
   },
+    "stable": {
+     dict: "anew", word: "stable", stem: "stable",
+     avg: [ 2.64, 6.18 ], std: [ 1.47, 1.92 ], fq: 22
+   },
   "stagnant": {
     dict: "anew", word: "stagnant", stem: "stagnant",
     avg: [ 3.93, 4.15 ], std: [ 1.94, 1.57 ], fq: 5
@@ -3598,9 +3734,9 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "sugar", stem: "sugar",
     avg: [ 5.64, 6.74 ], std: [ 2.18, 1.73 ], fq: 34
   },
-  "suicide": {
+   "suicide": {
     dict: "anew", word: "suicide", stem: "suicid",
-    avg: [ 5.73, 1.25 ], std: [ 3.14, 0.69 ], fq: 17
+    avg: [ 6.21, 0.58 ], std: [ 2.67, 1.5 ], fq: 29
   },
   "sun": {
     dict: "anew", word: "sun", stem: "sun",
@@ -3677,6 +3813,10 @@ var  anew_term = {			// ANEW terms, indexed by word
   "teacher": {
     dict: "anew", word: "teacher", stem: "teacher",
     avg: [ 4.05, 5.68 ], std: [ 2.61, 2.12 ], fq: 80
+  },
+   "tears": {
+    dict: "anew", word: "tears", stem: "tear",
+    avg: [ 4.8, 3.14 ], std: [ 2.42, 1.73 ], fq: 21
   },
   "tease": {
     dict: "anew", word: "tease", stem: "teas",
@@ -4002,6 +4142,10 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "volcano", stem: "volcano",
     avg: [ 6.33, 4.84 ], std: [ 2.21, 2.14 ], fq: 2
   },
+  "volatile": {
+    dict: "anew", word: "volatile", stem: "volatil",
+    avg: [ 5.35, 0.45 ], std: [ 2.87, 0.14 ], fq: 20
+  },
   "vomit": {
     dict: "anew", word: "vomit", stem: "vomit",
     avg: [ 5.75, 2.06 ], std: [ 2.84, 1.57 ], fq: 3
@@ -4042,6 +4186,22 @@ var  anew_term = {			// ANEW terms, indexed by word
     dict: "anew", word: "waterfall", stem: "waterfal",
     avg: [ 5.37, 7.88 ], std: [ 2.84, 1.03 ], fq: 2
   },
+  "warn": {
+    dict: "anew", word: "warn", stem: "warn",
+    avg: [ 7.37, 0.88 ], std: [ 2.84, 1.03 ], fq: 26
+  },
+  "warning": {
+    dict: "anew", word: "warning", stem: "warn",
+    avg: [ 7.37, 0.88 ], std: [ 2.84, 1.03 ], fq: 26
+  },
+   "warned": {
+    dict: "anew", word: "warned", stem: "warn",
+    avg: [ 7.37, 0.88 ], std: [ 2.84, 1.03 ], fq: 26
+  },
+   "weak hand": {
+    dict: "anew", word: "weak hand", stem: "weak hand",
+    avg: [ 1.5, 1.95 ], std: [ 1.17, 1.43 ], fq: 21
+  },
   "wealthy": {
     dict: "anew", word: "wealthy", stem: "wealthi",
     avg: [ 5.8, 7.7 ], std: [ 2.73, 1.34 ], fq: 12
@@ -4057,6 +4217,10 @@ var  anew_term = {			// ANEW terms, indexed by word
   "wedding": {
     dict: "anew", word: "wedding", stem: "wed",
     avg: [ 5.97, 7.82 ], std: [ 2.85, 1.56 ], fq: 32
+  },
+   "whales": {
+    dict: "anew", word: "whales", stem: "whale",
+    avg: [ 4.69, 2.5 ], std: [ 1.99, 1.21 ], fq: 19
   },
   "whistle": {
     dict: "anew", word: "whistle", stem: "whistl",
@@ -4121,6 +4285,10 @@ var  anew_term = {			// ANEW terms, indexed by word
   "world": {
     dict: "anew", word: "world", stem: "world",
     avg: [ 5.32, 6.5 ], std: [ 2.39, 2.03 ], fq: 787
+  },
+   "worthless": {
+    dict: "anew", word: "worthless", stem: "worthless",
+    avg: [ 4.45, 0.89 ], std: [ 2.91, 1.41 ], fq: 20
   },
   "wounds": {
     dict: "anew", word: "wounds", stem: "wound",
@@ -4325,6 +4493,10 @@ var  anew_stem = {			// ANEW terms, indexed by stem
      dict: "anew-stem", word: "bandage", stem: "bandag",
      avg: [ 3.9, 4.54 ], std: [ 2.07, 1.75 ], fq: 4
    },
+    "bear": {
+     dict: "anew-stem", word: "bearish", stem: "bear",
+     avg: [ 1.71, 0.61 ], std: [ 2.82, 1.74 ], fq: 41
+   },
    "beauti": {
      dict: "anew-stem", word: "beautiful", stem: "beauti",
      avg: [ 6.17, 7.6 ], std: [ 2.34, 1.64 ], fq: 127
@@ -4428,6 +4600,10 @@ var  anew_stem = {			// ANEW terms, indexed by stem
    "chocol": {
      dict: "anew-stem", word: "chocolate", stem: "chocol",
      avg: [ 5.29, 6.88 ], std: [ 2.55, 1.89 ], fq: 9
+   },
+   "collaps": {
+     dict: "anew-stem", word: "collapse", stem: "collaps",
+     avg: [ 7.14, 0.37 ], std: [ 0.29, 0.26 ], fq: 60
    },
    "christma": {
      dict: "anew-stem", word: "christmas", stem: "christma",
@@ -5433,6 +5609,10 @@ var  anew_stem = {			// ANEW terms, indexed by stem
      dict: "anew-stem", word: "pollute", stem: "pollut",
      avg: [ 6.08, 1.85 ], std: [ 2.42, 1.11 ], fq: 1
    },
+    "pollut": {
+     dict: "anew-stem", word: "pollute", stem: "pollut",
+     avg: [ 6.08, 1.85 ], std: [ 2.42, 1.11 ], fq: 1
+   },
    "poverti": {
      dict: "anew-stem", word: "poverty", stem: "poverti",
      avg: [ 4.87, 1.67 ], std: [ 2.66, 0.9 ], fq: 20
@@ -5577,6 +5757,7 @@ var  anew_stem = {			// ANEW terms, indexed by stem
      dict: "anew-stem", word: "scalding", stem: "scald",
      avg: [ 5.95, 2.82 ], std: [ 2.55, 2.12 ], fq: 1
    },
+
    "scare": {
      dict: "anew-stem", word: "scared", stem: "scare",
      avg: [ 6.82, 2.78 ], std: [ 2.03, 1.99 ], fq: 21

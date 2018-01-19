@@ -3,10 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#111111">
     <title>@ViewBag.Title - cryptobuddy - </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/NgAnimate.css">
-    <link rel="stylesheet"  href="~/Content/stockCharts.css"  />
+    <link rel="stylesheet" href="~/Content/stockCharts.css" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -158,7 +165,33 @@
                 isLoaded: false
             };
             refreshTicker();
+            $scope.daysToYMD = function humanise(days) {
+                if (!days)
+                    return '';
+                else if (days > 5000)
+                    return 'Unknown';
+                // The string we're working with to create the representation
+                var str = '';
+                // Map lengths of `days` to  time periods
+                var values = [['y', 365], ['m', 30], ['d', 1]];
 
+                // Iterate over the values...
+                for (var i = 0; i < values.length; i++) {
+                    
+                    var amount = Math.floor(days / values[i][1]);
+
+                    // ... and find the largest time value that fits into the days
+                    if (amount >= 1) {
+                        // If we match, add to the string ('s' is for pluralization)
+                        str += amount + values[i][0] +  '';
+
+                        // and subtract from the days
+                        days -= amount * values[i][1];
+                    }
+                }
+
+                return str;
+            };
             $interval(function () {
                 refreshTicker();
             }, 30000);
@@ -176,7 +209,17 @@
                 coinFilter: ''
             };
 
-
+            $scope.abbreviateNumber = function (num, fixed) {
+                if (num === null) { return null; } // terminate early
+                if (num === 0) { return '0'; } // terminate early
+                fixed = (!fixed || fixed < 0) ? 0 : fixed; // number of decimal places to show
+                var b = (num).toPrecision(2).split("e"), // get power
+                    k = b.length === 1 ? 0 : Math.floor(Math.min(b[1].slice(1), 14) / 3), // floor at decimals, ceiling at trillions
+                    c = k < 1 ? num.toFixed(0 + fixed) : (num / Math.pow(10, k * 3)).toFixed(1 + fixed), // divide by power
+                    d = c < 0 ? c : Math.abs(c), // enforce -0 is 0
+                    e = d + ['', ' K', ' M', ' B', ' T'][k]; // append power
+                return e;
+            }
 
             function refreshTicker() {
                 $http.get('/api/getticker').then(
@@ -474,7 +517,7 @@
                 else
                     return Math.floor(monthsOld / 12) + ' Years and ' + (monthsOld % 12) + ' Months';
             }
-
+           
             function diff_months(dt2, dt1) {
 
                 var diff = (dt2.getTime() - dt1.getTime()) / 1000;
@@ -493,6 +536,13 @@
 
                 query_twitter_v_1_1($scope.symbol + ' ' + $scope.id, 15);
             }
+            $scope.getExchangeData(){
+                $http.get('/api/getexchangedata?symbol=' + $scope.symbol + '&id=' + $scope.id + '&exchanges=' $scope.exchanges.join(';') ).then(function () {
+
+                }, function () {
+
+                })
+            }
             function getMetadata() {
 
                 $http.get('/api/getcoinmeta?symbol=' + $scope.symbol + '&id=' + $scope.id).then(
@@ -504,6 +554,7 @@
                         $scope.meta = response.data.Metadata;
                         $scope.coin = response.data.Details;
                         $scope.socialStats = response.data.SocialStats;
+                        $scope.exchanges = response.data.Exchanges;
 
                         if (response.data.CandleData) {
                             response.data.CandleData.Minute.map(function (d) {

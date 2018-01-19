@@ -5,8 +5,7 @@ html {
 html, body {
     background: #f8f8f8;
     font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-   
+    font-size: 15px; 
 }
 * {
     outline-color: #21ebff;
@@ -33,6 +32,10 @@ nvd3 {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+}
+.exchange-listing {
+    padding: 8px 0;
+    border-bottom: 1px solid #1a1a1a;
 }
 .pagination.pagination-list {
     -webkit-box-pack: flex-end !important;
@@ -111,6 +114,7 @@ footer {
 }
 .site-content {
     flex: 1 0 auto;
+
 }
 .back-button {
 float:left;
@@ -949,3 +953,13 @@ display:none;
     .ui-widget button:hover {
         color: #5bf0ff
     }
+
+li.pagination-page.active, li.pagination-page.active a {
+    background: #000000;
+    color: #21ebff;
+    font-weight: bold;
+}
+
+td.name-cell {
+    white-space: nowrap;
+}

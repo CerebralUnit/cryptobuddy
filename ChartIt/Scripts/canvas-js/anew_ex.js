@@ -1337,6 +1337,22 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "asylum", stem: "asylum",
     avg: [ 5.55, 3.24 ], std: [ 2.28, 2.34 ], fq: 20
   },
+  "ath": {
+    dict: "anew-ex", word: "ath", stem: "ath",
+    avg: [ 7.75, 7.21 ], std: [ 2.75, 2.04 ], fq: 19
+  },
+  "all time high": {
+    dict: "anew-ex", word: "all time high", stem: "all time high",
+    avg: [ 7.75, 7.21 ], std: [ 2.75, 2.04 ], fq: 19
+  },
+    "atl": {
+    dict: "anew-ex", word: "atl", stem: "atl",
+    avg: [ 0.75, 0.21 ], std: [ 2.75, 2.04 ], fq: 19
+  },
+   "all time low": {
+    dict: "anew-ex", word: "all time low", stem: "all time low",
+    avg: [ 0.75, 0.21 ], std: [ 2.75, 2.04 ], fq: 19
+  },
   "athlete": {
     dict: "anew-ex", word: "athlete", stem: "athlet",
     avg: [ 4.75, 6.21 ], std: [ 2.75, 2.04 ], fq: 19
@@ -2319,7 +2335,7 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "bloodbath": {
     dict: "anew-ex", word: "bloodbath", stem: "bloodbath",
-    avg: [ 4.86, 2.05 ], std: [ 2.8, 1.63 ], fq: 21
+     avg: [ 7.33, 1.61 ], std: [ 2.06, 1.04 ], fq: 19
   },
   "bloodshed": {
     dict: "anew-ex", word: "bloodshed", stem: "bloodsh",
@@ -2493,6 +2509,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "bonus", stem: "bonu",
     avg: [ 6.9, 8.05 ], std: [ 2.4, 1.05 ], fq: 20
   },
+   "noob": {
+    dict: "anew-ex", word: "noob", stem: "noob",
+    avg: [ 5.33, 0.23 ], std: [ 2.39, 1.82 ], fq: 21
+  },
   "booby": {
     dict: "anew-ex", word: "booby", stem: "boobi",
     avg: [ 5.33, 7.23 ], std: [ 2.39, 1.82 ], fq: 21
@@ -2567,7 +2587,7 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "bottom": {
     dict: "anew-ex", word: "bottom", stem: "bottom",
-    avg: [ 3.19, 3.61 ], std: [ 1.97, 1.69 ], fq: 19
+    avg: [ 0.19, 0.61 ], std: [ 1.97, 1.69 ], fq: 55
   },
   "botulism": {
     dict: "anew-ex", word: "botulism", stem: "botul",
@@ -2664,6 +2684,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   "breakdown": {
     dict: "anew-ex", word: "breakdown", stem: "breakdown",
     avg: [ 4.73, 3.48 ], std: [ 2.62, 1.91 ], fq: 21
+  },
+  "break out": {
+    dict: "anew-ex", word: "break out", stem: "break out",
+    avg: [ 7.73, 7.48 ], std: [ 0.62, 0.91 ], fq: 51
   },
   "breaker": {
     dict: "anew-ex", word: "breaker", stem: "breaker",
@@ -2899,7 +2923,11 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "bull": {
     dict: "anew-ex", word: "bull", stem: "bull",
-    avg: [ 4.9, 3.95 ], std: [ 2.85, 1.65 ], fq: 21
+    avg: [ 7.9, 7.95 ], std: [ 1.85, 1.65 ], fq: 21
+  },
+   "bullish": {
+    dict: "anew-ex", word: "bullish", stem: "bullish",
+    avg: [ 7.9, 7.95 ], std: [ 1.85, 1.65 ], fq: 21
   },
   "bullet": {
     dict: "anew-ex", word: "bullet", stem: "bullet",
@@ -2987,7 +3015,19 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "burn": {
     dict: "anew-ex", word: "burn", stem: "burn",
-    avg: [ 5.4, 3.73 ], std: [ 2.46, 1.87 ], fq: 42
+    avg: [ 5.4, 5.73 ], std: [ 2.46, 1.87 ], fq: 42
+  },
+  "burned": {
+    dict: "anew-ex", word: "burned", stem: "burn",
+    avg: [ 5.4, 5.73 ], std: [ 2.46, 1.87 ], fq: 42
+  },
+  "burning": {
+    dict: "anew-ex", word: "burning", stem: "burn",
+    avg: [ 5.4, 5.73 ], std: [ 2.46, 1.87 ], fq: 42
+  },
+  "coin burn": {
+    dict: "anew-ex", word: "coin burn", stem: "coin burn",
+    avg: [ 5.4, 6.73 ], std: [ 2.46, 1.87 ], fq: 42
   },
   "burner": {
     dict: "anew-ex", word: "burner", stem: "burner",
@@ -4689,6 +4729,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "correct", stem: "correct",
     avg: [ 3.48, 6.94 ], std: [ 2.68, 2.34 ], fq: 19
   },
+   "correction": {
+    dict: "anew-ex", word: "correction", stem: "correction",
+    avg: [ 3.63, 1.88 ], std: [ 2.41, 1.14 ], fq: 17
+  },
   "correspondence": {
     dict: "anew-ex", word: "correspondence", stem: "correspond",
     avg: [ 5.05, 6.59 ], std: [ 2.25, 1.53 ], fq: 20
@@ -4867,7 +4911,7 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "crash": {
     dict: "anew-ex", word: "crash", stem: "crash",
-    avg: [ 4.55, 2.9 ], std: [ 2.94, 2.03 ], fq: 32
+     avg: [ 0.5, 0.8 ], std: [ 0.06, 0.04 ], fq: 19
   },
   "crass": {
     dict: "anew-ex", word: "crass", stem: "crass",
@@ -5339,7 +5383,7 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "dead": {
     dict: "anew-ex", word: "dead", stem: "dead",
-    avg: [ 3.91, 2.02 ], std: [ 2.15, 1.39 ], fq: 32
+    avg: [ 3.91, 0.02 ], std: [ 2.15, 1.39 ], fq: 32
   },
   "deadbeat": {
     dict: "anew-ex", word: "deadbeat", stem: "deadbeat",
@@ -5628,6 +5672,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   "deluxe": {
     dict: "anew-ex", word: "deluxe", stem: "delux",
     avg: [ 4.96, 6.76 ], std: [ 2.35, 1.58 ], fq: 23
+  },
+   "delist": {
+    dict: "anew", word: "delist", stem: "delist",
+    avg: [ 2.62, 1.07 ], std: [ 2.39, 1.74 ], fq: 25
   },
   "demeaning": {
     dict: "anew-ex", word: "demeaning", stem: "demean",
@@ -6080,6 +6128,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   "dinosaur": {
     dict: "anew-ex", word: "dinosaur", stem: "dinosaur",
     avg: [ 5.33, 6.11 ], std: [ 2.03, 0.96 ], fq: 18
+  },
+   "dip": {
+    dict: "anew-ex", word: "dip", stem: "dip",
+    avg: [ 1.25, 1.32 ], std: [ 100.4, 1.68 ], fq: 30
   },
   "diploma": {
     dict: "anew-ex", word: "diploma", stem: "diploma",
@@ -6737,6 +6789,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "drool", stem: "drool",
     avg: [ 2.7, 3.28 ], std: [ 1.84, 1.81 ], fq: 19
   },
+  "drop": {
+    dict: "anew-ex", word: "drop", stem: "drop",
+    avg: [ 4.7, 2.33 ], std: [ 2.39, 1.06 ], fq: 20
+  },
   "dropout": {
     dict: "anew-ex", word: "dropout", stem: "dropout",
     avg: [ 4.7, 3.33 ], std: [ 2.39, 2.06 ], fq: 20
@@ -6827,7 +6883,11 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "dump": {
     dict: "anew-ex", word: "dump", stem: "dump",
-    avg: [ 3.67, 3.73 ], std: [ 2.06, 1.82 ], fq: 31
+    avg: [ 2.67, 0.73 ], std: [ 1.06, 1.82 ], fq: 31
+  },
+  "dumped": {
+    dict: "anew-ex", word: "dumped", stem: "dump",
+    avg: [ 0.67, 0.73 ], std: [ 0.06, 0.82 ], fq: 66
   },
   "dumpling": {
     dict: "anew-ex", word: "dumpling", stem: "dumpl",
@@ -7565,6 +7625,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "eviction", stem: "evict",
     avg: [ 4.67, 3 ], std: [ 2.82, 1.8 ], fq: 21
   },
+  "evaporate": {
+    dict: "anew-ex", word: "evaporate", stem: "evaporat",
+    avg: [ 0.67, 0.19 ], std: [ 2.82, 1.8 ], fq: 21
+  },
   "evil": {
     dict: "anew-ex", word: "evil", stem: "evil",
     avg: [ 5.67, 2.34 ], std: [ 2.93, 1.61 ], fq: 29
@@ -7932,6 +7996,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   "fall": {
     dict: "anew-ex", word: "fall", stem: "fall",
     avg: [ 4.24, 3.89 ], std: [ 2.17, 2.31 ], fq: 20
+  },
+   "falling": {
+    dict: "anew-ex", word: "falling", stem: "fall",
+     avg: [ 6.32, 3.52 ], std: [ 2.8, 2.52 ], fq: 21
   },
   "fallout": {
     dict: "anew-ex", word: "fallout", stem: "fallout",
@@ -8453,6 +8521,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "flight", stem: "flight",
     avg: [ 4.2, 6.11 ], std: [ 2.48, 1.97 ], fq: 19
   },
+  "flippening": {
+    dict: "anew-ex", word: "flippening", stem: "flippening",
+    avg: [ 4.71, 7.19 ], std: [ 2.69, 2.18 ], fq: 21
+  },
   "flirt": {
     dict: "anew-ex", word: "flirt", stem: "flirt",
     avg: [ 5.93, 6.73 ], std: [ 2.37, 1.41 ], fq: 42
@@ -8897,6 +8969,14 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "fucker", stem: "fucker",
     avg: [ 6.32, 3.52 ], std: [ 2.8, 2.52 ], fq: 21
   },
+   "fud": {
+    dict: "anew-ex", word: "fud", stem: "fud",
+    avg: [ 4.91, 0.62 ], std: [ 0.45, 0.43 ], fq: 22
+  },
+    "fomo": {
+    dict: "anew-ex", word: "fomo", stem: "fomo",
+    avg: [ 4.91, 6.62 ], std: [ 0.45, 0.43 ], fq: 22
+  },
   "fudge": {
     dict: "anew-ex", word: "fudge", stem: "fudg",
     avg: [ 4.91, 7.62 ], std: [ 2.45, 1.43 ], fq: 22
@@ -8984,6 +9064,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   "fuzzy": {
     dict: "anew-ex", word: "fuzzy", stem: "fuzzi",
     avg: [ 3.95, 6.53 ], std: [ 2.97, 2.01 ], fq: 20
+  },
+  "gain": {
+    dict: "anew-ex", word: "gain", stem: "gain",
+    avg: [ 7.9, 5.89 ], std: [ 1.87, 1.1 ], fq: 20
   },
   "gaff": {
     dict: "anew-ex", word: "gaff", stem: "gaff",
@@ -10339,8 +10423,9 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "help": {
     dict: "anew-ex", word: "help", stem: "help",
-    avg: [ 4.29, 6.95 ], std: [ 2.43, 2.01 ], fq: 21
+    avg: [ 4.29, 0.9 ], std: [ 2.43, 2.01 ], fq: 21
   },
+
   "helper": {
     dict: "anew-ex", word: "helper", stem: "helper",
     avg: [ 3.22, 6.71 ], std: [ 2.32, 1.19 ], fq: 22
@@ -10524,6 +10609,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   "hoard": {
     dict: "anew-ex", word: "hoard", stem: "hoard",
     avg: [ 4.82, 3.7 ], std: [ 2.3, 1.75 ], fq: 21
+  },
+  "hodl": {
+    dict: "anew-ex", word: "hodl", stem: "hodl",
+    avg: [ 5.33, 2.61 ], std: [ 2.06, 3.04 ], fq: 19
   },
   "hoarse": {
     dict: "anew-ex", word: "hoarse", stem: "hoars",
@@ -10912,6 +11001,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   "hurl": {
     dict: "anew-ex", word: "hurl", stem: "hurl",
     avg: [ 4.43, 3.32 ], std: [ 2.41, 1.97 ], fq: 21
+  },
+  "hurry": {
+    dict: "anew-ex", word: "hurry", stem: "hurry",
+    avg: [ 5.0, 7.16 ], std: [ 2.17, 1.8 ], fq: 19
   },
   "hurricane": {
     dict: "anew-ex", word: "hurricane", stem: "hurrican",
@@ -13139,7 +13232,11 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "lost": {
     dict: "anew-ex", word: "lost", stem: "lost",
-    avg: [ 5.11, 2.53 ], std: [ 2.47, 1.12 ], fq: 28
+    avg: [ 5.82, 0.12 ], std: [ 0.62, 0.83 ], fq: 173
+  },
+  "lost money": {
+    dict: "anew-ex", word: "lost money", stem: "lost money",
+    avg: [ 1.82, 0.12 ], std: [ 0.62, 0.83 ], fq: 173
   },
   "lottery": {
     dict: "anew-ex", word: "lottery", stem: "lotteri",
@@ -13200,6 +13297,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   "lovesick": {
     dict: "anew-ex", word: "lovesick", stem: "lovesick",
     avg: [ 5.81, 3.63 ], std: [ 2.48, 1.54 ], fq: 20
+  },
+  "low": {
+    dict: "anew-ex", word: "low", stem: "low",
+    avg: [ 0.8, 0.8 ], std: [ 1.43, 1.79 ], fq: 20
   },
   "lowdown": {
     dict: "anew-ex", word: "lowdown", stem: "lowdown",
@@ -14267,7 +14368,7 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "moon": {
     dict: "anew-ex", word: "moon", stem: "moon",
-    avg: [ 3.43, 7 ], std: [ 2.27, 1.88 ], fq: 19
+    avg: [ 7.43, 7 ], std: [ 0.27, 0.88 ], fq: 88
   },
   "moonbeam": {
     dict: "anew-ex", word: "moonbeam", stem: "moonbeam",
@@ -15621,9 +15722,21 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "panda", stem: "panda",
     avg: [ 4.05, 7.55 ], std: [ 2.61, 1.32 ], fq: 19
   },
-  "panic": {
+   "panic": {
     dict: "anew-ex", word: "panic", stem: "panic",
-    avg: [ 6.4, 2.56 ], std: [ 2.26, 1.55 ], fq: 29
+    avg: [ 7.33, 1.61 ], std: [ 0.06, 0.04 ], fq: 55
+  },
+   "panic sell": {
+    dict: "anew-ex", word: "panic sell", stem: "panic sell",
+    avg: [ 7.33, 0.61 ], std: [ 0.06, 0.04 ], fq: 55
+  },
+   "panic seller": {
+    dict: "anew-ex", word: "panic seller", stem: "panic seller",
+    avg: [ 7.33, 0.61 ], std: [ 0.06, 0.04 ], fq: 55
+  },
+   "panic sellers": {
+    dict: "anew-ex", word: "panic sellers", stem: "panic sellers",
+    avg: [ 7.33, 0.61 ], std: [0.06, 0.04 ], fq: 55
   },
   "panicky": {
     dict: "anew-ex", word: "panicky", stem: "panicki",
@@ -17019,7 +17132,7 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "profit": {
     dict: "anew-ex", word: "profit", stem: "profit",
-    avg: [ 5.24, 6.95 ], std: [ 1.84, 1.83 ], fq: 31
+    avg: [ 7.24, 7.95 ], std: [ 1.84, 1.83 ], fq: 31
   },
   "profitable": {
     dict: "anew-ex", word: "profitable", stem: "profit",
@@ -17268,6 +17381,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   "pulse": {
     dict: "anew-ex", word: "pulse", stem: "puls",
     avg: [ 4.85, 6.38 ], std: [ 2.52, 1.4 ], fq: 20
+  },
+  "pump and dump": {
+    dict: "anew-ex", word: "pump and dump", stem: "pump and dump",
+    avg: [ 3.43, 0.2 ], std: [ 1.96, 1.38 ], fq: 21
   },
   "pumpkin": {
     dict: "anew-ex", word: "pumpkin", stem: "pumpkin",
@@ -18789,9 +18906,21 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "scalpel", stem: "scalpel",
     avg: [ 4.48, 3.95 ], std: [ 2.5, 1.67 ], fq: 20
   },
-  "scam": {
+    "scam": {
     dict: "anew-ex", word: "scam", stem: "scam",
-    avg: [ 4.64, 2.53 ], std: [ 3.03, 1.87 ], fq: 20
+    avg: [ 0.64, 0.53 ], std: [ 0.03, 0.87 ], fq: 20
+  },
+  "scammer": {
+    dict: "anew-ex", word: "scammer", stem: "scam",
+    avg: [ 0.64, 0.53 ], std: [ 0.03, 0.87 ], fq: 20
+  },
+  "scammed": {
+    dict: "anew-ex", word: "scammed", stem: "scam",
+    avg: [ 0.64, 0.53 ], std: [ 0.03, 0.87 ], fq: 20
+  },
+   "scamming": {
+    dict: "anew-ex", word: "scamming", stem: "scam",
+    avg: [ 0.14, 0.13 ], std: [ 0.03, 0.87 ], fq: 20
   },
   "scandal": {
     dict: "anew-ex", word: "scandal", stem: "scandal",
@@ -19153,9 +19282,33 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "selfless", stem: "selfless",
     avg: [ 4.52, 7.11 ], std: [ 2.52, 1.49 ], fq: 21
   },
+   "selling": {
+    dict: "anew-ex", word: "selling", stem: "selling",
+    avg: [ 0.83, 0.74 ], std: [ 0.23, 0.56 ], fq: 88
+  },
   "sellout": {
     dict: "anew-ex", word: "sellout", stem: "sellout",
     avg: [ 3.83, 3.74 ], std: [ 2.23, 1.56 ], fq: 18
+  },
+  "sell wall": {
+    dict: "anew-ex", word: "sell wall", stem: "sell wall",
+    avg: [ 2.83, 2.74 ], std: [ 1.23, 1.56 ], fq: 58
+  },
+    "sell": {
+    dict: "anew-ex", word: "sell", stem: "sell",
+    avg: [ 0.83, 0.74 ], std: [ 1.23, 1.56 ], fq: 18
+  },
+  "selling": {
+    dict: "anew-ex", word: "selling", stem: "selling",
+    avg: [ 0.83, 0.74 ], std: [ 1.23, 1.56 ], fq: 18
+  },
+  "buy": {
+    dict: "anew-ex", word: "buy", stem: "buy",
+    avg: [ 6.83, 7.74 ], std: [ 1.23, 1.56 ], fq: 18
+  },
+  "buying": {
+    dict: "anew-ex", word: "buying", stem: "buying",
+    avg: [ 6.83, 7.74 ], std: [ 1.23, 1.56 ], fq: 18
   },
   "semen": {
     dict: "anew-ex", word: "semen", stem: "semen",
@@ -19437,6 +19590,15 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "shit", stem: "shit",
     avg: [ 5.67, 3.91 ], std: [ 2.69, 2.27 ], fq: 21
   },
+   "shitcoin": {
+    dict: "anew-ex", word: "shitcoin", stem: "shitcoin",
+    avg: [ 7.67, 0.91 ], std: [ 2.69, 2.27 ], fq: 21
+  },
+   "shit coin": {
+    dict: "anew-ex", word: "shit coin", stem: "shit coin",
+    avg: [ 7.67, 0.91 ], std: [ 2.69, 2.27 ], fq: 21
+  },
+
   "shithead": {
     dict: "anew-ex", word: "shithead", stem: "shithead",
     avg: [ 6, 2.37 ], std: [ 2.25, 2.14 ], fq: 19
@@ -20601,6 +20763,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "stab", stem: "stab",
     avg: [ 5.17, 3.05 ], std: [ 2.5, 1.54 ], fq: 18
   },
+   "stable": {
+     dict: "anew-ex", word: "stable", stem: "stable",
+     avg: [ 2.64, 6.18 ], std: [ 1.47, 1.92 ], fq: 22
+   },
   "stability": {
     dict: "anew-ex", word: "stability", stem: "stabil",
     avg: [ 2.64, 6.18 ], std: [ 1.47, 1.92 ], fq: 22
@@ -21103,7 +21269,7 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "suicide": {
     dict: "anew-ex", word: "suicide", stem: "suicid",
-    avg: [ 6.21, 1.58 ], std: [ 2.67, 1.5 ], fq: 29
+    avg: [ 6.21, 0.58 ], std: [ 2.67, 1.5 ], fq: 29
   },
   "suite": {
     dict: "anew-ex", word: "suite", stem: "suit",
@@ -21577,6 +21743,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "tangle", stem: "tangl",
     avg: [ 4.52, 3.95 ], std: [ 2.27, 1.39 ], fq: 20
   },
+  "tank": {
+    dict: "anew-ex", word: "tank", stem: "tank",
+    avg: [ 1.14, 1.25 ], std: [ 0.59, 1.77 ], fq: 20
+  },
   "tank top": {
     dict: "anew-ex", word: "tank top", stem: "tank top",
     avg: [ 5.14, 6.25 ], std: [ 2.59, 1.77 ], fq: 20
@@ -21679,6 +21849,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "tear": {
     dict: "anew-ex", word: "tear", stem: "tear",
+    avg: [ 4.8, 3.14 ], std: [ 2.42, 1.73 ], fq: 21
+  },
+   "tears": {
+    dict: "anew-ex", word: "tears", stem: "tear",
     avg: [ 4.8, 3.14 ], std: [ 2.42, 1.73 ], fq: 21
   },
   "tearful": {
@@ -23435,7 +23609,7 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "volatile": {
     dict: "anew-ex", word: "volatile", stem: "volatil",
-    avg: [ 5.35, 3.45 ], std: [ 2.87, 2.14 ], fq: 20
+    avg: [ 5.35, 0.45 ], std: [ 2.87, 0.14 ], fq: 20
   },
   "volleyball": {
     dict: "anew-ex", word: "volleyball", stem: "volleybal",
@@ -23629,6 +23803,10 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
     dict: "anew-ex", word: "weak", stem: "weak",
     avg: [ 4.9, 2.95 ], std: [ 2.17, 1.43 ], fq: 21
   },
+  "weak hand": {
+    dict: "anew-ex", word: "weak hand", stem: "weak hand",
+    avg: [ 1.5, 1.95 ], std: [ 1.17, 1.43 ], fq: 21
+  },
   "weaken": {
     dict: "anew-ex", word: "weaken", stem: "weaken",
     avg: [ 4.19, 3.3 ], std: [ 2.86, 1.13 ], fq: 18
@@ -23735,7 +23913,11 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "whaling": {
     dict: "anew-ex", word: "whaling", stem: "whale",
-    avg: [ 3.2, 3.26 ], std: [ 1.99, 2 ], fq: 19
+    avg: [ 3.2, 2.2 ], std: [ 1.99, 2 ], fq: 19
+  },
+    "whales": {
+    dict: "anew-ex", word: "whales", stem: "whale",
+    avg: [ 4.69, 2.5 ], std: [ 1.99, 1.21 ], fq: 19
   },
   "wheelchair": {
     dict: "anew-ex", word: "wheelchair", stem: "wheelchair",
@@ -24059,7 +24241,7 @@ var  anew_ex_term = {			// ANEW terms, indexed by word
   },
   "worthless": {
     dict: "anew-ex", word: "worthless", stem: "worthless",
-    avg: [ 4.45, 1.89 ], std: [ 2.91, 1.41 ], fq: 20
+    avg: [ 4.45, 0.89 ], std: [ 2.91, 1.41 ], fq: 20
   },
   "worthwhile": {
     dict: "anew-ex", word: "worthwhile", stem: "worthwhil",
@@ -25044,6 +25226,10 @@ var  anew_ex_stem = {			// ANEW terms, indexed by word
      dict: "anew-ex-stem", word: "bay", stem: "bai",
      avg: [ 3.26, 7.23 ], std: [ 2.21, 1.19 ], fq: 20
    },
+    "bear": {
+     dict: "anew-ex-stem", word: "bearish", stem: "bear",
+     avg: [ 1.71, 0.61 ], std: [ 2.82, 1.74 ], fq: 41
+   },
    "beauti": {
      dict: "anew-ex-stem", word: "beautiful", stem: "beauti",
      avg: [ 5.71, 7.61 ], std: [ 2.82, 1.74 ], fq: 41
@@ -25902,7 +26088,7 @@ var  anew_ex_stem = {			// ANEW terms, indexed by word
    },
    "collaps": {
      dict: "anew-ex-stem", word: "collapse", stem: "collaps",
-     avg: [ 6.14, 3.37 ], std: [ 2.29, 1.26 ], fq: 20
+     avg: [ 7.14, 0.37 ], std: [ 0.29, 0.26 ], fq: 60
    },
    "colleg": {
      dict: "anew-ex-stem", word: "college", stem: "colleg",
@@ -27136,6 +27322,10 @@ var  anew_ex_stem = {			// ANEW terms, indexed by word
      dict: "anew-ex-stem", word: "douse", stem: "dous",
      avg: [ 3.92, 3.92 ], std: [ 2.36, 1.53 ], fq: 24
    },
+    "down": {
+     dict: "anew-ex", word: "down", stem: "down",
+     avg: [ 4.5, 3.2 ], std: [ 2.64, 1.24 ], fq: 19
+   },
    "downfal": {
      dict: "anew-ex-stem", word: "downfall", stem: "downfal",
      avg: [ 4.5, 3.2 ], std: [ 2.64, 1.24 ], fq: 19
@@ -28104,6 +28294,7 @@ var  anew_ex_stem = {			// ANEW terms, indexed by word
      dict: "anew-ex-stem", word: "frustrated", stem: "frustrat",
      avg: [ 5.4, 2.55 ], std: [ 2.29, 1 ], fq: 31
    },
+
    "fudg": {
      dict: "anew-ex-stem", word: "fudge", stem: "fudg",
      avg: [ 4.91, 7.62 ], std: [ 2.45, 1.43 ], fq: 22
@@ -28780,6 +28971,7 @@ var  anew_ex_stem = {			// ANEW terms, indexed by word
      dict: "anew-ex-stem", word: "hobby", stem: "hobbi",
      avg: [ 3.05, 6.67 ], std: [ 2.06, 1.46 ], fq: 21
    },
+
    "holidai": {
      dict: "anew-ex-stem", word: "holiday", stem: "holidai",
      avg: [ 4.93, 7.18 ], std: [ 2.91, 1.18 ], fq: 32
@@ -32484,6 +32676,7 @@ var  anew_ex_stem = {			// ANEW terms, indexed by word
      dict: "anew-ex-stem", word: "scholastic", stem: "scholast",
      avg: [ 3.8, 6.63 ], std: [ 2.67, 1.64 ], fq: 19
    },
+
    "school": {
      dict: "anew-ex-stem", word: "schooling", stem: "school",
      avg: [ 4.52, 6.2 ], std: [ 2.11, 1.2 ], fq: 20
@@ -33044,6 +33237,7 @@ var  anew_ex_stem = {			// ANEW terms, indexed by word
      dict: "anew-ex-stem", word: "stability", stem: "stabil",
      avg: [ 2.64, 6.18 ], std: [ 1.47, 1.92 ], fq: 22
    },
+
    "stalem": {
      dict: "anew-ex-stem", word: "stalemate", stem: "stalem",
      avg: [ 2.78, 3.8 ], std: [ 2.13, 1.28 ], fq: 19

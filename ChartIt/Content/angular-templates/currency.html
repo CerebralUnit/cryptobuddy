@@ -83,7 +83,7 @@
                 <ul>
                     <li ng-click="bottomTabs.panel = 'charts'" ng-class="{'is-active': bottomTabs.panel === 'charts'}"><a>Charts</a></li>
                     <li ng-click="bottomTabs.panel = 'sentiment';resize_tweet();" ng-class="{'is-active': bottomTabs.panel === 'sentiment'}"><a>Sentiment</a></li>
-                    <li ng-click="bottomTabs.panel = 'exchanges'" ng-class="{'is-active': bottomTabs.panel === 'exchanges'}"><a>Exchanges</a></li>
+                    <li ng-click="bottomTabs.panel = 'exchanges';getExchangeData();" ng-class="{'is-active': bottomTabs.panel === 'exchanges'}"><a>Exchanges</a></li>
                     <li ng-click="bottomTabs.panel = 'ico'" ng-class="{'is-active': bottomTabs.panel === 'ico'}"><a>ICO Info</a></li>
                 </ul>
             </div>
@@ -99,7 +99,9 @@
                 </div>
             </div>
             <div class="tab-panel" ng-class="{active: bottomTabs.panel === 'exchanges'}">
-                Exchanges
+                <div class="exchange-listing" ng-repeat="exchange in exchanges">
+                    {{exchange}}
+                </div>
             </div>
             <div class="tab-panel currency-ico-info" ng-class="{active: bottomTabs.panel === 'ico'}">
                 <div ng-if="!isDefaultDate(meta.ICO.date)">{{ meta.ICO.Date | date }}</div>
