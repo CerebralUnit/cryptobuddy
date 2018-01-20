@@ -71,7 +71,7 @@ namespace ChartIt.Controllers
         }
 
         [Route("api/getexchangedata")]
-        public async Task<Dictionary<string, CoinAllTimeHigh>> getexchangedata(string symbol, string id, string exchanges)
+        public async Task<List<CoinCandleData>> getexchangedata(string symbol, string id, string exchanges)
         {
             var Exchanges = exchanges.Split(new char[1] { ';' }).ToList();
             var ATH = await CoinAPI.GetExchangeData(symbol, id, Exchanges);

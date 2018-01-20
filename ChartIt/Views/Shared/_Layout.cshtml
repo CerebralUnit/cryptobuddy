@@ -158,13 +158,16 @@
 
             }
         }])
-        cb.controller('mainCtrl', function ($scope, $http, $interval) {
+        cb.controller('mainCtrl', function ($scope, $http, $interval, $sce) {
             $scope.ticker = [];
             $scope.global = {};
             $scope.state = {
                 isLoaded: false
             };
             refreshTicker();
+            $scope.tickerState = {
+                conversion: 'USD'
+            }
             $scope.daysToYMD = function humanise(days) {
                 if (!days)
                     return '';
@@ -173,24 +176,31 @@
                 // The string we're working with to create the representation
                 var str = '';
                 // Map lengths of `days` to  time periods
-                var values = [['y', 365], ['m', 30], ['d', 1]];
-
+                //var values = [['y', 365], ['m', 30], ['d', 1]];
+                var values = [['<span class="age-label year">Y</span>', 365], ['<span class="age-label month">M</span>', 30], ['<span class="age-label day">D</span>', 1]];
+                var prevAmount = 0;
+               
+                 
                 // Iterate over the values...
-                for (var i = 0; i < values.length; i++) {
-                    
+                for (var i = 0; i < values.length; i++) { 
                     var amount = Math.floor(days / values[i][1]);
-
+                    var val = amount.toString();
+                    var c = "age-value";
                     // ... and find the largest time value that fits into the days
-                    if (amount >= 1) {
-                        // If we match, add to the string ('s' is for pluralization)
-                        str += amount + values[i][0] +  '';
-
-                        // and subtract from the days
-                        days -= amount * values[i][1];
+                    if ((i === 0 && amount === 0) || (i === 1 && prevAmount === 0 && amount === 0)) { 
+                        val = '--';
+                        c = "age-value null"
                     }
+                         // If we match, add to the string ('s' is for pluralization) 
+                    str += values[i][0] + '<span class="' + c + '">' + val + '</span>';
+
+                         // and subtract from the days
+                        days -= amount * values[i][1];
+
+                        prevAmount = amount;
                 }
 
-                return str;
+                return $sce.trustAsHtml(str);
             };
             $interval(function () {
                 refreshTicker();
@@ -536,9 +546,9 @@
 
                 query_twitter_v_1_1($scope.symbol + ' ' + $scope.id, 15);
             }
-            $scope.getExchangeData(){
-                $http.get('/api/getexchangedata?symbol=' + $scope.symbol + '&id=' + $scope.id + '&exchanges=' $scope.exchanges.join(';') ).then(function () {
-
+            $scope.getExchangeData = function (){
+                $http.get('/api/getexchangedata?symbol=' + $scope.symbol + '&id=' + $scope.id + '&exchanges=' + $scope.exchanges.join(';') ).then(function (response) {
+                    console.log(response);
                 }, function () {
 
                 })

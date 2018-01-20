@@ -20,9 +20,63 @@ display:none;
 tr.showIfLast:last-child{
     display:table-row;
 }
-
-
-
+.age-cell {
+    position: relative; 
+    padding-bottom:4px !important;
+}
+.age-cell .age-label {
+    position: absolute;
+    font-size: 9px;
+    top: 4px;
+    color: #262d33;
+    width: 33.333333%;
+    display: block;
+}
+.age-cell .age-label.year{
+    left: 8px;
+    text-align:center;
+}
+.age-cell .age-label.month{
+    left: 33.33333333%;
+    text-align:center;
+}
+.age-cell .age-label.day{
+    right: 8px;
+    text-align:center ;
+}
+td.ath-cell {
+    width: 111px;
+}
+td.ath-date-cell {
+    width: 95px;
+}
+.age-value {
+    text-align: center;
+    display: block;
+    float: left;
+    width: 33.333333%;
+    padding-top: 8px;
+    font-size: 91%;
+}
+.age-label.month + .age-value {
+  padding-left:4px;
+  padding-right:4px;
+}
+.age-label.year + .age-value {
+    float: left;
+    text-align: center;
+    border-right: 1px solid #333;
+    padding-right: 4px;
+}
+.age-label.day + .age-value {
+    float: right;
+    text-align: center;
+    border-left: 1px solid #333;
+    padding: 8px 0 0 4px;
+}
+.age-value.null {
+    color: #333;
+}
 nvd3 {
     background: #262d33;
     display: block;

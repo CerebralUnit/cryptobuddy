@@ -1,20 +1,24 @@
-﻿<div>
-   
+﻿<div> 
+    <select ng-model="tickerState.conversion">
+        <option value="USD">USD</option>
+        <option value="BTC">BTC</option> 
+    </select>
     <table class="cb-ticker table" ts-filter-fields="Id,Name,Symbol" ts-no-data-text="Nothing to see here..." ts-wrapper ts-display-filtering="true" ts-filter-function="customFilterFn" ts-no-data-text="Nothing to see here!">
         <thead>
             <tr>
                 <th ts-criteria="Rank" ts-default>#</th>
                 <th ts-criteria="Name|lowercase">Coin</th>
-                <th ts-criteria="PriceUsd">Price USD</th>
-                <th ts-criteria="PriceBtc">Price BTC</th>
+                <th ts-criteria="PriceUsd" ng-show="tickerState.conversion === 'USD'">Price USD</th>
+                <th ts-criteria="PriceBtc" ng-show="tickerState.conversion === 'BTC'">Price BTC</th>
                 <th ts-criteria="MarketCapUsd">Market Cap</th>
                 <th ts-criteria="Volume24hUsd">Volume</th>
-                <th ts-criteria="DaysOld">Age</th>
+
                 <th ts-criteria="ATH">ATH</th>
                 <th ts-criteria="LastATH">Last ATH</th>
-                <th ts-criteria="PercentChange1h">Change (1h)</th>
-                <th ts-criteria="PercentChange24h">Change (24h)</th>
-                <th ts-criteria="PercentChange7d">Change (1w)</th>
+                <th ts-criteria="PercentChange1h">(1h)</th>
+                <th ts-criteria="PercentChange24h">(24h)</th>
+                <th ts-criteria="PercentChange7d">(1w)</th>
+                <th ts-criteria="DaysOld">Age</th>
             </tr>
         </thead>
         <tbody>
@@ -27,21 +31,19 @@
                         <span class="cb-symbol">({{coin.Symbol}})</span>
                     </a>
                 </td>
-                <td class="price-cell usd" ng-class="{positive: coin.PercentChange1h  > 0,  negative: coin.PercentChange1h  < 0,  neutral: coin.PercentChange1h === 0}">
+                <td class="price-cell usd" ng-show="tickerState.conversion === 'USD'" ng-class="{positive: coin.PercentChange1h  > 0,  negative: coin.PercentChange1h  < 0,  neutral: coin.PercentChange1h === 0}">
                     ${{coin.PriceUsd > 1 ? coin.PriceUsd.toFixed(2) : coin.PriceUsd.toFixed(6)}}<span class="mobile-label">USD</span>
                 </td>
-                <td class="price-cell btc">฿{{coin.PriceBtc <= 1 ? coin.PriceBtc : coin.PriceBtc.toFixed(8)}} <span class="mobile-label">BTC</span></td>
+                <td class="price-cell btc" ng-show="tickerState.conversion === 'BTC'">฿{{coin.PriceBtc <= 1 ? coin.PriceBtc : coin.PriceBtc.toFixed(6)}} <span class="mobile-label">BTC</span></td>
                 <td class="cap-cell"> <span class="mobile-label block">Market Cap: </span>${{abbreviateNumber(coin.MarketCapUsd) }}</td>
                 <td class="volume-cell"> <span class="mobile-label block">Volume: </span>${{abbreviateNumber(coin.Volume24hUsd)}}</td>
-                <td class="age-cell">
-                    <span class="mobile-label">Age: </span>{{daysToYMD(coin.DaysOld)}}
-                </td>
+
                 <td class="ath-cell">
                     <span ng-if="coin.ATH"><span class="mobile-label">ATH: </span>{{coin.ATH | currency}}</span>
                     <span ng-if="!coin.ATH"><span class="mobile-label">ATH: </span>- - -</span>
                 </td>
                 <td class="ath-date-cell">
-                    <span ng-if="coin.ATH"><span class="mobile-label">Last ATH: </span>{{coin.LastATH | date : 'M/d/yy'}}</span>
+                    <span ng-if="coin.ATH"><span class="mobile-label">Last ATH: </span>{{coin.LastATH | date : 'MM/dd/yy'}}</span>
                     <span ng-if="!coin.ATH"><span class="mobile-label">Last ATH: </span>- - -</span>
                 </td>
                 <td class="change-cell hour" ng-class="{positive: coin.PercentChange1h  > 0,  negative: coin.PercentChange1h  < 0,  neutral: coin.PercentChange1h === 0}">
@@ -52,6 +54,9 @@
                 </td>
                 <td class="change-cell week" ng-class="{positive: coin.PercentChange7d  > 0,  negative: coin.PercentChange7d  < 0,  neutral: coin.PercentChange7d === 0}">
                     <span class="mobile-label">(7d): </span>{{coin.PercentChange7d.toFixed(2)}}%
+                </td>
+                <td class="age-cell">
+                    <span class="mobile-label">Age: </span><div class="clearfix" ng-bind-html="daysToYMD(coin.DaysOld)"></div>
                 </td>
             </tr>
         </tbody>
