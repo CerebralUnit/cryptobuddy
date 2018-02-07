@@ -77,7 +77,22 @@ namespace ChartIt.Controllers
             var ATH = await CoinAPI.GetExchangeData(symbol, id, Exchanges);
             return ATH;
         }
-        
+
+        [Route("api/getcoinath")]
+        public async Task<KeyValuePair<long, decimal>> GetCoinATH(string name)
+        {
+           
+            var ATH = await CoinAPI.GetATH(name);
+            return ATH;
+        }
+
+        [Route("api/getcoinscores")]
+        public async Task<Dictionary<string, CoinScore>> GetCoinScores()
+        {
+            var Scores = await CoinAPI.GetCoinScores();
+
+            return Scores;
+        }
     }
 
 }

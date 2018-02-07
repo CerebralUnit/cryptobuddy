@@ -14,6 +14,7 @@
                 <th ts-criteria="Volume24hUsd">Volume</th>
 
                 <th ts-criteria="ATH">ATH</th>
+                <th ts-criteria="ATH/PriceUsd">Next ATH</th>
                 <th ts-criteria="LastATH">Last ATH</th>
                 <th ts-criteria="PercentChange1h">(1h)</th>
                 <th ts-criteria="PercentChange24h">(24h)</th>
@@ -40,6 +41,10 @@
 
                 <td class="ath-cell">
                     <span ng-if="coin.ATH"><span class="mobile-label">ATH: </span>{{coin.ATH | currency}}</span>
+                    <span ng-if="!coin.ATH"><span class="mobile-label">ATH: </span>- - -</span>
+                </td>
+                <td class="ath-until-cell">
+                    <span ng-if="coin.ATH"><span class="mobile-label">ATH: </span>+{{coin.ATH - coin.PriceUsd | currency}} (+{{(coin.ATH/coin.PriceUsd*100).toFixed(0) | number}}%)</span>
                     <span ng-if="!coin.ATH"><span class="mobile-label">ATH: </span>- - -</span>
                 </td>
                 <td class="ath-date-cell">

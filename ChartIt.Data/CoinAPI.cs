@@ -22,9 +22,42 @@ using System.Web;
 using ScrapySharp.Network;
 using ScrapySharp.Extensions;
 using System.Collections.ObjectModel;
+using System.Net;
+using System.Collections;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using System.Runtime.Caching;
+using Newtonsoft.Json.Linq;
 
 namespace ChartIt.Data
 {
+
+     [DataContract]
+    public class CMCCoinHistory
+    {
+        [DataMember(Name = "market_cap_by_available_supply")]
+        public List<List<decimal>> MarketCapBySupply { get; set; }
+        [DataMember(Name = "price_btc")]
+        public List<List<decimal>> PriceBTC { get; set; }
+        [DataMember(Name = "price_usd")]
+        public List<List<decimal>> PriceUSD { get; set; }
+        [DataMember(Name = "volume_usd")]
+        public List<List<decimal>> VolumeUSD { get; set; }
+    }
+
+    public class CoinScore
+    {
+        public float? Overall { get; set; }
+        public int? Communication { get; set; }
+        public int? Social { get; set; }
+        public int? Team { get; set; }
+        public int? Advisors { get; set; }
+        public int? Buzz { get; set; }
+        public int? Product { get; set; }
+        public int? Coin { get; set; }
+        public int? Business { get; set; }
+        public int? GitHub { get; set; }
+    }
     public class CoinAPI
     {
         private static IReadOnlyDictionary<string, CoinInfo> _coinList;
@@ -33,6 +66,16 @@ namespace ChartIt.Data
         private static Dictionary<string, DateTime> CoinAges = new JSONFile<Dictionary<string, DateTime>>().Object;
         private static Dictionary<string, CoinAllTimeHigh> AllTimeHighs = null;
         private static IReadOnlyDictionary<string, IReadOnlyDictionary<string, IReadOnlyList<string>>> Exchanges = null;
+        private const string CMC_GRAPH_URL_TEMPLATE = "https://graphs2.coinmarketcap.com/currencies/{0}/";
+        private const string COINCHECKUP_ROOT = "https://coincheckup.com";
+            
+        public static DateTime FromUnixTime(long unixTime)
+        {
+            return epoch.AddMilliseconds(unixTime);
+        }
+        private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+
         public static int? GetCoinAgeInDays(string symbol, string id)
         {
             DateTime? StartDate = null;
@@ -71,18 +114,22 @@ namespace ChartIt.Data
 
             var Client = CoinMarketCapClient.GetInstance();
             var TickerList = await Client.GetTickerListAsync(1000);
+            TickerList.Reverse();
             try
             {
-                if (AllTimeHighs == null)
-                {
-                    AllTimeHighs = await GetATHList();
-                }
-          
+                var Tasks = new List<Task<KeyValuePair<long, decimal>>>();
                 foreach (var Ticker in TickerList)
                 {
                     int? daysOld = null;
 
-                  
+                    double? Vol = 0;
+
+                    try
+                    {
+                        Vol = Ticker.Volume24hUsd.GetValueOrDefault();
+                    }
+                    catch { }
+
                     try
                     {
                         daysOld = GetCoinAgeInDays(Ticker.Symbol, Ticker.Id);
@@ -114,16 +161,24 @@ namespace ChartIt.Data
                         PriceOther = Ticker.PriceOther.ToEntity(),
                         PriceUsd = Ticker.PriceUsd,
                         Volume24hOther = Ticker.Volume24hOther.ToEntity(),
-                        Volume24hUsd = Ticker.Volume24hUsd.GetValueOrDefault(),
+                        Volume24hUsd = Vol,
                         DaysOld = daysOld
                     };
 
-                    if (AllTimeHighs.ContainsKey(Ticker.Id))
-                    {
-                        Info.ATH = AllTimeHighs[Ticker.Id].ATH;
-                        Info.LastATH = AllTimeHighs[Ticker.Id].LastATH;
-                    }
+                    Tasks.Add(GetATH(Ticker.Id));
+
                     Coins.Add(Info);
+                }
+
+                var Completed = await Task.WhenAll(Tasks);
+
+                for(var i = 0; i < Completed.Length; i++)
+                {
+                   var ATH =  Completed[i];
+
+                    Coins[i].ATH = (float)ATH.Value;
+                    Coins[i].LastATH = FromUnixTime(ATH.Key);
+
                 }
             }
             catch(Exception ex)
@@ -269,6 +324,87 @@ namespace ChartIt.Data
 
             return _coinList;
         }
+        public static async Task<Dictionary<string, CoinScore>> GetCoinScores()
+        {
+            var DataPath = await GetCoinCheckupDataPath();
+            var Url = String.Format("{0}{1}coins.json", COINCHECKUP_ROOT, DataPath);
+            string JsonResponse = String.Empty;
+            var Response = new Dictionary<string, CoinScore>();
+
+            using (WebClient wc = new WebClient())
+            {
+                var json = await wc.DownloadStringTaskAsync(Url);
+
+                JArray jsonObj = JArray.Parse(json);
+
+                foreach (JObject o in jsonObj.Children<JObject>())
+                {
+                    JObject scores = o["scores"].Type != JTokenType.Null ? o["scores"].Value<JObject>() : null;
+
+                    var Overall       = o["score"].Type != JTokenType.Null ? o["score"].Value<float>() : 0;
+                    JToken Communication = null;
+                    JToken Social        = null;
+                    JToken Team          = null;
+                    JToken Advisors      = null;
+                    JToken Buzz          = null;
+                    JToken Product       = null;
+                    JToken Coin          = null;
+                    JToken Business      = null;
+                    JToken GitHub        = null;
+                    
+                    if(scores != null)
+                    {
+                        scores.TryGetValue("A", out Communication);
+                        scores.TryGetValue("B", out Social);
+                        scores.TryGetValue("C", out Team);
+                        scores.TryGetValue("D", out Advisors);
+                        scores.TryGetValue("E", out Buzz);
+                        scores.TryGetValue("F", out Product);
+                        scores.TryGetValue("G", out Coin);
+                        scores.TryGetValue("H", out Business);
+                        scores.TryGetValue("J", out GitHub);
+
+                        var Score = new CoinScore()
+                        {
+                            Overall = Overall,
+                            Communication = Communication.Type != JTokenType.Null ? Communication.Value<int>() : 0,
+                            Social = Social.Type != JTokenType.Null ? Social.Value<int>() : 0,
+                            Team = Team.Type != JTokenType.Null ? Team.Value<int>() : 0,
+                            Advisors = Advisors.Type != JTokenType.Null ? Advisors.Value<int>() : 0,
+                            Buzz = Buzz.Type != JTokenType.Null ? Buzz.Value<int>() : 0,
+                            Product = Product.Type != JTokenType.Null ? Product.Value<int>() : 0,
+                            Coin = Coin.Type != JTokenType.Null ? Coin.Value<int>() : 0,
+                            Business = Business.Type != JTokenType.Null ? Business.Value<int>() : 0,
+                            GitHub = GitHub.Type != JTokenType.Null ? GitHub.Value<int>() : 0
+
+                        };
+                        Response.Add(o["id"].Value<string>(), Score);
+                    } 
+                }
+            }
+
+            return Response;
+        }
+        public async static Task<string> GetCoinCheckupDataPath()
+        {
+            var Scraper = new ScrapingBrowser();
+
+            var js = new Jurassic.ScriptEngine();
+
+            Scraper.AllowAutoRedirect = true;
+
+            Scraper.AllowMetaRedirect = true;
+
+            var Page = await Scraper.NavigateToPageAsync(new Uri("https://coincheckup.com/analysis"));
+
+            var RootScript = Page.Html.SelectSingleNode("//script[contains(text(), 'DATA_URI')]");
+            var x = js.Evaluate("window = {}");
+            var result = js.Evaluate(RootScript.InnerText);
+          
+            var root = js.GetGlobalValue<string>("DATA_URI"); 
+
+            return root;
+        }
         public async static Task<Dictionary<string, CoinAllTimeHigh>> GetATHList()
         {
             var Scraper = new ScrapingBrowser();
@@ -316,6 +452,67 @@ namespace ChartIt.Data
             var Client = new CryptoCompareClient();
             var Ex = await Client.Exchanges.ListAsync();
             return Ex;
+        }
+    
+        public async static Task<KeyValuePair<long, decimal>> GetATH(string name)
+        {
+         
+            //get dictionary of name, symbol, slug
+            //https://files.coinmarketcap.com/generated/search/quick_search.json
+
+            var UrlName = name.ToLower().Replace(" ", "-");
+
+            var Url = String.Format(CMC_GRAPH_URL_TEMPLATE, UrlName);
+
+            CMCCoinHistory JsonResponse = null;
+
+            var Response = default(KeyValuePair<long, decimal>);
+            long ATHDate = 0;
+            decimal? ATH = 0;
+
+            ObjectCache cache = MemoryCache.Default;
+
+            if (cache.Contains(name))
+            {
+                var val = cache.Get(name);
+
+                if (val != null)
+                {
+                    Response = (KeyValuePair<long, decimal>)cache.Get(name);
+                } 
+            } 
+            else
+            { 
+                using (WebClient wc = new WebClient())
+                {
+                    var json = await wc.DownloadStringTaskAsync(Url);
+
+                    JsonResponse = JsonConvert.DeserializeObject<CMCCoinHistory>(json);
+
+                    foreach (var price in JsonResponse.PriceUSD)
+                    {
+                        if (price[1] > ATH)
+                        {
+                            ATH = price[1];
+                            ATHDate = (long)price[0];
+                        }
+                    }
+                }
+
+                if (ATH.HasValue && ATH.Value > 0)
+                {
+                    Response = new KeyValuePair<long, decimal>(ATHDate, ATH.Value);
+
+                    CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
+                    cacheItemPolicy.AbsoluteExpiration = DateTime.Now.Date.AddDays(1); //midnight
+                    cache.Add(name, Response, cacheItemPolicy);
+
+                }
+            }
+
+            
+
+            return Response; 
         }
         public static bool ArchiveCoinAge(string symbol, DateTime startDate)
         {
