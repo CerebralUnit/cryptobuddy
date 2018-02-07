@@ -339,7 +339,7 @@ namespace ChartIt.Data
 
                 foreach (JObject o in jsonObj.Children<JObject>())
                 {
-                    JObject scores = o["scores"].Type != JTokenType.Null ? o["scores"].Value<JObject>() : null;
+                    JObject scores = o["scores"] != null && o["scores"].Type != JTokenType.Null ? o["scores"].Value<JObject>() : null;
 
                     var Overall       = o["score"].Type != JTokenType.Null ? o["score"].Value<float>() : 0;
                     JToken Communication = null;
