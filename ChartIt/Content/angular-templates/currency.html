@@ -18,7 +18,7 @@
                                 Age: {{ getAge(meta.StartDate) }}
                             </div>
                             <div ng-if="meta && meta.Website">
-                                <a ng-href="meta.AffiliateUrl"><i class="fa fa-link" aria-hidden="true"></i><span class="general-label">Website</span></a> 
+                                <a ng-href="{{meta.AffiliateUrl}}"><i class="fa fa-link" aria-hidden="true"></i><span class="general-label">Website</span></a> 
                             </div>
                             <div ng-if="meta && meta.Twitter">
                                 <a ng-href="https://www.twitter.com/{{meta.Twitter.replace('@', '')}}">
@@ -30,10 +30,10 @@
                                 <a href="{{socialStats.FacebookLink}}"><i class="fa fa-facebook" aria-hidden="true"></i> <span class="general-label">Facebook</span></a>
                             </div>
                             <div ng-if="meta.ICO.Blog">
-                                <a ng-href="meta.ICO.BlogLink"><i class="fa fa-rss" aria-hidden="true"></i> <span class="general-label">Blog</span></a>
+                                <a ng-href="{{meta.ICO.BlogLink}}"><i class="fa fa-rss" aria-hidden="true"></i> <span class="general-label">Blog</span></a>
                             </div>
                             <div ng-if="meta.ICO.WhitePaper">
-                                <a ng-href="meta.ICO.WhitePaperLink"><i class="fa fa-book" aria-hidden="true"></i> <span class="general-label">White Paper</span></a>
+                                <a ng-href="{{meta.ICO.WhitePaperLink}}"><i class="fa fa-book" aria-hidden="true"></i> <span class="general-label">White Paper</span></a>
                             </div>
                             <div ng-if="socialStats.CodeRepos && socialStats.CodeRepos.length">
                                 <a href="{{socialStats.CodeRepos[0].Url}}"><i class="fa fa-code-fork" aria-hidden="true"></i> <span class="general-label">Repository</span></a>

@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/NgAnimate.css">
     <link rel="stylesheet" href="~/Content/stockCharts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/Scripts/jquery.qtip-2.0.1.css" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -20,7 +22,7 @@
 <body class="site">
     <div class="coin-loader" ng-show="!state.isLoaded"></div>
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-brand">
 
                 <a class="navbar-item logo" href="/">
@@ -44,7 +46,7 @@
             </div>
         </div>
     </nav>
-    <div class="container site-content">
+    <div class="container-fluid site-content">
         @RenderBody()
         <div class="slide-top" ng-view></div>
 
@@ -76,13 +78,12 @@
 
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
-    <link rel="stylesheet" href="/Scripts/jquery.qtip-2.0.1.css" />
-
+    
 
     <script>
         var PHP_location = "http://" + window.location.hostname + "/api/getsentiment";
     </script> 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.qtip-2.0.1.js"></script>
     <script type="text/javascript" src="/scripts/moment.min.js"></script>
@@ -214,7 +215,7 @@
             $scope.isDefaultDate = function (d) {
                 return d === new Date('Jan 18, 1970')
             };
-
+            $scope.scores = {};
             $scope.filters = {
                 coinFilter: ''
             };
@@ -230,12 +231,34 @@
                     e = d + ['', ' K', ' M', ' B', ' T'][k]; // append power
                 return e;
             }
+            $http.get('/api/getcoinscores').then(function (response) {
+                $scope.scores = response.data;
+                if ($scope.ticker.length) {
+                    $scope.ticker.map(function (coin) {
+                        if ($scope.scores.hasOwnProperty(coin.Id)) {
+                            coin.Score = $scope.scores[coin.Id].Overall;
+                        }
+                    })
+                }
+
+            }, function () {
+
+                });
 
             function refreshTicker() {
                 $http.get('/api/getticker').then(
                     function (response) {
                         $scope.state.isLoaded = true;
                         $scope.ticker = response.data;
+
+
+                        if (Object.keys($scope.scores).length) {
+                            $scope.ticker.map(function (coin) {
+                                if ($scope.scores.hasOwnProperty(coin.Id)) {
+                                    coin.Score = $scope.scores[coin.Id].Overall;
+                                }
+                            })
+                        }
                     },
                     function (err) {
                         $scope.state.isLoaded = true;

@@ -330,58 +330,83 @@ namespace ChartIt.Data
             var Url = String.Format("{0}{1}coins.json", COINCHECKUP_ROOT, DataPath);
             string JsonResponse = String.Empty;
             var Response = new Dictionary<string, CoinScore>();
+            var cacheKey = "coinscores";
+            ObjectCache cache = MemoryCache.Default;
 
-            using (WebClient wc = new WebClient())
+            if (cache.Contains(cacheKey))
             {
-                var json = await wc.DownloadStringTaskAsync(Url);
+                var val = cache.Get(cacheKey);
 
-                JArray jsonObj = JArray.Parse(json);
-
-                foreach (JObject o in jsonObj.Children<JObject>())
+                if (val != null)
                 {
-                    JObject scores = o["scores"] != null && o["scores"].Type != JTokenType.Null ? o["scores"].Value<JObject>() : null;
-
-                    var Overall       = o["score"] != null && o["score"].Type != JTokenType.Null ? o["score"].Value<float>() : 0;
-                    JToken Communication = null;
-                    JToken Social        = null;
-                    JToken Team          = null;
-                    JToken Advisors      = null;
-                    JToken Buzz          = null;
-                    JToken Product       = null;
-                    JToken Coin          = null;
-                    JToken Business      = null;
-                    JToken GitHub        = null;
-                    
-                    if(scores != null)
-                    {
-                        scores.TryGetValue("A", out Communication);
-                        scores.TryGetValue("B", out Social);
-                        scores.TryGetValue("C", out Team);
-                        scores.TryGetValue("D", out Advisors);
-                        scores.TryGetValue("E", out Buzz);
-                        scores.TryGetValue("F", out Product);
-                        scores.TryGetValue("G", out Coin);
-                        scores.TryGetValue("H", out Business);
-                        scores.TryGetValue("J", out GitHub);
-
-                        var Score = new CoinScore()
-                        {
-                            Overall = Overall,
-                            Communication = Communication.Type != JTokenType.Null ? Communication.Value<int>() : 0,
-                            Social = Social.Type != JTokenType.Null ? Social.Value<int>() : 0,
-                            Team = Team.Type != JTokenType.Null ? Team.Value<int>() : 0,
-                            Advisors = Advisors.Type != JTokenType.Null ? Advisors.Value<int>() : 0,
-                            Buzz = Buzz.Type != JTokenType.Null ? Buzz.Value<int>() : 0,
-                            Product = Product.Type != JTokenType.Null ? Product.Value<int>() : 0,
-                            Coin = Coin.Type != JTokenType.Null ? Coin.Value<int>() : 0,
-                            Business = Business.Type != JTokenType.Null ? Business.Value<int>() : 0,
-                            GitHub = GitHub.Type != JTokenType.Null ? GitHub.Value<int>() : 0
-
-                        };
-                        Response.Add(o["id"].Value<string>(), Score);
-                    } 
+                    Response = (Dictionary<string, CoinScore>)cache.Get(cacheKey);
                 }
             }
+            else
+            {
+                using (WebClient wc = new WebClient())
+                {
+                    var json = await wc.DownloadStringTaskAsync(Url);
+
+                    JArray jsonObj = JArray.Parse(json);
+
+                    foreach (JObject o in jsonObj.Children<JObject>())
+                    {
+                        JObject scores = o["scores"] != null && o["scores"].Type != JTokenType.Null ? o["scores"].Value<JObject>() : null;
+
+                        var Overall = o["score"] != null && o["score"].Type != JTokenType.Null ? o["score"].Value<float>() : 0;
+                        JToken Communication = null;
+                        JToken Social = null;
+                        JToken Team = null;
+                        JToken Advisors = null;
+                        JToken Buzz = null;
+                        JToken Product = null;
+                        JToken Coin = null;
+                        JToken Business = null;
+                        JToken GitHub = null;
+
+                        if (scores != null)
+                        {
+                            scores.TryGetValue("A", out Communication);
+                            scores.TryGetValue("B", out Social);
+                            scores.TryGetValue("C", out Team);
+                            scores.TryGetValue("D", out Advisors);
+                            scores.TryGetValue("E", out Buzz);
+                            scores.TryGetValue("F", out Product);
+                            scores.TryGetValue("G", out Coin);
+                            scores.TryGetValue("H", out Business);
+                            scores.TryGetValue("J", out GitHub);
+
+                            var Score = new CoinScore()
+                            {
+                                Overall = Overall,
+                                Communication = Communication.Type != JTokenType.Null ? Communication.Value<int>() : 0,
+                                Social = Social.Type != JTokenType.Null ? Social.Value<int>() : 0,
+                                Team = Team.Type != JTokenType.Null ? Team.Value<int>() : 0,
+                                Advisors = Advisors.Type != JTokenType.Null ? Advisors.Value<int>() : 0,
+                                Buzz = Buzz.Type != JTokenType.Null ? Buzz.Value<int>() : 0,
+                                Product = Product.Type != JTokenType.Null ? Product.Value<int>() : 0,
+                                Coin = Coin.Type != JTokenType.Null ? Coin.Value<int>() : 0,
+                                Business = Business.Type != JTokenType.Null ? Business.Value<int>() : 0,
+                                GitHub = GitHub.Type != JTokenType.Null ? GitHub.Value<int>() : 0
+
+                            };
+                            Response.Add(o["id"].Value<string>(), Score);
+                        }
+                    }
+                }
+
+                if (Response.Keys.Count > 0)
+                {
+                   
+                    CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
+                    cacheItemPolicy.AbsoluteExpiration = DateTime.Now.Date.AddDays(1); //midnight
+                    cache.Add(cacheKey, Response, cacheItemPolicy);
+
+                }
+            }
+
+            
 
             return Response;
         }

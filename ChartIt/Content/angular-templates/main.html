@@ -11,8 +11,7 @@
                 <th ts-criteria="PriceUsd" ng-show="tickerState.conversion === 'USD'">Price USD</th>
                 <th ts-criteria="PriceBtc" ng-show="tickerState.conversion === 'BTC'">Price BTC</th>
                 <th ts-criteria="MarketCapUsd">Market Cap</th>
-                <th ts-criteria="Volume24hUsd">Volume</th>
-
+                <th ts-criteria="Volume24hUsd">Volume</th> 
                 <th ts-criteria="ATH">ATH</th>
                 <th ts-criteria="ATH/PriceUsd">Next ATH</th>
                 <th ts-criteria="LastATH">Last ATH</th>
@@ -20,6 +19,7 @@
                 <th ts-criteria="PercentChange24h">(24h)</th>
                 <th ts-criteria="PercentChange7d">(1w)</th>
                 <th ts-criteria="DaysOld">Age</th>
+                <th ts-criteria="Score">Rating</th>
             </tr>
         </thead>
         <tbody>
@@ -62,6 +62,13 @@
                 </td>
                 <td class="age-cell">
                     <span class="mobile-label">Age: </span><div class="clearfix" ng-bind-html="daysToYMD(coin.DaysOld)"></div>
+                </td>
+                <td class="rating-cell" ng-if="scores.hasOwnProperty(coin.Id)">
+                    <span class="mobile-label" >Rating: </span>
+                    <div class="clearfix rating-value">{{coin.Score.toFixed(2)}}</div>
+                    <div class="rating-bar">
+                        <div class="rating-bar-fill" style=" background-color: {{ coin.Score < 60 ? '#ff207d' : '#9EFF20'}}; transform: scaleX({{coin.Score/100}});"></div>
+                    </div>
                 </td>
             </tr>
         </tbody>

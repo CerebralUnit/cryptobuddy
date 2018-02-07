@@ -5,6 +5,40 @@
 /*- Modification History: --------------------------------------------------*/
 /*  When:	Who:			Comments:			    */
 /* 									    */
+if (Array.prototype.equals)
+    console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
+// attach the .equals method to Array's prototype to call it on any array
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time 
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l = this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;
+        }
+        else if (this[i] != array[i]) {
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;
+        }
+    }
+    return true;
+}
+// Hide method from for-in loops
+Object.defineProperty(Array.prototype, "equals", { enumerable: false });
+
+
+
+
+
+
 /*  01-May-12	Christopher G. Healey	Initial implementation		    */
 /*--------------------------------------------------------------------------*/
 
@@ -13,8 +47,8 @@
 var  canvas_x;				// Current mouse X-position on canvas
 var  canvas_y;				// Current mouse X-position on canvas
 var  timer_ID = -1;			// Current setTimeout ID
-
-
+var lastTweet = [];
+ 
 function clear_canvas( canvas_ID )
 
   //  Clear the given canvas's drawing area
@@ -268,11 +302,11 @@ function draw_tooltip()
     return;
   }
 
-  //  Ensure canvas has focus before trying to draw tooltip
+  ////  Ensure canvas has focus before trying to draw tooltip
 
-  if ( ( id == 0 && !tweet_focus() ) || ( id == 1 && !topic_focus() ) ) {
-    return;				// If not, don't draw tooltip
-  }
+  //if ( ( id == 0 && !tweet_focus() ) || ( id == 1 && !topic_focus() ) ) {
+  //  return;				// If not, don't draw tooltip
+  //}
 
   canvas_ID = get_canvas_ID();
   if ( !( canvas = get_canvas( canvas_ID ) ) ) {
@@ -281,7 +315,8 @@ function draw_tooltip()
 
   if ( id < 2 ) {			// Tooltips for tweet circles?
     if ( id == 0 || id == 1 ) {		// Sentiment or topic canvases?
-      tweet_ID = within_tweet();
+        tweet_ID = within_tweet();
+        lastTweet = tweet_ID;
     } else {				// Narrative SVG
       return;
     }
@@ -321,7 +356,7 @@ function draw_tooltip()
       anchor = anchor + "right";
     } 
 
-  } else {				// Tooptip for heatmap cells
+  } else {				// Tooltip for heatmap cells
     cell_ID = within_heatmap_cell();
     if ( !cell_ID.hasOwnProperty( "v" ) ) {
       return;
@@ -357,7 +392,7 @@ function handle_click_evt( e, ID )
   //  ID:  Parent canvas ID
 {
   update_mouse_pos( e.pageX, e.pageY, ID );
-  show_info_dlg( within_tweet() );	// Show tweets under mouse cursor
+ // show_info_dlg( within_tweet() );	// Show tweets under mouse cursor
 }					// End function handle_click_evt
 
 
@@ -378,18 +413,22 @@ function reset_tooltip()
   //  Destroy any previously shown tooltip, and reset the mouse move
   //  timeout delay to re-display a new tooltip
 {
-  if ( $("#tweet-canvas").data( "qtip" ) ) {
-    $("#tweet-canvas").qtip( "destroy" );
-  }
-  if ( $("#topic-canvas").data( "qtip" ) ) {
-    $("#topic-canvas").qtip( "destroy" );
-  }
-  if ( $("#heatmap-canvas").data( "qtip" ) ) {
-    $("#heatmap-canvas").qtip( "destroy" );
-  }
+    if (within_tweet().equals(lastTweet))
+        return;
+    
 
+        if ($("#tweet-canvas").data("qtip")) {
+            $("#tweet-canvas").qtip("destroy");
+        }
+        if ($("#topic-canvas").data("qtip")) {
+            $("#topic-canvas").qtip("destroy");
+        }
+        if ($("#heatmap-canvas").data("qtip")) {
+            $("#heatmap-canvas").qtip("destroy");
+        }
+ 
   clearTimeout( timer_ID );		// Set mouse hover timeout
-  timer_ID = setTimeout( "draw_tooltip()", 665 );
+  timer_ID = setTimeout( "draw_tooltip()", 0 );
 }					// End function reset_tooltip
 
 
@@ -629,5 +668,8 @@ function within_tweet()
     }
   }
 
+  
+  if (tweet_ID.length)
+      var i = 0;
   return tweet_ID;
 }					// End routine within_tweet
