@@ -1,0 +1,37 @@
+﻿<h1 class="tab-header text-center">{{ ::$parent.details.market.name }} ratings &raquo; detailed scores</h1>
+<div>
+    <div ng-show="::$parent.details.total_score && governance"> 
+        <div class="text-center">            
+            <a class="btn btn-primary no-und" href="" ng-click="toggleAllWhys()" analytics-on="click" analytics-event="Toggle full score explanations">See full details</a>        
+        </div>
+        <dl class="dl-horizontal">
+            <dt class="fw fw-progress-wrapper" ng-repeat-start="section in coinScores">
+                <div class="fw-progress" style="width: {{ ::section.sectionScore }}%;">
+                    {{ ::section.sectionTitle }} {{ ::section.sectionScore }}%
+                </div>
+            </dt>
+            <dd class="sub-hdn"></dd>
+            <dt class="sub" ng-repeat-start="item in section.items">
+                {{ ::item.label }}
+                <div ng-if="::item.sublabel" class="text-sm"><em>{{ ::item.sublabel }}</em></div>
+            </dt>
+            <dd ng-repeat-end>
+                {{ ::item.score }} points<a href="" class="item-expander no-und" ng-click="item.expanded =!item.expanded">
+                    <i class="fa" ng-class="{ 'fa-caret-down': !item.expanded, 'fa-caret-up': item.expanded }"></i> Why?
+                </a><span class="max">{{ ::item.maxScore }}</span>
+                <div class="details row" ng-show="item.expanded">
+                    <div class="col-xs-12 col-sm-6 score-data">
+                        <ul>
+                            <li ng-repeat="ref in item.scoreRefs"><span class="ref-label">{{ ::ref.label }}</span> <span class="ref-data" ng-bind-html="::(ref.data | linky : '_blank') | NAToUpper"></span>            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 score-methodology" ng-bind-html="::item.scoreMethodology"></div>
+                </div>
+            </dd>
+            <span ng-repeat-end ng-hide="true"></span>
+        </dl>
+    </div>
+    <div ng-hide="::$parent.details.total_score && governance" class="text-center margin-top-xxl text-lg">
+        <em>We're currently working to gather more data in order to score {{ ::$parent.details.market.name }}</em>
+    </div>
+</div>

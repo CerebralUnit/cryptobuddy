@@ -85,6 +85,7 @@
                     <li ng-click="bottomTabs.panel = 'sentiment';resize_tweet();" ng-class="{'is-active': bottomTabs.panel === 'sentiment'}"><a>Sentiment</a></li>
                     <li ng-click="bottomTabs.panel = 'exchanges';getExchangeData();" ng-class="{'is-active': bottomTabs.panel === 'exchanges'}"><a>Exchanges</a></li>
                     <li ng-click="bottomTabs.panel = 'ico'" ng-class="{'is-active': bottomTabs.panel === 'ico'}"><a>ICO Info</a></li>
+                    <li ng-click="bottomTabs.panel = 'rating'" ng-class="{'is-active': bottomTabs.panel === 'rating'}"><a>Rating</a></li>
                 </ul>
             </div>
             <div class="tab-panel" ng-class="{active: bottomTabs.panel === 'charts'}">
@@ -101,6 +102,42 @@
             <div class="tab-panel" ng-class="{active: bottomTabs.panel === 'exchanges'}">
                 <div class="exchange-listing" ng-repeat="exchange in exchanges">
                     {{exchange}}
+                </div>
+            </div>
+            <div class="scores-panel">
+                <div>
+                    <div >
+                        <div class="text-center">
+                            <a class="btn btn-primary no-und" href="" ng-click="toggleAllWhys()" analytics-on="click" analytics-event="Toggle full score explanations">See full details</a>
+                        </div>
+                        <dl class="dl-horizontal">
+                            <dt class="fw fw-progress-wrapper" ng-repeat-start="section in coinScoreLabels">
+                                <div class="fw-progress" style="width: {{ ::section.sectionScore }}%;">
+                                    {{ ::section.sectionTitle }} {{ ::section.sectionScore }}%
+                                </div>
+                            </dt>
+                            <dd class="sub-hdn"></dd>
+                            <dt class="sub" ng-repeat-start="item in section.items">
+                                {{ ::item.label }}
+                                <div ng-if="::item.sublabel" class="text-sm"><em>{{ ::item.sublabel }}</em></div>
+                            </dt>
+                            <dd ng-repeat-end>
+                                {{ ::item.score }} points<a href="" class="item-expander no-und" ng-click="item.expanded =!item.expanded">
+                                    <i class="fa" ng-class="{ 'fa-caret-down': !item.expanded, 'fa-caret-up': item.expanded }"></i> Why?
+                                </a><span class="max">{{ ::item.maxScore }}</span>
+                                <div class="details row" ng-show="item.expanded">
+                                    <div class="col-xs-12 col-sm-6 score-data">
+                                        <ul>
+                                            <li ng-repeat="ref in item.scoreRefs"><span class="ref-label">{{ ::ref.label }}</span> <span class="ref-data" ng-bind-html="::(ref.data | linky : '_blank') | NAToUpper"></span>            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-5 score-methodology" ng-bind-html="::item.scoreMethodology"></div>
+                                </div>
+                            </dd>
+                            <span ng-repeat-end ng-hide="true"></span>
+                        </dl>
+                    </div>
+                   
                 </div>
             </div>
             <div class="tab-panel currency-ico-info" ng-class="{active: bottomTabs.panel === 'ico'}">

@@ -69,6 +69,18 @@ namespace ChartIt.Data
         private const string CMC_GRAPH_URL_TEMPLATE = "https://graphs2.coinmarketcap.com/currencies/{0}/";
         private const string COINCHECKUP_ROOT = "https://coincheckup.com";
             
+        private static Dictionary<string,string> ScoreLabelKey = new Dictionary<string, string>() {
+            {"A", "Communication"},
+            {"B", "Social"},
+            {"C", "Team"},
+            {"D", "Advisors"},
+            {"E", "Buzz"},
+            {"F", "Product"},
+            {"G", "Coin"},
+            {"H", "Business"},
+            {"J", "GitHub"}
+        };
+
         public static DateTime FromUnixTime(long unixTime)
         {
             return epoch.AddMilliseconds(unixTime);
@@ -324,6 +336,75 @@ namespace ChartIt.Data
 
             return _coinList;
         }
+        
+
+        public static async Task<Dictionary<string, Dictionary<string, int>>> GetCoinScoreDetails(string name)
+        {
+           
+            var DataPath = await GetCoinCheckupDataPath();
+            var Url = String.Format("{0}{1}assets/{2}.json", COINCHECKUP_ROOT, DataPath, name);
+            var JsonResponse = String.Empty;
+            var Response = new Dictionary<string, Dictionary<string, int>>();
+            var cacheKey = "scoredetail" + name;
+            ObjectCache cache = MemoryCache.Default;
+
+            if (cache.Contains(cacheKey))
+            {
+                var val = cache.Get(cacheKey);
+
+                if (val != null)
+                {
+                    Response = (Dictionary<string, Dictionary<string, int>>)cache.Get(cacheKey);
+                }
+            }
+            else
+            {
+                using (WebClient wc = new WebClient())
+                {
+                    var json = await wc.DownloadStringTaskAsync(Url);
+
+                    JObject jsonObj = JObject.Parse(json);
+                     
+                    JObject scoreDetails = jsonObj["scores_detailed"] != null && jsonObj["scores_detailed"].Type != JTokenType.Null ? jsonObj["scores_detailed"].Value<JObject>() : null;
+ 
+                    foreach (var x in scoreDetails)
+                    {
+                        string key = x.Key;
+                        JObject value = x.Value as JObject;
+                        string category = ScoreLabelKey[key];
+                        Response.Add(category, new Dictionary<string, int>());
+
+                        if(value != null)
+                        {
+                            foreach (var y in value)
+                            {
+                                string k = y.Key;
+                                var v = y.Value;
+
+                                Response[category].Add(k, v.Value<int>());
+                            }
+                        }
+                        
+                    }
+                    
+                }
+                 
+                if (Response.Keys.Count > 0)
+                {
+
+                    CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
+                    cacheItemPolicy.AbsoluteExpiration = DateTime.Now.Date.AddDays(1); //midnight
+                    cache.Add(cacheKey, Response, cacheItemPolicy);
+
+                }
+            }
+
+
+
+            return Response;
+        }
+
+
         public static async Task<Dictionary<string, CoinScore>> GetCoinScores()
         {
             var DataPath = await GetCoinCheckupDataPath();

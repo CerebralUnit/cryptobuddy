@@ -93,6 +93,15 @@ namespace ChartIt.Controllers
 
             return Scores;
         }
+
+        [Route("api/getcoinscoredetails")]
+        public async Task<Dictionary<string, Dictionary<string,int>>> GetCoinScoreDetails(string name)
+        {
+            var Scores = await CoinAPI.GetCoinScoreDetails(name);
+
+            return Scores;
+        }
+    
     }
 
 }
