@@ -183,6 +183,7 @@
     <Content Include="Content\angular-templates\main.html" />
     <Content Include="Content\angular-templates\scores.html" />
     <Content Include="Content\Bulma.css" />
+    <Content Include="Content\circle.css" />
     <Content Include="Content\NgAnimate.css" />
     <Content Include="Content\stockCharts.css" />
     <None Include="Data\CoinAge.json" />

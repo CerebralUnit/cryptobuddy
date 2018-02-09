@@ -104,36 +104,62 @@
                     {{exchange}}
                 </div>
             </div>
-            <div class="scores-panel">
+            <div class="tab-panel scores-panel" ng-class="{active: bottomTabs.panel === 'rating'}">
                 <div>
                     <div >
-                        <div class="text-center">
-                            <a class="btn btn-primary no-und" href="" ng-click="toggleAllWhys()" analytics-on="click" analytics-event="Toggle full score explanations">See full details</a>
+                        <div class="clearfix">
+                            <a class="btn btn-primary no-und" href="" ng-click="toggleAllWhys()" analytics-on="click" analytics-event="Toggle full score explanations">Show all details</a>
                         </div>
                         <dl class="dl-horizontal">
-                            <dt class="fw fw-progress-wrapper" ng-repeat-start="section in coinScoreLabels">
-                                <div class="fw-progress" style="width: {{ ::section.sectionScore }}%;">
-                                    {{ ::section.sectionTitle }} {{ ::section.sectionScore }}%
-                                </div>
-                            </dt>
-                            <dd class="sub-hdn"></dd>
-                            <dt class="sub" ng-repeat-start="item in section.items">
-                                {{ ::item.label }}
-                                <div ng-if="::item.sublabel" class="text-sm"><em>{{ ::item.sublabel }}</em></div>
-                            </dt>
-                            <dd ng-repeat-end>
-                                {{ ::item.score }} points<a href="" class="item-expander no-und" ng-click="item.expanded =!item.expanded">
-                                    <i class="fa" ng-class="{ 'fa-caret-down': !item.expanded, 'fa-caret-up': item.expanded }"></i> Why?
-                                </a><span class="max">{{ ::item.maxScore }}</span>
-                                <div class="details row" ng-show="item.expanded">
-                                    <div class="col-xs-12 col-sm-6 score-data">
-                                        <ul>
-                                            <li ng-repeat="ref in item.scoreRefs"><span class="ref-label">{{ ::ref.label }}</span> <span class="ref-data" ng-bind-html="::(ref.data | linky : '_blank') | NAToUpper"></span>            </li>
-                                        </ul>
+                            <dl ng-repeat-start="section in coinScoreLabels">
+
+                                <dt class="section-title">
+                                    {{ ::section.sectionTitle }}
+                                </dt>
+                                <dt class="c100 p{{ ::section.sectionScore }} dark green bad"   ng-class="{good: section.sectionScore > 70, okay: section.sectionScore > 50}">
+                                    <span>{{ ::section.sectionScore }}%</span>
+                                  
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-5 score-methodology" ng-bind-html="::item.scoreMethodology"></div>
-                                </div>
-                            </dd>
+                                </dt>
+                                <dd class="sub-hdn"></dd>
+                                <dd class="sub-item" ng-repeat-start="item in section.items" ng-click="item.expanded = !item.expanded">
+                                    <div class="sub-item-header">
+                                        <div class="sub-score" ng-class="{good: item.score/item.maxScore > 0.75, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore <= 0.75, bad:  item.score/item.maxScore < 0.5}">
+                                            {{ ::item.score }}/<span class="max">{{ ::item.maxScore }}</span>
+                                        </div>
+
+
+                                        <div class="sub">
+                                            {{ ::item.label }}
+                                            <div ng-if="::item.sublabel" class="text-sm"><em>{{ ::item.sublabel }}</em></div>
+                                        </div>
+                                        <div class="item-expander ">
+                                            <a href="" class="no-und">
+                                                <i class="fa" ng-class="{ 'fa-caret-down': !item.expanded, 'fa-caret-up': item.expanded }"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="sub-expander" ng-show="item.expanded"> 
+                                        <div class="score-data">
+                                            <ul>
+                                                <li ng-repeat="ref in item.scoreRefs">
+                                                    <span class="ref-label">{{ ::ref.label }}</span> 
+                                                    <span class="ref-data" ng-bind-html="::(ref.data | linky : '_blank') | NAToUpper"></span>            
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="score-methodology" ng-bind-html="::item.scoreMethodology"></div>
+                                    </div> 
+                                </dd>
+                         
+                                   
+                                    
+                                 
+                                <span ng-repeat-end ng-hide="true"></span>
+                            </dl>
                             <span ng-repeat-end ng-hide="true"></span>
                         </dl>
                     </div>

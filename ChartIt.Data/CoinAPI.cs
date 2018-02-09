@@ -338,13 +338,13 @@ namespace ChartIt.Data
         }
         
 
-        public static async Task<Dictionary<string, Dictionary<string, int>>> GetCoinScoreDetails(string name)
+        public static async Task<Dictionary<string, Dictionary<string, object>>> GetCoinScoreDetails(string name)
         {
            
             var DataPath = await GetCoinCheckupDataPath();
             var Url = String.Format("{0}{1}assets/{2}.json", COINCHECKUP_ROOT, DataPath, name);
             var JsonResponse = String.Empty;
-            var Response = new Dictionary<string, Dictionary<string, int>>();
+            var Response = new Dictionary<string, Dictionary<string, object>>();
             var cacheKey = "scoredetail" + name;
             ObjectCache cache = MemoryCache.Default;
 
@@ -354,7 +354,7 @@ namespace ChartIt.Data
 
                 if (val != null)
                 {
-                    Response = (Dictionary<string, Dictionary<string, int>>)cache.Get(cacheKey);
+                    Response = (Dictionary<string, Dictionary<string, object>>)cache.Get(cacheKey);
                 }
             }
             else
@@ -364,15 +364,55 @@ namespace ChartIt.Data
                     var json = await wc.DownloadStringTaskAsync(Url);
 
                     JObject jsonObj = JObject.Parse(json);
-                     
+
                     JObject scoreDetails = jsonObj["scores_detailed"] != null && jsonObj["scores_detailed"].Type != JTokenType.Null ? jsonObj["scores_detailed"].Value<JObject>() : null;
+
+                    JObject research = jsonObj["research"] != null && jsonObj["research"].Type != JTokenType.Null ? jsonObj["research"].Value<JObject>() : null;
+
+                    JObject overallScores = jsonObj["scores"] != null && jsonObj["scores"].Type != JTokenType.Null ? jsonObj["scores"].Value<JObject>() : null;
+
+                    JObject market = jsonObj["market"] != null && jsonObj["market"].Type != JTokenType.Null ? jsonObj["market"].Value<JObject>() : null;
+
+
+                    var governance = String.Empty;
  
+                    Response.Add("Governance", new Dictionary<string, object>() { { "Type", governance } });
+                    Response.Add("Overall", new Dictionary<string, object>());
+                    Response.Add("Research", new Dictionary<string, object>());
+                    Response.Add("market", new Dictionary<string, object>());
+
+                    foreach (var v in market)
+                    {
+                        var key = v.Key;
+                        var val = v.Value == null || v.Value.Type == JTokenType.Null ? String.Empty : v.Value.Value<object>();
+
+                        Response["market"].Add(key, val);
+                    }
+
+                    foreach (var w in research)
+                    {
+                        var key = w.Key;
+                        var val = w.Value == null || w.Value.Type == JTokenType.Null ? String.Empty : w.Value.Value<object>();
+
+                        Response["Research"].Add(key, val); 
+                    }
+
+
+                    foreach (var w in overallScores)
+                    {
+                        var key = w.Key;
+                        var val = w.Value == null || w.Value.Type == JTokenType.Null ? 0 : w.Value.Value<int>();
+
+                        Response["Overall"].Add(ScoreLabelKey[key], val);
+                         
+                    }
+
                     foreach (var x in scoreDetails)
                     {
                         string key = x.Key;
                         JObject value = x.Value as JObject;
                         string category = ScoreLabelKey[key];
-                        Response.Add(category, new Dictionary<string, int>());
+                        Response.Add(category, new Dictionary<string, object>());
 
                         if(value != null)
                         {

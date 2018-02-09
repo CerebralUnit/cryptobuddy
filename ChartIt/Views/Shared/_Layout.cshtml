@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="~/Content/stockCharts.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="/Scripts/jquery.qtip-2.0.1.css" />
+    <link rel="stylesheet" href="/Content/circle.css"/>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -22,7 +23,7 @@
 <body class="site">
     <div class="coin-loader" ng-show="!state.isLoaded"></div>
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-brand">
 
                 <a class="navbar-item logo" href="/">
@@ -46,7 +47,7 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid site-content">
+    <div class="container site-content">
         @RenderBody()
         <div class="slide-top" ng-view></div>
 
@@ -78,11 +79,11 @@
 
 
 
-    
+
 
     <script>
         var PHP_location = "http://" + window.location.hostname + "/api/getsentiment";
-    </script> 
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.qtip-2.0.1.js"></script>
@@ -92,7 +93,7 @@
     <script type="text/javascript" src="/scripts/canvas-js/anew_ex.js"></script>
     <script type="text/javascript" src="/scripts/canvas-js/anew_neg.js"></script>
     <script type="text/javascript" src="/scripts/canvas-js/colour.js"></script>
-    <script type="text/javascript" src="/scripts/canvas-js/info_dlg.js"></script> 
+    <script type="text/javascript" src="/scripts/canvas-js/info_dlg.js"></script>
     <script type="text/javascript" src="/scripts/canvas-js/draw.js"></script>
     <script type="text/javascript" src="/scripts/canvas-js/dup.js"></script>
     <script type="text/javascript" src="/scripts/canvas-js/happiness.js"></script>
@@ -105,10 +106,13 @@
     <script type="text/javascript" src="/scripts/canvas-js/tfidf.js"></script>
     <script type="text/javascript" src="/scripts/canvas-js/topic.js"></script>
     <script type="text/javascript" src="/scripts/canvas-js/uniq.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.9/angular-sanitize.min.js"></script>
 
     <script>
-        var cb = angular.module('cryptobuddy', ['ngRoute', 'ngTouch','ngAnimate', 'tableSort', 'nvd3', 'amCharts', 'ui.bootstrap'])
+
+       
+
+        var cb = angular.module('cryptobuddy', ['ngRoute', 'ngTouch', 'ngAnimate', 'ngSanitize', 'tableSort', 'nvd3', 'amCharts', 'ui.bootstrap'])
             .config(['tableSortConfigProvider', function (tableSortConfigProvider) {
                  /* Template Tokens - all are replaced by Angular expressions
              * TOTAL_COUNT         - The number for the total count of items in the table
@@ -145,468 +149,1065 @@
             tableSortConfigProvider.paginationTemplate = pagerString;
             }]);
 
+
+
+        cb.constant("fieldLabels", {
+            "Machine name": "What we want to know →",
+            assignee: "Who is working on this? ↓",
+            priority: "Priority",
+            publishable: "Ready for publishing?",
+            current_status: "Status",
+            research_update_date: "Research update date",
+            symbol: "Symbol",
+            website_url: "Main website",
+            website2_url: "IF any secondary website mention here",
+            blog_url: "Do they have a blog, if yes, enter the url",
+            posting_frequently: "Are they posting something every 10 days or less on their blog?",
+            faq_url: "FAQ page",
+            message_board_1_url: "Message board 1",
+            message_board_2_url: "Message board 2",
+            message_board_3_url: "Message board 3",
+            bitcointalk_url: "Bitcointalk.org discussions",
+            chain_exp_1_url: "Explorer 1",
+            chain_exp_2_url: "Explorer 2 if any",
+            chain_exp_3_url: "Explorer 3 if any",
+            logo_filename: "Logo (minimum 300px wide)",
+            whitepaper_url: "Whitepaper",
+            contact_email: "Email",
+            contact_form_url: "Contact form on website",
+            phone_num: "Phonenumber",
+            description_short: "Description",
+            "abstract": "Abstract",
+            facebook_url: "Facebook",
+            twitter_url: "Twitter",
+            youtube_url: "Youtube",
+            slack_url: "Slack",
+            telegram_url: "Telegram",
+            icq_handle: "ICQ",
+            google_plus_url: "Google+",
+            other_social_url: "Other",
+            social_freq_facebook: "Do they post something on their facebook every 3 days or less?",
+            social_freq_twitter: "Do they post something on their Twitter every 3 days or less?",
+            social_freq_youtube: "Do they post something on their Youtube every 7 days or less?",
+            open_source_bool: "Yes or No",
+            github_url: "Github link",
+            incorporated_bool: "Incorporated according to their website: Yes or No",
+            incorporation_proof_url: "Incorporation proof",
+            incorporated_officially_bool: "Officially Incorporated: Yes or No or Can't trace back",
+            incorporatation_number: "Incorporation number",
+            incorporation_country: "Where (country)",
+            incorporation_address: "Address",
+            whois_name: "Name",
+            whois_org: "Organisation",
+            whois_reg_date: "Registration Date",
+            members_listed_by_name_bool: "Are team/foundation members nominally listed on the page?(by name)",
+            team_has_social_profiles_bool: "Do most of the teammembers on the team page have links to social media profiles (Facebook, linkedin, github)",
+            team_has_bios_bool: "Biography on website for each team member - yes/no",
+            team_page_url: "Link to the team page",
+            team_dev_size: "How many developers?",
+            team_mkt_sales_size: "How many marketing / sales specialists?",
+            team_size_total: "How many teammembers in total?",
+            team_age_avg: "Average teamembers age",
+            team_qa_size: "Does the company have any testers / quality asurance specialists on the team? (these people are dedicated to testing only)",
+            ceo_name: "CEO Name/Executive leader",
+            ceo_linkedin_url: "CEO LinkedIN link",
+            ceo_linkedin_position: "Is it mentioned that this CEO works for this company on his LinkedIn profile?",
+            ceo_prior_engagements: "CEO previous companies / achievements",
+            ceo_million_dollar_prior_engagement: "Managed a million+ USD$ company before?",
+            ceo_yrs_business_experience: "Years of business experience",
+            ceo_years_c_level_experience: "Years of experience as a CEO (OR COO)",
+            cto_name: "CTO/Technical lead Name",
+            cto_linkedin_url: "CTO LinkedIN link",
+            cto_github_url: "CTO Github link",
+            cto_github_engagement: "Can you see that this CTO works on this project on his Github profile?",
+            cto_million_dollar_prior_engagement: "Worked on a million dollar+ project (within 1 or more of his/her previous companies before?",
+            cto_prior_engagements: "CTO previous companies / achievements",
+            cto_years_experience_development: "Years of exeperience as a developer?",
+            cto_years_cto_experience: "Years of experience as a CTO?",
+            team_has_advisors_social_profiles_bool: "Do most of the Advisory board members on the team page have links to social media profiles (Facebook, linkedin, github,Twitter other social media)",
+            team_has_advisors_bios_bool: "Biography on website for each board member - yes/no",
+            multiple_advisors_managed_multimillion_dollar_engagements: "2 or more advisors of the team managed multimillon dollar projects or companies",
+            advisory_board_special_achievements: "Note special achievements from the advisory board. ",
+            company_publishes_financial_statements: "Does the company present its complete financial statements (anywhere)?",
+            company_publishes_financial_statements_source: "Source of information",
+            company_burn_rate: "Does the company give insights in its costs? How much it will spend a month (also known as the burnrate)?",
+            company_burn_rate_source: "Source of information",
+            company_gains_predictions: "Does the company give it's financial/growth predictions / predictions for profit and growth?",
+            company_gains_predictions_source: "Source of information",
+            company_explains_advantage_over_competition: "Does the company explain its benefits opposed to their competitors (if any)?",
+            company_explains_advantage_over_competition_source: "Source of information",
+            company_explains_strategic_partnerships: "Does the company list its strategic partner(ships)?",
+            company_presents_sales_mkt_plan: "Does the company present it's sales plan / marketing plan / go to market strategy in any way?",
+            company_presents_sales_mkt_plan_source: "Source of information",
+            community_size: "How many people are involved in the community of this project",
+            product_status: "Does this coin / business have a working project?",
+            product_release_date: "Release date of first version of the product",
+            product_roadmap_url: "Product Roadmap",
+            roadmap_updated: "Is product roadmap updated to date?",
+            token_supply: "What is the total token supply?",
+            tokens_distributed: "Number of tokens Distributed in ICO?",
+            token_emission_rate: "Emission rate",
+            blockchain: "Blockchain",
+            consensus_method: "Consensus method",
+            block_processing_speed: "Time for block processing",
+            transactions_per_second: "Transactions per second",
+            ico_proceeds_founders_team: "Founders & Team",
+            ico_proceeds_mkt_sales: "Marketing & Sales",
+            ico_proceeds_development: "Development",
+            ico_proceeds_adm_legal: "Administration/Legal",
+            ico_proceeds_other: "Other",
+            ico_sale_period_start: "ICO Sale period start date(/time)",
+            ico_sale_period_end: "ICO Sale period end date(/time)",
+            ico_initial_price: "ICO token price",
+            ico_accepted_currencies: "Currency accepted during ICO",
+            ico_investment_round: "Investment Round",
+            ico_token_distribution_date: "Token distribution date",
+            ico_token_trading_start_date: "Token start trading date",
+            ico_min_investment_goal: "Min investment goal",
+            ico_max_investment_cap: "Max investment cap",
+            ico_bonus: "Bonus",
+            ico_jurisdiction: "ICO jurisdiction",
+            ico_legal_advisers: "ICO legal advisers ",
+            ico_legal_form: "ICO legal form",
+            ico_security: "ICO security audit company",
+            alexa_url: "Main website",
+            alexa_url_2: "Secondary website (if any)",
+            reddit_url: "Reddit discussions",
+            governance: "Governance",
+            video_what_is_it: "Video: What is the Crypto?",
+            goal_clarity: "Clear what they do",
+            categories: "Crypto Category/Catagories",
+            category_1: "Category 1",
+            category_2: "Category 2",
+            category_3: "Category 3",
+            category_4: "Category 4",
+            coin_goals: "The issue the Crypto solves / Aspects of coin",
+            additional_differentiation: "Additional info arround the issue it solves / Differentiation with competitor",
+            system_status: "System status",
+            market_cap_usd: "Market Cap USD",
+            internal_signature: "Internal Signature",
+            num_cols_req_basic_update: "# Basic update req.",
+            num_cols_req_expert_update: "# Expert update req.",
+            mkt_cap_against_total_market_growth: "Market cap % of total market growth",
+            avg_3mo_volume: "Average trading volume trailing 3 months",
+            avg_3mo_mkt_cap: "Average market cap trailing 3 months",
+            github_community: "GitHub community size",
+            github_activity: "GitHub commit activity"
+        })
+        cb.constant("scoreReferences", {
+            decentralized: {
+                Communication: {
+                    A1: ["slack_url", "telegram_url", "icq_handle"],
+                    A2: ["contact_email", "contact_form_url"]
+                },
+                Social: {
+                    B1: ["posting_frequently"],
+                    B2: ["social_freq_facebook"],
+                    B3: ["social_freq_twitter"],
+                    B4: ["youtube_url"],
+                    B5: ["social_freq_youtube"]
+                },
+                Team: [],
+                Advisors: [],
+                Buzz: {
+                    E1: ["community_size"]
+                },
+                Product: {
+                    F1: ["product_status"],
+                    F2: ["open_source_bool"],
+                    F3: ["product_roadmap_url"],
+                    F4: ["roadmap_updated"],
+                    F5: ["product_release_date"],
+                    F6: ["whitepaper_url"]
+                },
+                Coin: {
+                    G1: ["transactions_per_second"],
+                    G2: ["token_emission_rate"],
+                    G3: [
+                        ["market", "avg_3mo_volume"]
+                    ],
+                    G4: [
+                        ["market", "avg_3mo_mkt_cap"]
+                    ],
+                    G5: [
+                        ["market", "mkt_cap_against_total_market_growth"]
+                    ],
+                    G6: ["ico_proceeds_founders_team"]
+                },
+                Business: [],
+                GitHub: {
+                    J1: [
+                        ["github", "community"]
+                    ],
+                    J2: [
+                        ["github", "activity"]
+                    ]
+                }
+            },
+            "centralized-hierarchical": {
+                Communication: {
+                    A1: ["slack_url", "telegram_url", "icq_handle"],
+                    A2: ["contact_email", "contact_form_url"]
+                },
+                Social: {
+                    B1: ["posting_frequently"],
+                    B2: ["social_freq_facebook"],
+                    B3: ["social_freq_twitter"],
+                    B4: ["youtube_url"],
+                    B5: ["social_freq_youtube"]
+                },
+                Team: {
+                    C1: ["ceo_million_dollar_prior_engagement"],
+                    C2: ["cto_million_dollar_prior_engagement"],
+                    C3: ["ceo_years_c_level_experience"],
+                    C4: ["cto_years_cto_experience"],
+                    C5: ["team_qa_size"],
+                    C6: ["team_mkt_sales_size"],
+                    C7: ["team_age_avg"],
+                    C8: ["team_size_total"]
+                },
+                Advisors: {
+                    D1: ["team_has_advisors_bios_bool"],
+                    D2: ["team_has_advisors_social_profiles_bool"],
+                    D3: ["multiple_advisors_managed_multimillion_dollar_engagements"]
+                },
+                Buzz: {
+                    E1: ["community_size"],
+                    E2: [
+                        ["github", "community"]
+                    ]
+                },
+                Product: {
+                    F1: ["product_status"],
+                    F2: ["open_source_bool"],
+                    F3: [
+                        ["github", "activity"]
+                    ],
+                    F4: ["product_roadmap_url"],
+                    F5: ["roadmap_updated"],
+                    F6: ["product_release_date"],
+                    F7: ["whitepaper_url"]
+                },
+                Coin: {
+                    G1: ["transactions_per_second"],
+                    G2: ["token_emission_rate"],
+                    G3: [
+                        ["market", "avg_3mo_volume"]
+                    ],
+                    G4: [
+                        ["market", "avg_3mo_mkt_cap"]
+                    ],
+                    G5: [
+                        ["market", "mkt_cap_against_total_market_growth"]
+                    ],
+                    G6: ["ico_proceeds_founders_team"]
+                },
+                Business: {
+                    H1: ["company_publishes_financial_statements"],
+                    H2: ["company_burn_rate"],
+                    H3: ["company_gains_predictions"],
+                    H4: ["company_explains_strategic_partnerships"],
+                    H5: ["company_explains_advantage_over_competition"],
+                    H6: ["company_presents_sales_mkt_plan"]
+                },
+                GitHub: []
+            },
+            "centralized-flat": {
+                Communication: {
+                    A1: ["slack_url", "telegram_url", "icq_handle"],
+                    A2: ["contact_email", "contact_form_url"]
+                },
+                Social: {
+                    B1: ["posting_frequently"],
+                    B2: ["social_freq_facebook"],
+                    B3: ["social_freq_twitter"],
+                    B4: ["youtube_url"],
+                    B5: ["social_freq_youtube"]
+                },
+                Team: {
+                    C1: ["ceo_million_dollar_prior_engagement"],
+                    C2: ["cto_million_dollar_prior_engagement"],
+                    C3: ["ceo_years_c_level_experience"],
+                    C4: ["cto_years_cto_experience"],
+                    C5: ["team_qa_size"],
+                    C6: ["team_mkt_sales_size"],
+                    C7: ["team_age_avg"],
+                    C8: ["team_size_total"]
+                },
+                Advisors: {
+                    D1: ["team_has_advisors_bios_bool"],
+                    D2: ["team_has_advisors_social_profiles_bool"],
+                    D3: ["multiple_advisors_managed_multimillion_dollar_engagements"]
+                },
+                Buzz: {
+                    E1: ["community_size"],
+                    E2: [
+                        ["github", "community"]
+                    ]
+                },
+                Product: {
+                    F1: ["product_status"],
+                    F2: ["open_source_bool"],
+                    F3: [
+                        ["github", "activity"]
+                    ],
+                    F4: ["product_roadmap_url"],
+                    F5: ["roadmap_updated"],
+                    F6: ["product_release_date"],
+                    F7: ["whitepaper_url"]
+                },
+                Coin: {
+                    G1: ["transactions_per_second"],
+                    G2: ["token_emission_rate"],
+                    G3: [
+                        ["market", "avg_3mo_volume"]
+                    ],
+                    G4: [
+                        ["market", "avg_3mo_mkt_cap"]
+                    ],
+                    G5: [
+                        ["market", "mkt_cap_against_total_market_growth"]
+                    ],
+                    G6: ["ico_proceeds_founders_team"]
+                },
+                Business: {
+                    H1: ["company_publishes_financial_statements"],
+                    H2: ["company_burn_rate"],
+                    H3: ["company_gains_predictions"],
+                    H4: ["company_explains_strategic_partnerships"],
+                    H5: ["company_explains_advantage_over_competition"],
+                    H6: ["company_presents_sales_mkt_plan"]
+                },
+                GitHub: []
+            },
+            "semi-centralized": {
+                Communication: {
+                    A1: ["slack_url", "telegram_url", "icq_handle"],
+                    A2: ["contact_email", "contact_form_url"]
+                },
+                Social: {
+                    B1: ["posting_frequently"],
+                    B2: ["social_freq_facebook"],
+                    B3: ["social_freq_twitter"],
+                    B4: ["youtube_url"],
+                    B5: ["social_freq_youtube"]
+                },
+                Team: {
+                    C1: ["team_page_url"],
+                    C2: ["members_listed_by_name_bool"],
+                    C3: ["team_has_social_profiles_bool"],
+                    C4: ["cto_name"],
+                    C5: ["team_size_total"]
+                },
+                Advisors: {
+                    D1: ["team_has_advisors_bios_bool"],
+                    D2: ["team_has_advisors_social_profiles_bool"],
+                    D3: ["multiple_advisors_managed_multimillion_dollar_engagements"]
+                },
+                Buzz: {
+                    E1: ["community_size"]
+                },
+                Product: {
+                    F1: ["product_status"],
+                    F2: ["open_source_bool"],
+                    F3: ["product_roadmap_url"],
+                    F4: ["roadmap_updated"],
+                    F5: ["product_release_date"],
+                    F6: ["whitepaper_url"]
+                },
+                Coin: {
+                    G1: ["transactions_per_second"],
+                    G2: ["token_emission_rate"],
+                    G3: [
+                        ["market", "avg_3mo_volume"]
+                    ],
+                    G4: [
+                        ["market", "avg_3mo_mkt_cap"]
+                    ],
+                    G5: [
+                        ["market", "mkt_cap_against_total_market_growth"]
+                    ],
+                    G6: ["ico_proceeds_founders_team"]
+                },
+                Business: [],
+                GitHub: {
+                    J1: [
+                        ["github", "community"]
+                    ],
+                    J2: [
+                        ["github", "activity"]
+                    ]
+                }
+            }
+        })
+        cb.constant("maxScores", {
+            decentralized: {
+                Communication: {
+                    A1: 70,
+                    A2: 30
+                },
+                Social: {
+                    B1: 50,
+                    B2: 20,
+                    B3: 20,
+                    B4: 5,
+                    B5: 5
+                },
+                Team: [],
+                Advisors: [],
+                Buzz: {
+                    E1: 100
+                },
+                Product: {
+                    F1: 50,
+                    F2: 20,
+                    F3: 5,
+                    F4: 5,
+                    F5: 10,
+                    F6: 10
+                },
+                Coin: {
+                    G1: 8,
+                    G2: 30,
+                    G3: 17,
+                    G4: 17,
+                    G5: 13,
+                    G6: 15
+                },
+                Business: [],
+                GitHub: {
+                    J1: 40,
+                    J2: 60
+                }
+            },
+            "centralized-hierarchical": {
+                Communication: {
+                    A1: 70,
+                    A2: 30
+                },
+                Social: {
+                    B1: 50,
+                    B2: 20,
+                    B3: 20,
+                    B4: 5,
+                    B5: 5
+                },
+                Team: {
+                    C1: 10,
+                    C2: 10,
+                    C3: 15,
+                    C4: 15,
+                    C5: 10,
+                    C6: 4,
+                    C7: 8,
+                    C8: 8
+                },
+                Advisors: {
+                    D1: 25,
+                    D2: 25,
+                    D3: 50
+                },
+                Buzz: {
+                    E1: 60,
+                    E2: 40
+                },
+                Product: {
+                    F1: 50,
+                    F2: 10,
+                    F3: 5,
+                    F4: 10,
+                    F5: 5,
+                    F6: 10,
+                    F7: 10
+                },
+                Coin: {
+                    G1: 8,
+                    G2: 30,
+                    G3: 17,
+                    G4: 17,
+                    G5: 13,
+                    G6: 15
+                },
+                Business: {
+                    H1: 10,
+                    H2: 10,
+                    H3: 10,
+                    H4: 20,
+                    H5: 30,
+                    H6: 20
+                },
+                GitHub: []
+            },
+            "centralized-flat": {
+                Communication: {
+                    A1: 70,
+                    A2: 30
+                },
+                Social: {
+                    B1: 50,
+                    B2: 20,
+                    B3: 20,
+                    B4: 5,
+                    B5: 5
+                },
+                Team: {
+                    C1: 10,
+                    C2: 10,
+                    C3: 15,
+                    C4: 15,
+                    C5: 10,
+                    C6: 4,
+                    C7: 8,
+                    C8: 8
+                },
+                Advisors: {
+                    D1: 25,
+                    D2: 25,
+                    D3: 50
+                },
+                Buzz: {
+                    E1: 60,
+                    E2: 40
+                },
+                Product: {
+                    F1: 50,
+                    F2: 10,
+                    F3: 5,
+                    F4: 10,
+                    F5: 5,
+                    F6: 10,
+                    F7: 10
+                },
+                Coin: {
+                    G1: 8,
+                    G2: 30,
+                    G3: 17,
+                    G4: 17,
+                    G5: 13,
+                    G6: 15
+                },
+                Business: {
+                    H1: 10,
+                    H2: 10,
+                    H3: 10,
+                    H4: 20,
+                    H5: 30,
+                    H6: 20
+                },
+                GitHub: []
+            },
+            "semi-centralized": {
+                Communication: {
+                    A1: 70,
+                    A2: 30
+                },
+                Social: {
+                    B1: 50,
+                    B2: 20,
+                    B3: 20,
+                    B4: 5,
+                    B5: 5
+                },
+                Team: {
+                    C1: 20,
+                    C2: 20,
+                    C3: 20,
+                    C4: 20,
+                    C5: 20
+                },
+                Advisors: {
+                    D1: 25,
+                    D2: 25,
+                    D3: 50
+                },
+                Buzz: {
+                    E1: 100
+                },
+                Product: {
+                    F1: 50,
+                    F2: 10,
+                    F3: 10,
+                    F4: 10,
+                    F5: 10,
+                    F6: 10
+                },
+                Coin: {
+                    G1: 8,
+                    G2: 30,
+                    G3: 17,
+                    G4: 17,
+                    G5: 13,
+                    G6: 15
+                },
+                Business: [],
+                GitHub: {
+                    J1: 40,
+                    J2: 60
+                }
+            }
+        })
         cb.constant("coinScoreLabels", {
             "centralized-hierarchical": {
-                A: {
+                Communication: {
                     sectionTitle: "Open communication channels",
                     items: {
                         A1: {
                             label: "Ability to contact the company via: Slack, Telegram or ICQ",
-                            description: "<strong>70</strong> ANY NOT EMPTY<br><strong>0</strong> ALL EMPTY"
+                            description: "<div><strong>70</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
                         },
                         A2: {
                             label: "Ability to contact the company via: Contact form or Email",
-                            description: "<strong>30</strong> ANY NOT EMPTY<br><strong>0</strong> ALL EMPTY"
+                            description: "<div><strong>30</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
                         }
                     }
                 },
-                B: {
+                Social: {
                     sectionTitle: "Activity on social media",
                     items: {
                         B1: {
                             label: "Activity on Blog",
                             sublabel: "Are they posting every 10 days or less?",
-                            description: "<strong>50</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B2: {
                             label: "Activity on Facebook",
                             sublabel: "Are they posting every 3 days or less?",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B3: {
                             label: "Activity on Twitter",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B4: {
                             label: "Do they have a YouTube channel?",
-                            description: "<strong>5</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B5: {
                             label: "Activity on Youtube",
                             sublabel: "Are they posting every 7 days or less?",
-                            description: "<strong>5</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
                         }
                     }
                 },
-                C: {
+                Team: {
                     sectionTitle: "Team strength",
                     items: {
                         C1: {
                             label: "Executive lead (CEO, COO, executive lead, founder, managing partner etc) who managed multi million dollar companies.",
-                            description: "<strong>10</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         C2: {
                             label: "Tech lead who managed million dollar projects",
-                            description: "<strong>10</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         C3: {
                             label: "Exec lead years of experience at executive level",
-                            description: "<strong>15</strong> 10+ years<strong>8</strong> 3-10 years<strong>4</strong> 1-3 years<strong>0</strong> 0-1 years <br>"
+                            description: "<div><strong>15</strong> 10+ years</div><div><strong>8</strong> 3-10 years</div><div><strong>4</strong> 1-3 years</div><div><strong>0</strong> 0-1 years </div>"
                         },
                         C4: {
                             label: "Tech lead years of experience as teach lead",
-                            description: "<strong>15</strong> 10+ years<strong>7</strong> 3-10 years<strong>3</strong> 1-3 years<strong>0</strong> 0-1 years <br>"
+                            description: "<div><strong>15</strong> 10+ years</div><div><strong>7</strong> 3-10 years</div><div><strong>3</strong> 1-3 years</div><div><strong>0</strong> 0-1 years </div>"
                         },
                         C5: {
                             label: "Has dedicated Quality Assurance members within the team",
-                            description: "<strong>10</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         C6: {
                             label: "Sales/Marketing team size compared to other coins",
-                            description: "<strong>10</strong> 90th percentile<strong>6</strong> 75th percentile<strong>4</strong> 50th percentile<strong>2</strong> 30th percentile<strong>0</strong> other <br>"
+                            description: "<div><strong>10</strong> 90th percentile</div><div><strong>6</strong> 75th percentile</div><div><strong>4</strong> 50th percentile</div><div><strong>2</strong> 30th percentile</div><div><strong>0</strong> other </div>"
                         },
                         C7: {
                             label: "Average team member age",
-                            description: "<strong>10</strong> 30+<strong>5</strong> 25-30<strong>2</strong> 20-25<strong>0</strong> 0 <br>"
+                            description: "<div><strong>10</strong> 30+<div><strong>5</strong> 25-30</div><div><strong>2</strong> 20-25<div><strong>0</strong> 0 </div>"
                         },
                         C8: {
                             label: "Total team size compared to other coins",
-                            description: "<strong>20</strong> 95th percentile<strong>18</strong> 90th percentile<strong>16</strong> 80th percentile<strong>14</strong> 50th percentile<strong>7</strong> 30th percentile<strong>4</strong> 10th percentile<strong>0</strong> other <br>"
+                            description: "<div><strong>20</strong> 95th percentile</div><div><strong>18</strong> 90th percentile</div><div><strong>16</strong> 80th percentile</div><div><strong>14</strong> 50th percentile</div><div><strong>7</strong> 30th percentile</div><div><strong>4</strong> 10th percentile</div><div><strong>0</strong> other </div>"
                         }
                     }
                 },
-                D: {
+                Advisors: {
                     sectionTitle: "Advisory board strength",
                     items: {
                         D1: {
                             label: "Advisors have bios on the website",
-                            description: "<strong>25</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
                         },
                         D2: {
                             label: "Advisors have social media links on the website",
-                            description: "<strong>25</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
                         },
                         D3: {
                             label: "2+ advisors have managed multi million dollar companies",
-                            description: "<strong>50</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO </div>"
                         }
                     }
                 },
-                J: {
+                GitHub: {
                     sectionTitle: "GitHub",
                     items: {
                         J1: {
                             label: "Github community size compared to other coins",
                             sublabel: "Stars, Forks, Watchers",
-                            description: "<strong>40</strong> 99th-percentile<strong>30</strong> 95th-percentile<strong>20</strong> 85th-percentile<strong>15</strong> 50th-percentile<strong>10</strong> 30th-percentile<strong>5</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "</div><div><strong>40</strong> 99th-percentile</div><div><strong>30</strong> 95th-percentile</div><div><strong>20</strong> 85th-percentile</div><div><strong>15</strong> 50th-percentile</div><div><strong>10</strong> 30th-percentile</div><div><strong>5</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         J2: {
                             label: "Github activity tempo",
                             sublabel: "Statistical mean of 4 week SMAs for commits over 49 weeks, compared to other coins",
-                            description: "<strong>60</strong> 90th-percentile<strong>50</strong> 67th-percentile<strong>40</strong> 57th-percentile<strong>30</strong> 53rd-percentile<strong>20</strong> 40th-percentile<strong>10</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>60</strong> 90th-percentile</div><div><strong>50</strong> 67th-percentile</div><div><strong>40</strong> 57th-percentile</div><div><strong>30</strong> 53rd-percentile</div><div><strong>20</strong> 40th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         }
                     }
                 },
-                E: {
+                Buzz: {
                     sectionTitle: "Brand awareness/Buzz",
                     items: {
                         E1: {
                             label: "Total community size compared to other coins",
                             sublabel: "Facebook, Twitter, YouTube, Reddit",
-                            description: "<strong>60</strong> 99th-percentile<strong>50</strong> 95th-percentile<strong>40</strong> 85th-percentile<strong>30</strong> 50th-percentile<strong>20</strong> 30th-percentile<strong>10</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>60</strong> 99th-percentile</div><div><strong>50</strong> 95th-percentile</div><div><strong>40</strong> 85th-percentile</div><div><strong>30</strong> 50th-percentile</div><div><strong>20</strong> 30th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         }
                     }
                 },
-                F: {
+                Product: {
                     sectionTitle: "Product strength",
                     items: {
                         F1: {
                             label: "Product development status (i.e. stage)",
-                            description: "<strong>50</strong> Fully working product<strong>40</strong> Beta version<strong>30</strong> Alpha version<strong>25</strong> Prototype / MVP<strong>20</strong> Demo only<strong>10</strong> Just an Idea<strong>0</strong> Unknown <br>"
+                            description: "<div><strong>50</strong> Fully working product</div><div><strong>40</strong> Beta version</div><div><strong>30</strong> Alpha version</div><div><strong>25</strong> Prototype / MVP</div><div><strong>20</strong> Demo only<div><strong>10</strong> Just an Idea</div><div><strong>0</strong> Unknown </div>"
                         },
                         F2: {
                             label: "Have they open sourced their code?",
-                            description: "<strong>20</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong>  NO </div>"
                         },
                         F3: {
                             label: "Have they published a Product roadmap?",
-                            description: "<strong>10</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
                         },
                         F4: {
                             label: "Is their Product roadmap up to date?",
-                            description: "<strong>5</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong>  NO </div>"
                         },
                         F5: {
                             label: "Product age (Todayâ€™s date - Release date)",
-                            description: "<strong>10</strong>  5+ years<strong>8</strong>  1+ years<strong>6</strong>  6+ months<strong>4</strong>   3+ months<strong>2</strong>   1+ months<strong>1</strong>   < 1 month<strong>0</strong>   future <br>"
+                            description: "<div><strong>10</strong>  5+ years</div><div><strong>8</strong>  1+ years</div><div><strong>6</strong>  6+ months</div><div><strong>4</strong>   3+ months</div><div><strong>2</strong>   1+ months</div><div><strong>1</strong>   < 1 month</div><div><strong>0</strong>   future </div>"
                         },
                         F6: {
                             label: "Have they published a Whitepaper?",
-                            description: "<strong>10</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
                         }
                     }
                 },
-                G: {
+                Coin: {
                     sectionTitle: "Coin strength",
                     items: {
                         G1: {
                             label: "Transactions per second compared to other coins",
-                            description: "<strong>8</strong> 95th-percentile<strong>6</strong> 75th-percentile<strong>4</strong> 50th-percentile<strong>2</strong> 30rd-percentile<strong>1</strong> 15th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>8</strong> 95th-percentile</div><div><strong>6</strong> 75th-percentile</div><div><strong>4</strong> 50th-percentile</div><div><strong>2</strong> 30rd-percentile</div><div><strong>1</strong> 15th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G2: {
                             label: 'What is their coin emission rate? Is the coin"s inflation under control?',
-                            description: "<strong>30</strong> No new tokens created<strong>30</strong> Deflationary through token burning<strong>15</strong> Emitted in proportion to amount of network activity<strong>15</strong> 2nd round might occur<strong>0</strong>  Company can decide <br>"
+                            description: "<div><strong>30</strong> No new tokens created<div><strong>30</strong> Deflationary through token burning<div><strong>15</strong> Emitted in proportion to amount of network activity<div><strong>15</strong> 2nd round might occur<div><strong>0</strong>  Company can decide </div>"
                         },
                         G3: {
                             label: "Is the coin among the top traded coins for the past 3 months in terms of transaction volumes?",
-                            description: "<strong>17</strong> 99th-percentile<strong>16</strong> 95th-percentile<strong>14</strong> 85th-percentile<strong>10</strong> 50th-percentile<strong>7</strong> 30th-percentile<strong>4</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G4: {
                             label: "Is the coin among the top traded coins for the past 3 months in terms of market capitalization?",
-                            description: "<strong>17</strong> 99th-percentile<strong>16</strong> 95th-percentile<strong>14</strong> 85th-percentile<strong>10</strong> 50th-percentile<strong>7</strong> 30th-percentile<strong>4</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G5: {
                             label: "Has the coin outperformed the rest of the market trend since it started trading?",
-                            description: "<strong>13</strong> 99th-percentile<strong>12</strong> 95th-percentile<strong>10</strong> 85th-percentile<strong>5</strong> 50th-percentile<strong>3</strong> 30th-percentile<strong>2</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>13</strong> 99th-percentile</div><div><strong>12</strong> 95th-percentile</div><div><strong>10</strong> 85th-percentile</div><div><strong>5</strong> 50th-percentile</div><div><strong>3</strong> 30th-percentile</div><div><strong>2</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G6: {
                             label: "Does the founding team reserve a decent amount of coin to themselves?",
-                            description: "<strong>15</strong> 0-5%<strong>10</strong> 5-10%<strong>5</strong> 10-20%<strong>2</strong> 0%<strong>0</strong> 20%+ <br>"
+                            description: "<div><strong>15</strong> 0-5%<div><strong>10</strong> 5-10%<div><strong>5</strong> 10-20%<div><strong>2</strong> 0%<div><strong>0</strong> 20%+ </div>"
                         }
                     }
                 },
-                H: {
+                Business: {
                     sectionTitle: "Business/Company strength",
                     items: {
                         H1: {
                             label: "Financial statements published",
-                            description: "<strong>10</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
                         },
                         H2: {
                             label: "Burn rate and costs published",
-                            description: "<strong>10</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
                         },
                         H3: {
                             label: "Financial gains predictions published",
-                            description: "<strong>10</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
                         },
                         H4: {
                             label: "Company has strategic partnerships",
-                            description: "<strong>10</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
                         },
                         H5: {
                             label: "Company explains its advantages over competition",
-                            description: "<strong>10</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
                         },
                         H6: {
                             label: "Company presents a sales/marketing plan",
-                            description: "<strong>10</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
                         }
                     }
                 }
             },
             decentralized: {
-                A: {
+                Communication: {
                     sectionTitle: "Open communication channels",
                     items: {
                         A1: {
                             label: "Ability to contact the company via: Slack, Telegram or ICQ",
-                            description: "<strong>70</strong> ANY NOT EMPTY<br><strong>0</strong> ALL EMPTY"
+                            description: "<div><strong>70</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
                         },
                         A2: {
                             label: "Ability to contact the company via: Contact form or Email",
-                            description: "<strong>30</strong> ANY NOT EMPTY<br><strong>0</strong> ALL EMPTY"
+                            description: "<div><strong>30</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
                         }
                     }
                 },
-                B: {
+                Social: {
                     sectionTitle: "Activity on social media",
                     items: {
                         B1: {
                             label: "Activity on Blog",
                             sublabel: "Are they posting every 10 days or less?",
-                            description: "<strong>50</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B2: {
                             label: "Activity on Facebook",
                             sublabel: "Are they posting every 3 days or less?",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B3: {
                             label: "Activity on Twitter",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B4: {
                             label: "Do they have a YouTube channel?",
-                            description: "<strong>5</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B5: {
                             label: "Activity on Youtube",
                             sublabel: "Are they posting every 7 days or less?",
-                            description: "<strong>5</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
                         }
                     }
                 },
-                E: {
+                Buzz: {
                     sectionTitle: "Brand awareness/Buzz",
                     items: {
                         E1: {
                             label: "Total community size compared to other coins",
                             sublabel: "Facebook, Twitter, YouTube, Reddit",
-                            description: "<strong>100</strong> 99th-percentile<strong>90</strong> 95th-percentile<strong>80</strong> 85th-percentile<strong>50</strong> 50th-percentile<strong>30</strong> 30th-percentile<strong>10</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>100</strong> 99th-percentile</div><div><strong>90</strong> 95th-percentile</div><div><strong>80</strong> 85th-percentile</div><div><strong>50</strong> 50th-percentile</div><div><strong>30</strong> 30th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         }
                     }
                 },
-                F: {
+                Product: {
                     sectionTitle: "Product strength",
                     items: {
                         F1: {
                             label: "Product development status (i.e. stage)",
-                            description: "<strong>50</strong> Fully working product<strong>40</strong> Beta version<strong>30</strong> Alpha version<strong>25</strong> Prototype / MVP<strong>20</strong> Demo only<strong>10</strong> Just an Idea<strong>0</strong> Unknown <br>"
+                            description: "<div><strong>50</strong> Fully working product</div><div><strong>40</strong> Beta version</div><div><strong>30</strong> Alpha version</div><div><strong>25</strong> Prototype / MVP</div><div><strong>20</strong> Demo only<div><strong>10</strong> Just an Idea</div><div><strong>0</strong> Unknown </div>"
                         },
                         F2: {
                             label: "Have they open sourced their code?",
-                            description: "<strong>20</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong>  NO </div>"
                         },
                         F3: {
                             label: "Have they published a Product roadmap?",
-                            description: "<strong>10</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
                         },
                         F4: {
                             label: "Is their Product roadmap up to date?",
-                            description: "<strong>5</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong>  NO </div>"
                         },
                         F5: {
                             label: "Product age (Todayâ€™s date - Release date)",
-                            description: "<strong>10</strong>  5+ years<strong>8</strong>  1+ years<strong>6</strong>  6+ months<strong>4</strong>   3+ months<strong>2</strong>   1+ months<strong>1</strong>   < 1 month<strong>0</strong>   future <br>"
+                            description: "<div><strong>10</strong>  5+ years</div><div><strong>8</strong>  1+ years</div><div><strong>6</strong>  6+ months</div><div><strong>4</strong>   3+ months</div><div><strong>2</strong>   1+ months</div><div><strong>1</strong>   < 1 month</div><div><strong>0</strong>   future </div>"
                         },
                         F6: {
                             label: "Have they published a Whitepaper?",
-                            description: "<strong>10</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
                         }
                     }
                 },
-                G: {
+                Coin: {
                     sectionTitle: "Coin strength",
                     items: {
                         G1: {
                             label: "Transactions per second compared to other coins",
-                            description: "<strong>8</strong> 95th-percentile<strong>6</strong> 75th-percentile<strong>4</strong> 50th-percentile<strong>2</strong> 30rd-percentile<strong>1</strong> 15th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>8</strong> 95th-percentile</div><div><strong>6</strong> 75th-percentile</div><div><strong>4</strong> 50th-percentile</div><div><strong>2</strong> 30rd-percentile</div><div><strong>1</strong> 15th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G2: {
                             label: 'What is their coin emission rate? Is the coin"s inflation under control?',
-                            description: "<strong>30</strong> No new tokens created<strong>30</strong> Deflationary through token burning<strong>15</strong> Emitted in proportion to amount of network activity<strong>15</strong> 2nd round might occur<strong>0</strong>  Company can decide <br>"
+                            description: "<div><strong>30</strong> No new tokens created<div><strong>30</strong> Deflationary through token burning<div><strong>15</strong> Emitted in proportion to amount of network activity<div><strong>15</strong> 2nd round might occur<div><strong>0</strong>  Company can decide </div>"
                         },
                         G3: {
                             label: "Is the coin among the top traded coins for the past 3 months in terms of transaction volumes?",
-                            description: "<strong>17</strong> 99th-percentile<strong>16</strong> 95th-percentile<strong>14</strong> 85th-percentile<strong>10</strong> 50th-percentile<strong>7</strong> 30th-percentile<strong>4</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G4: {
                             label: "Is the coin among the top traded coins for the past 3 months in terms of market capitalization?",
-                            description: "<strong>25</strong> 99th-percentile<strong>24</strong> 95th-percentile<strong>22</strong> 85th-percentile<strong>18</strong> 50th-percentile<strong>9</strong> 30th-percentile<strong>5</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>25</strong> 99th-percentile</div><div><strong>24</strong> 95th-percentile</div><div><strong>22</strong> 85th-percentile</div><div><strong>18</strong> 50th-percentile</div><div><strong>9</strong> 30th-percentile</div><div><strong>5</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G5: {
                             label: "Has the coin outperformed the rest of the market trend since it started trading?",
-                            description: "<strong>20</strong> 99th-percentile<strong>18</strong> 95th-percentile<strong>16</strong> 85th-percentile<strong>8</strong> 50th-percentile<strong>6</strong> 30th-percentile<strong>4</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>20</strong> 99th-percentile</div><div><strong>18</strong> 95th-percentile</div><div><strong>16</strong> 85th-percentile</div><div><strong>8</strong> 50th-percentile</div><div><strong>6</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         }
                     }
                 }
             },
             "semi-centralized": {
-                A: {
+                Communication: {
                     sectionTitle: "Open communication channels",
                     items: {
                         A1: {
                             label: "Ability to contact the company via: Slack, Telegram or ICQ",
-                            description: "<strong>70</strong> ANY NOT EMPTY<br><strong>0</strong> ALL EMPTY"
+                            description: "<div><strong>70</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
                         },
                         A2: {
                             label: "Ability to contact the company via: Contact form or Email",
-                            description: "<strong>30</strong> ANY NOT EMPTY<br><strong>0</strong> ALL EMPTY"
+                            description: "<div><strong>30</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
                         }
                     }
                 },
-                B: {
+                Social: {
                     sectionTitle: "Activity on social media",
                     items: {
                         B1: {
                             label: "Activity on Blog",
                             sublabel: "Are they posting every 10 days or less?",
-                            description: "<strong>50</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B2: {
                             label: "Activity on Facebook",
                             sublabel: "Are they posting every 3 days or less?",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B3: {
                             label: "Activity on Twitter",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B4: {
                             label: "Do they have a YouTube channel?",
-                            description: "<strong>5</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         B5: {
                             label: "Activity on Youtube",
                             sublabel: "Are they posting every 7 days or less?",
-                            description: "<strong>5</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
                         }
                     }
                 },
-                C: {
+                Team: {
                     sectionTitle: "Team strength",
                     items: {
                         C1: {
                             label: "Is there a link to the team/foundation page?",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         C2: {
                             label: "Are team/foundation members nominally listed on the page?",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         C3: {
                             label: "Do they have links to their linkedin/github profiles?",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         C4: {
                             label: "Is there a tech lead for the project?",
-                            description: "<strong>20</strong> YES<br><strong>0</strong> NO"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
                         },
                         C5: {
                             label: "Total team size compared to other coins",
-                            description: "<strong>20</strong> 95th percentile<strong>18</strong> 90th percentile<strong>16</strong> 80th percentile<strong>14</strong> 50th percentile<strong>7</strong> 30th percentile<strong>4</strong> 10th percentile<strong>0</strong> other <br>"
+                            description: "<div><strong>20</strong> 95th percentile</div><div><strong>18</strong> 90th percentile</div><div><strong>16</strong> 80th percentile</div><div><strong>14</strong> 50th percentile</div><div><strong>7</strong> 30th percentile</div><div><strong>4</strong> 10th percentile</div><div><strong>0</strong> other </div>"
                         }
                     }
                 },
-                D: {
+                Advisors: {
                     sectionTitle: "Advisory board strength",
                     items: {
                         D1: {
                             label: "Advisors have bios on the website",
-                            description: "<strong>25</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
                         },
                         D2: {
                             label: "Advisors have social media links on the website",
-                            description: "<strong>25</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
                         },
                         D3: {
                             label: "2+ advisors have managed multi million dollar companies",
-                            description: "<strong>50</strong> YES<strong>0</strong> NO <br>"
+                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO </div>"
                         }
                     }
                 },
-                E: {
+                Buzz: {
                     sectionTitle: "Brand awareness/Buzz",
                     items: {
                         E1: {
                             label: "Total community size compared to other coins",
                             sublabel: "Facebook, Twitter, YouTube, Reddit",
-                            description: "<strong>100</strong> 99th-percentile<strong>90</strong> 95th-percentile<strong>80</strong> 85th-percentile<strong>50</strong> 50th-percentile<strong>30</strong> 30th-percentile<strong>10</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>100</strong> 99th-percentile</div><div><strong>90</strong> 95th-percentile</div><div><strong>80</strong> 85th-percentile</div><div><strong>50</strong> 50th-percentile</div><div><strong>30</strong> 30th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         }
                     }
                 },
-                F: {
+                Product: {
                     sectionTitle: "Product strength",
                     items: {
                         F1: {
                             label: "Product development status (i.e. stage)",
-                            description: "<strong>50</strong> Fully working product<strong>40</strong> Beta version<strong>30</strong> Alpha version<strong>25</strong> Prototype / MVP<strong>20</strong> Demo only<strong>10</strong> Just an Idea<strong>0</strong> Unknown <br>"
+                            description: "<div><strong>50</strong> Fully working product</div><div><strong>40</strong> Beta version</div><div><strong>30</strong> Alpha version</div><div><strong>25</strong> Prototype / MVP</div><div><strong>20</strong> Demo only<div><strong>10</strong> Just an Idea</div><div><strong>0</strong> Unknown </div>"
                         },
                         F2: {
                             label: "Have they open sourced their code?",
-                            description: "<strong>20</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong>  NO </div>"
                         },
                         F3: {
                             label: "Have they published a Product roadmap?",
-                            description: "<strong>10</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
                         },
                         F4: {
                             label: "Is their Product roadmap up to date?",
-                            description: "<strong>5</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong>  NO </div>"
                         },
                         F5: {
                             label: "Product age (Todayâ€™s date - Release date)",
-                            description: "<strong>10</strong>  5+ years<strong>8</strong>  1+ years<strong>6</strong>  6+ months<strong>4</strong>   3+ months<strong>2</strong>   1+ months<strong>1</strong>   < 1 month<strong>0</strong>   future <br>"
+                            description: "<div><strong>10</strong>  5+ years</div><div><strong>8</strong>  1+ years</div><div><strong>6</strong>  6+ months</div><div><strong>4</strong>   3+ months</div><div><strong>2</strong>   1+ months</div><div><strong>1</strong>   < 1 month</div><div><strong>0</strong>   future </div>"
                         },
                         F6: {
                             label: "Have they published a Whitepaper?",
-                            description: "<strong>10</strong> YES<strong>0</strong>  NO <br>"
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
                         }
                     }
                 },
-                G: {
+                Coin: {
                     sectionTitle: "Coin strength",
                     items: {
                         G1: {
                             label: "Transactions per second compared to other coins",
-                            description: "<strong>8</strong> 95th-percentile<strong>6</strong> 75th-percentile<strong>4</strong> 50th-percentile<strong>2</strong> 30rd-percentile<strong>1</strong> 15th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>8</strong> 95th-percentile</div><div><strong>6</strong> 75th-percentile</div><div><strong>4</strong> 50th-percentile</div><div><strong>2</strong> 30rd-percentile</div><div><strong>1</strong> 15th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G2: {
                             label: 'What is their coin emission rate? Is the coin"s inflation under control?',
-                            description: "<strong>30</strong> No new tokens created<strong>30</strong> Deflationary through token burning<strong>15</strong> Emitted in proportion to amount of network activity<strong>15</strong> 2nd round might occur<strong>0</strong>  Company can decide <br>"
+                            description: "<div><strong>30</strong> No new tokens created<div><strong>30</strong> Deflationary through token burning<div><strong>15</strong> Emitted in proportion to amount of network activity<div><strong>15</strong> 2nd round might occur<div><strong>0</strong>  Company can decide </div>"
                         },
                         G3: {
                             label: "Is the coin among the top traded coins for the past 3 months in terms of transaction volumes?",
-                            description: "<strong>17</strong> 99th-percentile<strong>16</strong> 95th-percentile<strong>14</strong> 85th-percentile<strong>10</strong> 50th-percentile<strong>7</strong> 30th-percentile<strong>4</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G4: {
                             label: "Is the coin among the top traded coins for the past 3 months in terms of market capitalization?",
-                            description: "<strong>25</strong> 99th-percentile<strong>24</strong> 95th-percentile<strong>22</strong> 85th-percentile<strong>18</strong> 50th-percentile<strong>9</strong> 30th-percentile<strong>5</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>25</strong> 99th-percentile</div><div><strong>24</strong> 95th-percentile</div><div><strong>22</strong> 85th-percentile</div><div><strong>18</strong> 50th-percentile</div><div><strong>9</strong> 30th-percentile</div><div><strong>5</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         },
                         G5: {
                             label: "Has the coin outperformed the rest of the market trend since it started trading?",
-                            description: "<strong>20</strong> 99th-percentile<strong>18</strong> 95th-percentile<strong>16</strong> 85th-percentile<strong>8</strong> 50th-percentile<strong>6</strong> 30th-percentile<strong>4</strong> 10th-percentile<strong>0</strong> 0-10th percentile <br>"
+                            description: "<div><strong>20</strong> 99th-percentile</div><div><strong>18</strong> 95th-percentile</div><div><strong>16</strong> 85th-percentile</div><div><strong>8</strong> 50th-percentile</div><div><strong>6</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         }
                     }
                 }
@@ -649,19 +1250,19 @@
                 //var values = [['y', 365], ['m', 30], ['d', 1]];
                 var values = [['<span class="age-label year">Y</span>', 365], ['<span class="age-label month">M</span>', 30], ['<span class="age-label day">D</span>', 1]];
                 var prevAmount = 0;
-               
-                 
+
+
                 // Iterate over the values...
-                for (var i = 0; i < values.length; i++) { 
+                for (var i = 0; i < values.length; i++) {
                     var amount = Math.floor(days / values[i][1]);
                     var val = amount.toString();
                     var c = "age-value";
                     // ... and find the largest time value that fits into the days
-                    if ((i === 0 && amount === 0) || (i === 1 && prevAmount === 0 && amount === 0)) { 
+                    if ((i === 0 && amount === 0) || (i === 1 && prevAmount === 0 && amount === 0)) {
                         val = '--';
                         c = "age-value null"
                     }
-                         // If we match, add to the string ('s' is for pluralization) 
+                         // If we match, add to the string ('s' is for pluralization)
                     str += values[i][0] + '<span class="' + c + '">' + val + '</span>';
 
                          // and subtract from the days
@@ -750,25 +1351,41 @@
         cb.controller('homeCtrl', function ($scope, $http, $interval) {
 
         });
-        cb.controller('currencyCtrl', function ($scope, $http, $interval, $routeParams, $sce, $q, $timeout, coinScoreLabels) {
+        cb.filter("NAToUpper", ["$filter", function (e) {
+            return function (e, t) {
+                return typeof e === 'undefined' || (e = String(e)), e === 'undefined'|| !e.length || "n/a" == e.toLowerCase() ? "N/A" : e
+            }
+        }])
+        cb.controller('currencyCtrl', function ($scope, $http, $interval, $routeParams, $sce, $q, $timeout, coinScoreLabels, maxScores, scoreReferences, $filter, fieldLabels) {
+
             $scope.$parent.state.isLoaded = false;
+
             $scope.id = $routeParams.id;
+
             $scope.symbol = $routeParams.symbol;
+
             $scope.meta = {};
+
             $scope.coin = {};
+
             $scope.showAllGeneralInfo = false;
-            $scope.coinScoreLabels = coinScoreLabels['semi-centralized'];
+
+            $scope.coinScoreLabels = null;
+
             $scope.toggleGeneralInfo = function () {
                 $scope.showAllGeneralInfo = !$scope.showAllGeneralInfo;
             }
+
             $scope.bottomTabs = {
                 panel: 'charts'
             };
+
             $scope.chartData = {
                 minutes:[],
                 hours: [],
                 days: []
             };
+            getCoinScoreDetails();
             $scope.config = {
                 stockChart: $timeout(function () {
                     return {
@@ -988,21 +1605,21 @@
                 },3000)
             };
 
-
-
-
             var _metaLoaded = false;
             var _infoLoaded = false;
 
             $scope.tabs = {
                 panel: 'general'
             };
+
             $scope.tabs.panel = 'general';
+
             $scope.urlFriendly = function (name) {
                 if (!name)
                     return '';
                 return name.toLowerCase().replace(/ /g, '-');
             }
+
             $scope.getAge = function (startDate) {
                 if (!startDate)
                     return '';
@@ -1020,7 +1637,7 @@
                 else
                     return Math.floor(monthsOld / 12) + ' Years and ' + (monthsOld % 12) + ' Months';
             }
-           
+
             function diff_months(dt2, dt1) {
 
                 var diff = (dt2.getTime() - dt1.getTime()) / 1000;
@@ -1032,26 +1649,92 @@
 
             $scope.resize_tweet = resize_canvas;
             function initSentiment() {
-                init_tweet();				// Initialize scatterplot  
-                init_progress_dlg();			// Initialize progress dialog  
+                init_tweet();				// Initialize scatterplot
+                init_progress_dlg();			// Initialize progress dialog
                 draw_legend();			// Draw sentiment tab's legend
                 draw_tweet();				// Draw sentiment tab's axes
 
                 query_twitter_v_1_1($scope.symbol + ' ' + $scope.id, 15);
             }
+
             $scope.getExchangeData = function (){
                 $http.get('/api/getexchangedata?symbol=' + $scope.symbol + '&id=' + $scope.id + '&exchanges=' + $scope.exchanges.join(';') ).then(function (response) {
                     console.log(response);
                 }, function () {
 
                 })
+
             }
+
             $scope.scoreDetails = {};
+            $scope.allWhys = !1,
+            $scope.toggleAllWhys = function () {
+                $scope.allWhys = !$scope.allWhys;
+
+                for(var property in $scope.coinScoreLabels) {
+                    for (var prop in $scope.coinScoreLabels[property].items) {
+                        $scope.coinScoreLabels[property].items[prop].expanded = $scope.allWhys;
+                    }
+                }
+            }
             function getCoinScoreDetails() {
-                $http.get('/api/getcoinscoredetails?name=cardano').then(function (response) {
+                $http.get('/api/getcoinscoredetails?name=' + $scope.id).then(function (response) {
+                    var governanceType = '';
                     $scope.scoreDetails = response.data;
+
+                    switch ($scope.scoreDetails.Research.governance) {
+                        case "Decentralized":
+                            governanceType = "decentralized";
+                            break;
+                        case "Centralized > Hierarchical":
+                            governanceType = "centralized-hierarchical";
+                            break;
+                        case "Centralized > Flat":
+                            governanceType = "centralized-hierarchical";
+                            break;
+                        case "Semi-centralized":
+                            governanceType = "semi-centralized"
+                    }
+
+                    $scope.coinScoreLabels = coinScoreLabels[governanceType];
+
+
+                    for (var property in $scope.coinScoreLabels) {
+                        var labelCategory = $scope.coinScoreLabels[property];
+
+                        labelCategory.sectionScore = $scope.scoreDetails.Overall[property];
+
+                        for (var prop in $scope.coinScoreLabels[property].items) {
+                            var item = labelCategory.items[prop];
+
+
+                            item.maxScore = maxScores[governanceType][property][prop];
+                            item.score = typeof $scope.scoreDetails[property][prop] === "undefined" ? 0 : $scope.scoreDetails[property][prop];
+                            item.scoreMethodology = item.description;
+                            item.scoreRefs = [];
+
+                            scoreReferences[governanceType][property][prop].map(function (ref) {
+                                if (Array.isArray(ref)) {
+                                    item.scoreRefs.push({
+                                        data: $filter("NAToUpper")($scope.scoreDetails[ref[0]][ref[1]]),
+                                        label: typeof fieldLabels[ref[1]] === "undefined" ? fieldLabels[ref[0] + "_" + ref[1]] : fieldLabels[ref[1]]
+                                    })
+                                }
+                                else {
+                                    item.scoreRefs.push({
+                                        data: $filter("NAToUpper")($scope.scoreDetails.Research[ref]),
+                                        label: fieldLabels[ref]
+                                    })
+                                }
+
+                            });
+                        }
+                    }
+
+
                 }, function () { });
             }
+
             function getMetadata() {
 
                 $http.get('/api/getcoinmeta?symbol=' + $scope.symbol + '&id=' + $scope.id).then(

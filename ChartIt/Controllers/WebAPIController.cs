@@ -95,7 +95,7 @@ namespace ChartIt.Controllers
         }
 
         [Route("api/getcoinscoredetails")]
-        public async Task<Dictionary<string, Dictionary<string,int>>> GetCoinScoreDetails(string name)
+        public async Task<Dictionary<string, Dictionary<string,object>>> GetCoinScoreDetails(string name)
         {
             var Scores = await CoinAPI.GetCoinScoreDetails(name);
 
