@@ -116,7 +116,7 @@
                                 <dt class="section-title">
                                     {{ ::section.sectionTitle }}
                                 </dt>
-                                <dt class="c100 p{{ ::section.sectionScore }} dark green bad"   ng-class="{good: section.sectionScore > 70, okay: section.sectionScore > 50}">
+                                <dt class="c100 p{{ ::section.sectionScore }} dark green bad"   ng-class="{good: section.sectionScore > 75, okay: section.sectionScore > 50 && section.sectionScore <= 75}">
                                     <span>{{ ::section.sectionScore }}%</span>
                                   
                                     <div class="slice">
@@ -127,7 +127,7 @@
                                 <dd class="sub-hdn"></dd>
                                 <dd class="sub-item" ng-repeat-start="item in section.items" ng-click="item.expanded = !item.expanded">
                                     <div class="sub-item-header">
-                                        <div class="sub-score" ng-class="{good: item.score/item.maxScore > 0.75, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore <= 0.75, bad:  item.score/item.maxScore < 0.5}">
+                                        <div class="sub-score" ng-class="{good: item.score/item.maxScore > 0.7, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore <= 0.7, bad:  item.score/item.maxScore < 0.5}">
                                             {{ ::item.score }}/<span class="max">{{ ::item.maxScore }}</span>
                                         </div>
 
