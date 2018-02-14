@@ -373,6 +373,9 @@ namespace ChartIt.Data
 
                     JObject market = jsonObj["market"] != null && jsonObj["market"].Type != JTokenType.Null ? jsonObj["market"].Value<JObject>() : null;
 
+                    JObject github = jsonObj["github"] != null && jsonObj["github"].Type != JTokenType.Null ? jsonObj["github"].Value<JObject>() : null;
+
+
 
                     var governance = String.Empty;
  
@@ -380,6 +383,15 @@ namespace ChartIt.Data
                     Response.Add("Overall", new Dictionary<string, object>());
                     Response.Add("Research", new Dictionary<string, object>());
                     Response.Add("market", new Dictionary<string, object>());
+                    Response.Add("github", new Dictionary<string, object>());
+                    Response["Overall"].Add("Total", jsonObj["total_score"].Value<int>());
+                    foreach (var v in github)
+                    {
+                        var key = v.Key;
+                        var val = v.Value == null || v.Value.Type == JTokenType.Null ? String.Empty : v.Value.Value<object>();
+
+                        Response["github"].Add(key, val);
+                    }
 
                     foreach (var v in market)
                     {
@@ -397,7 +409,7 @@ namespace ChartIt.Data
                         Response["Research"].Add(key, val); 
                     }
 
-
+                 
                     foreach (var w in overallScores)
                     {
                         var key = w.Key;

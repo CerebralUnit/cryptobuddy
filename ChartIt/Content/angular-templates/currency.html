@@ -107,34 +107,30 @@
             <div class="tab-panel scores-panel" ng-class="{active: bottomTabs.panel === 'rating'}">
                 <div>
                     <div >
-                        <div class="clearfix">
-                            <a class="btn btn-primary no-und" href="" ng-click="toggleAllWhys()" analytics-on="click" analytics-event="Toggle full score explanations">Show all details</a>
-                        </div>
+                       
                         <dl class="dl-horizontal">
-                            
-                            <dl ng-repeat-start="section in coinScoreLabels">
-                              
-                                <dt class="section-title">
-                                    {{ ::section.sectionTitle }}
+                            <dl class="total-score">
+                                <dt class="section-title overall-score">
+                                   Overall
                                 </dt>
-                                <dt class="c100 p{{ ::section.sectionScore }} dark green" ng-class="{good: section.sectionScore >= 75, okay: section.sectionScore > 50 && section.sectionScore < 75, bad: section.sectionScore <= 50}">
+                                <dt class="c100 p{{ ::scoreDetails.Overall['Total'] }} dark green" ng-class="{good: scoreDetails.Overall['Total'] >= 75, okay: scoreDetails.Overall['Total'] > 50 && scoreDetails.Overall['Total'] < 75, bad: scoreDetails.Overall['Total'] <= 50}">
                                     <svg height="120" width="320" style="position: relative;display: block;margin: -12px auto 0;">
                                         <defs>
-                                            <mask id="textMask{{ section.sectionScore }}">
-                                                <text  ng-class="{good: item.score/item.maxScore >= 0.75, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore < 0.75, bad:  item.score/item.maxScore <= 0.5}" x="50%" y="106" style="stroke: rgba(255, 255, 255, 0.48);stroke-width: 23px;font-size: 110px;font-weight: bold;text-anchor:middle;" ng-if="section.sectionScore" ng-cloak>
-                                                    <tspan style=" filter: url(#innerShadow);" fill="#fff"> {{ section.sectionScore }}</tspan><tspan fill="#fff" style="font-size: 45px;">% </tspan>
+                                            <mask id="textMask{{ scoreDetails.Overall['Total'] }}">
+                                                <text ng-class="{good: item.score/item.maxScore >= 0.75, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore < 0.75, bad:  item.score/item.maxScore <= 0.5}" x="50%" y="106" style="stroke: rgba(255, 255, 255, 0.48);stroke-width: 23px;font-size: 110px;font-weight: bold;text-anchor:middle;" ng-cloak>
+                                                    <tspan style=" filter: url(#innerShadow);" fill="#fff"> {{ scoreDetails.Overall['Total'] }}</tspan><tspan fill="#fff" style="font-size: 45px;">% </tspan>
                                                 </text>
-                                            
+
                                             </mask>
                                             <filter id="innerShadow" x="-20%" y="-20%" width="140%" height="140%">
                                                 <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"></feGaussianBlur>
                                                 <feOffset in="blur" dx="2.5" dy="4.5"></feOffset>
                                             </filter>
-                                            <linearGradient id="Gradient{{ section.sectionScore }}" x1="0" x2="0" y1="1" y2="0">
-                                                <stop class="stop1"  ng-class="{good: section.sectionScore >= 75, okay: section.sectionScore > 50 && section.sectionScore < 75, bad:  section.sectionScore <= 50}" offset="23%"></stop>
-                                                <stop class="stop1"  ng-class="{good: section.sectionScore >= 75, okay: section.sectionScore > 50 && section.sectionScore < 75, bad:  section.sectionScore <= 50}" offset="{{ section.sectionScore * 0.55 + 23 }}%"></stop>
-                                                <stop class="stop2" offset="{{ section.sectionScore * 0.55 + 23 }}%"></stop>
-                                                <stop class="stop3" offset="78%"></stop>
+                                            <linearGradient id="Gradient{{ scoreDetails.Overall['Total'] }}" x1="0" x2="0" y1="1" y2="0" ng-cloak>
+                                                <stop class="stop1" ng-class="{good: scoreDetails.Overall['Total'] >= 75, okay: scoreDetails.Overall['Total'] > 50 && scoreDetails.Overall['Total'] < 75, bad:  scoreDetails.Overall['Total'] <= 50}" offset="0"></stop>
+                                                <stop class="stop1" ng-class="{good: scoreDetails.Overall['Total'] >= 75, okay: scoreDetails.Overall['Total'] > 50 && scoreDetails.Overall['Total'] < 75, bad:  scoreDetails.Overall['Total'] <= 50}" offset="{{ scoreDetails.Overall['Total'] * 0.6 + 20 }}%"></stop>
+                                                <stop class="stop2" offset="{{ scoreDetails.Overall['Total'] * 0.6 + 20 }}%"></stop>
+                                                <stop class="stop3" offset="80%"></stop>
                                             </linearGradient>
                                             <style type="text/css">
                                                 #rect1 {
@@ -152,21 +148,89 @@
                                                 .stop3 {
                                                     stop-color: #666;
                                                 }
+
                                                 stop.stop1.good {
                                                     stop-color: #9EFF20;
                                                 }
+
                                                 stop.stop1.bad {
                                                     stop-color: #ff207d;
                                                 }
+
+                                                stop.stop1.okay {
+                                                    stop-color: #f57100;
+                                                }
+                                            </style>
+                                        </defs>
+                                        <g mask="url(#textMask{{ scoreDetails.Overall['Total'] }})">
+                                            <text fill="url(#Gradient{{ scoreDetails.Overall['Total'] }})" ng-class="{good: item.score/item.maxScore >= 0.75, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore < 0.75, bad:  item.score/item.maxScore <= 0.5}" x="50%" y="104" style="font-size: 110px;font-weight: bold;text-anchor:middle;" ng-cloak>
+                                                <tspan> {{ scoreDetails.Overall['Total'] }}</tspan><tspan style="font-size: 45px;">%</tspan>
+                                            </text>
+                                        </g>
+                                    </svg>
+                                </dt>
+                            </dl>
+                            <div class="clearfix details-button">
+                                <a class="btn btn-primary no-und" href="" ng-click="toggleAllWhys()" analytics-on="click" analytics-event="Toggle full score explanations">Show all details</a>
+                            </div>
+                            <dl ng-repeat-start="section in coinScoreLabels" ng-if="Utils.keys(scoreDetails[section.section]).length">
+
+                                <dt class="section-title">
+                                    {{ ::section.sectionTitle }}
+                                </dt>
+                                <dt class="c100 p{{ ::section.sectionScore }} dark green" ng-class="{good: section.sectionScore >= 75, okay: section.sectionScore > 50 && section.sectionScore < 75, bad: section.sectionScore <= 50}">
+                                    <svg height="120" width="320" style="position: relative;display: block;margin: -12px auto 0;">
+                                        <defs>
+                                            <mask id="textMask{{ section.sectionScore }}">
+                                                <text ng-class="{good: item.score/item.maxScore >= 0.75, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore < 0.75, bad:  item.score/item.maxScore <= 0.5}" x="50%" y="106" style="stroke: rgba(255, 255, 255, 0.48);stroke-width: 23px;font-size: 110px;font-weight: bold;text-anchor:middle;" ng-cloak>
+                                                    <tspan style=" filter: url(#innerShadow);" fill="#fff"> {{ section.sectionScore }}</tspan><tspan fill="#fff" style="font-size: 45px;">% </tspan>
+                                                </text>
+
+                                            </mask>
+                                            <filter id="innerShadow" x="-20%" y="-20%" width="140%" height="140%">
+                                                <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"></feGaussianBlur>
+                                                <feOffset in="blur" dx="2.5" dy="4.5"></feOffset>
+                                            </filter>
+                                            <linearGradient id="Gradient{{ section.sectionScore }}" x1="0" x2="0" y1="1" y2="0" ng-cloak>
+                                                <stop class="stop1" ng-class="{good: section.sectionScore >= 75, okay: section.sectionScore > 50 && section.sectionScore < 75, bad:  section.sectionScore <= 50}" offset="0"></stop>
+                                                <stop class="stop1" ng-class="{good: section.sectionScore >= 75, okay: section.sectionScore > 50 && section.sectionScore < 75, bad:  section.sectionScore <= 50}" offset="{{ section.sectionScore * 0.6 + 20 }}%"></stop>
+                                                <stop class="stop2" offset="{{ section.sectionScore * 0.6 + 20 }}%"></stop>
+                                                <stop class="stop3" offset="80%"></stop>
+                                            </linearGradient>
+                                            <style type="text/css">
+                                                #rect1 {
+                                                    fill: url(#Gradient1);
+                                                }
+
+                                                .stop1 {
+                                                    stop-color: #21ebff;
+                                                }
+
+                                                .stop2 {
+                                                    stop-color: #666;
+                                                }
+
+                                                .stop3 {
+                                                    stop-color: #666;
+                                                }
+
+                                                stop.stop1.good {
+                                                    stop-color: #9EFF20;
+                                                }
+
+                                                stop.stop1.bad {
+                                                    stop-color: #ff207d;
+                                                }
+
                                                 stop.stop1.okay {
                                                     stop-color: #f57100;
                                                 }
                                             </style>
                                         </defs>
                                         <g mask="url(#textMask{{ section.sectionScore }})">
-                                            <text  ng-class="{good: item.score/item.maxScore >= 0.75, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore < 0.75, bad:  item.score/item.maxScore <= 0.5}" x="50%" y="104" style="font-size: 110px;font-weight: bold;text-anchor:middle;" ng-if="section.sectionScore" ng-cloak>
-                                                <tspan  fill="url(#Gradient{{ section.sectionScore }})" > {{ section.sectionScore }}</tspan><tspan  fill="#21ebff" style="font-size: 45px;">%</tspan>
-                                            </text> 
+                                            <text fill="url(#Gradient{{ section.sectionScore }})" ng-class="{good: item.score/item.maxScore >= 0.75, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore < 0.75, bad:  item.score/item.maxScore <= 0.5}" x="50%" y="104" style="font-size: 110px;font-weight: bold;text-anchor:middle;" ng-cloak>
+                                                <tspan> {{ section.sectionScore }}</tspan><tspan style="font-size: 45px;">%</tspan>
+                                            </text>
                                         </g>
                                     </svg>
                                 </dt>
@@ -174,7 +238,7 @@
                                 <dd class="sub-item" ng-repeat-start="item in section.items" ng-click="item.expanded = !item.expanded">
                                     <div class="sub-item-header">
                                         <div class="sub-score" ng-class="{good: item.score/item.maxScore >= 0.75, okay: item.score/item.maxScore > 0.5 && item.score/item.maxScore < 0.75, bad:  item.score/item.maxScore <= 0.5}">
-                                            <sup class="min"> {{ ::item.score }}</sup>&frasl;<sub class="max">{{ ::item.maxScore }}</sub>          
+                                            <sup class="min"> {{ ::item.score }}</sup>&frasl;<sub class="max">{{ ::item.maxScore }}</sub>
                                         </div>
 
 

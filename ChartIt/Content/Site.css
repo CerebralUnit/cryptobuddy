@@ -17,8 +17,11 @@ body {
 tr.showIfLast {
 display:none;
 }
-text {
+dt.c100 > svg text {
     font-family: 'Montserrat', sans-serif;
+    -webkit-transform: translateX(20.75px);
+    -moz-transform: translateX(20.75px);
+    transform: translateX(20.75px);
 }
 tr.showIfLast:last-child{
     display:table-row;
@@ -901,10 +904,12 @@ select.amcharts-data-set-select {
     .currency-details > .columns{
         margin: 0 !important
     }
-    .currency-details > .columns .column {
-        padding-left: 0;
-        padding-right: 0;
-    }
+        .currency-details > .columns .column {
+            padding-left: 0;
+            padding-right: 0;
+            position: relative;
+            overflow: hidden;
+        }
 }
 .slide-top {
     flex: 1;
@@ -1139,11 +1144,12 @@ dl.dl-horizontal {
 dl > dl {
     background: #0e151d;
     border: 8px solid #0d1013;
-    width: 33.333333%;
+flex: 1 1 420px;
     padding: 0 16px 0;
     position: relative;
     min-height: 636px;
 }
+
 dt.section-title {
     padding: 0 0 16px;
     font-size: 302%;
@@ -1163,7 +1169,7 @@ dt.section-title {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    height: 240px;
+    height: 242px;
     padding-bottom: 0;
     color: #0e151d;
     padding-right: 4px;
@@ -1271,15 +1277,26 @@ span.ref-data {
     border-radius: 3px;
 }
 .score-methodology > div > strong {
-    background: #1fecff;
-    color: #0e151d;
-    width: 20px;
-    display: inline-block;
-    text-align: center;
+    color: #5078a0;
+    display: flex;
     line-height: 20px;
-    border-radius: 50%;
+    border-radius: 0;
+    flex: 1 1;
+    align-items: center;
+    max-width: 32px;
+    justify-content: center;
+    background: rgb(0, 0, 0);
+    height: 100%;
 }
-
+.score-methodology > div > span {
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    flex: 1;
+    padding: 8px;
+    font-size: 11px;
+    height: 100%;
+}
 .score-data {
     display: flex;
     flex-wrap: wrap;
@@ -1297,22 +1314,30 @@ span.ref-data {
     background: transparent;
     padding: 8px 0;
     margin: 16px 16px 8px;
-    display: block;
+    display: flex;
     text-align: left;
-    border-top: 1px dashed #10353f;
+    border-top: navajowhite;
     color: #5078a0;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
 }
 
 span.ref-label {
     flex: 8 0 30%;
     padding: 0 16px 0 0;
 }
-    .score-methodology > div {
-        display: inline-block;
-        width: 33.33333%;
-        height: 24px;
-        line-height: 24px;
-    }
+.score-methodology > div {
+    width: auto;
+    min-height: 32px;
+    line-height: normal;
+    flex: 1 1 50%;
+    border: 1px solid #0e151d;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
 .score-data ul {
     padding: 0 16px;
     width: 100%;
@@ -1321,7 +1346,7 @@ span.ref-label {
         list-style-type: decimal;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: start;
         width: 100%;
         flex: 0 0 100%;
         margin-bottom: 16px;
@@ -1416,17 +1441,76 @@ a.btn.btn-primary.no-und {
     font-size: 80%;
     margin-bottom: 8px;
 }
-
-.bad g tspan:nth-child(2) {
-    fill: #ff207d;
-}
-.good g tspan:nth-child(2) {
-    fill: #9EFF20;
-}
-.okay g tspan:nth-child(2) {
-    fill: #f57100;
-}
-
+ 
 dt svg {
     margin-top: -9px !important
+}
+
+@media (max-width: 420px) {
+
+
+    dl > dl {
+        width: 100%;
+        flex: 1 1 100%;
+        min-height: 0;
+    }
+
+    dt.c100 > svg text {
+        font-size: 60px !important;
+        transform: translateX(13.75px);
+    }
+
+    dt.section-title {
+        font-size: 240%;
+        height: 168px;
+    }
+
+    .sub-item,
+    .sub-item-header {
+        min-height: 60px;
+    }
+
+    .sub-item-header {
+        padding: 8px;
+    }
+    .c100:after {
+            height: 90%;
+        }
+    dt.c100{
+        min-height:140px;
+    }
+        dt.c100 > svg {
+            margin: -12px auto 32px !important;
+        }
+    .c100 tspan:last-child {
+        font-size: 30px !important;
+    }
+    .tab-panel.scores-panel{
+        padding-top:0;
+    } dl > dl.total-score {
+        min-height: 0;
+        border: none;
+        margin: 0 0 16px !important;
+        padding: 0;
+    }
+        dl > dl.total-score > dt.c100 {
+            margin: 0 -16px;
+        }
+    .tabs,
+    .tab-panel {
+        margin: 0 -16px !important;
+    }
+    .details-button {
+        flex: 1;
+        padding: 0 8px;
+    }
+    .details-button > .btn{
+        width: 100%;
+    }
+    .dl-horizontal dt.section-title.overall-score {
+        margin: 0;
+        height: 100%;
+        padding: 0;
+        line-height: 18px; 
+    }
 }
