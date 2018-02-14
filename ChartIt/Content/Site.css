@@ -580,6 +580,43 @@ select.amcharts-data-set-select {
     display:none;
 }
 @media (max-width: 767px) {
+    .currency-select { 
+        background: #0d1013;
+        color: #fff;
+        height: 37px;
+        border-radius: 3px;
+        border: none;
+        padding: 0 6px;
+        display: block;
+        max-width: 100%;
+        width: 100%;
+        margin: 2px 0 0;
+        border-top: 1px solid #262d33;
+        border-bottom: 1px solid #262d33;
+        border-radius: 0;
+    }
+
+    .mobile-hide{
+        display:none !important;
+    }
+   .ath-cell,.ath-until-cell, .ath-date-cell {
+        float: left;
+        text-align: left !important;
+        width: 33.3333333%;
+        padding: 8px 16px !important;
+    }
+    .age-label.year + .age-value,
+    .age-label.day + .age-value {
+        border: none;
+        padding: 0;
+    }
+    td.ath-until-cell {
+        text-align: center !important;
+    }
+    td.ath-date-cell {
+        text-align: right !important;
+        float: right;
+    }
     .pagination-list li {
         margin: 0;
         border: 1px solid transparent !important;
@@ -597,7 +634,7 @@ select.amcharts-data-set-select {
     }
     .table-per-page select {
         background: #0d1013;
-        margin-left: 6px;
+        margin-left: 0;
         margin-bottom: 8px;
         height: 27px;
         font-size: 12px;
@@ -616,6 +653,7 @@ select.amcharts-data-set-select {
    }
    .mobile-label.block{
        display:block;
+       margin: 0;
    }
     table.cb-ticker td {
         padding: 4px 16px;
@@ -722,7 +760,7 @@ select.amcharts-data-set-select {
         width: 33.33333%;
         float: left;
         text-align: center;
-        padding-bottom:16px;
+        padding-bottom:12px;
     }
     td.rank-cell:before {
         content: '';
@@ -734,6 +772,9 @@ select.amcharts-data-set-select {
         left: -35px;
         z-index: 0;
         top: 0px;
+    }
+    .table-footer {
+        padding: 0 16px;
     }
     .cb-ticker .change-cell.week {
         
@@ -748,6 +789,7 @@ select.amcharts-data-set-select {
     .cb-ticker .price-cell.usd,
     .cb-ticker .price-cell.btc {
         padding-bottom: 0;
+        min-height:45px;
     }
     td.name-cell img {
         float: right;
@@ -793,8 +835,67 @@ select.amcharts-data-set-select {
     .night table.cb-ticker tr {
         border-bottom: 2px solid #262d33;
         background: linear-gradient(to bottom, #0d1013 80%, #000000);
+        padding: 0px;
+        overflow: hidden;
     }
-
+    .age-cell {
+        width: 50%;
+        float: left;
+        text-align: left !important;
+    }
+    
+    td.rating-cell {
+        width: 50%;
+        float: right;
+    }
+    .slide-top {
+        flex: 1;
+        margin: 0 -16px;
+    }
+    .rating-cell .mobile-label {
+        float: left;
+        position: relative;
+        z-index: 11111;
+        padding-top: 3px;
+        font-size: 100%;
+    }
+    .rating-value {
+        position: absolute;
+        z-index: 2;
+        text-align: left;
+        font-size: 91%;
+        padding-left: 8px;
+        color: #fff;
+        right: 16px;
+        height: 19px;
+        line-height: 21px;
+        left: 50px;
+    }
+  
+    .age-cell .mobile-label {
+        display: inline-block;
+        font-size: 100%;
+        margin-right: 5px;
+    }
+    .age-cell .age-value {
+        display: inline-block;
+        padding: 0;
+        font-size: 100%;
+        width: auto;
+        float:none !important;
+    }
+       .age-cell .mobile-label + .clearfix{
+           display:inline-block;
+       }
+    .age-cell .age-label {
+        position: static;
+        font-size: 100%;
+        top: 4px;
+        color: #262d33;
+        width: auto;
+        display: inline-block;
+        padding: 0 3px 0 0;
+    }
     .general-label{
         display:none;
     }
@@ -927,14 +1028,13 @@ select.amcharts-data-set-select {
 
 }
 .rating-bar {
- 
     position: absolute;
-    background: #000;
-    
-    top: 8px;
+    background: #1d1d1d;
+    top: 1px;
     bottom: 8px;
-    left: 0;
+    left: 50px;
     right: 16px;
+    height: 19px;
     z-index: 0;
 }
 .rating-cell{

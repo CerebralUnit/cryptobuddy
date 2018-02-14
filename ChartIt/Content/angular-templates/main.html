@@ -1,5 +1,5 @@
 ﻿<div> 
-    <select ng-model="tickerState.conversion">
+    <select ng-model="tickerState.conversion" class="currency-select">
         <option value="USD">USD</option>
         <option value="BTC">BTC</option> 
     </select>
@@ -40,16 +40,16 @@
                 <td class="volume-cell"> <span class="mobile-label block">Volume: </span>${{abbreviateNumber(coin.Volume24hUsd)}}</td>
 
                 <td class="ath-cell">
-                    <span ng-if="coin.ATH"><span class="mobile-label">ATH: </span>{{coin.ATH | currency}}</span>
-                    <span ng-if="!coin.ATH"><span class="mobile-label">ATH: </span>- - -</span>
+                    <span ng-if="coin.ATH"><span class="mobile-label block">ATH: </span>{{coin.ATH | currency}}</span>
+                    <span ng-if="!coin.ATH"><span class="mobile-label block">ATH: </span>- - -</span>
                 </td>
                 <td class="ath-until-cell">
-                    <span ng-if="coin.ATH"><span class="mobile-label">ATH: </span>+{{coin.ATH - coin.PriceUsd | currency}} (+{{(coin.ATH/coin.PriceUsd*100).toFixed(0) | number}}%)</span>
-                    <span ng-if="!coin.ATH"><span class="mobile-label">ATH: </span>- - -</span>
+                    <span ng-if="coin.ATH"><span class="mobile-label block">To ATH: </span><span class="mobile-hide">+{{coin.ATH - coin.PriceUsd | currency}}</span> (+{{(coin.ATH/coin.PriceUsd*100).toFixed(0) | number}}%)</span>
+                    <span ng-if="!coin.ATH"><span class="mobile-label block">To ATH: </span>- - -</span>
                 </td>
                 <td class="ath-date-cell">
-                    <span ng-if="coin.ATH"><span class="mobile-label">Last ATH: </span>{{coin.LastATH | date : 'MM/dd/yy'}}</span>
-                    <span ng-if="!coin.ATH"><span class="mobile-label">Last ATH: </span>- - -</span>
+                    <span ng-if="coin.ATH"><span class="mobile-label block">Last ATH: </span>{{coin.LastATH | date : 'MM/dd/yy'}}</span>
+                    <span ng-if="!coin.ATH"><span class="mobile-label block">Last ATH: </span>- - -</span>
                 </td>
                 <td class="change-cell hour" ng-class="{positive: coin.PercentChange1h  > 0,  negative: coin.PercentChange1h  < 0,  neutral: coin.PercentChange1h === 0}">
                     <span class="mobile-label">(1h): </span>{{coin.PercentChange1h.toFixed(2)}}%
