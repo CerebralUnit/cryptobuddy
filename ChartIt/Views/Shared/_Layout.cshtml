@@ -747,9 +747,94 @@
             }
         })
         cb.constant("coinScoreLabels", {
-            "centralized-hierarchical": {
+            "centralized-hierarchical": {  
+                Advisors: {
+                    sectionTitle: "Advisors",
+                    items: {
+                        D1: {
+                            label: "Advisors have bios on the website",
+                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
+                        },
+                        D2: {
+                            label: "Advisors have social media links on the website",
+                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
+                        },
+                        D3: {
+                            label: "2+ advisors have managed multi million dollar companies",
+                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO </div>"
+                        }
+                    }
+                },
+                Business: {
+                    sectionTitle: "Business/Company strength",
+                    items: {
+                        H1: {
+                            label: "Financial statements published",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
+                        },
+                        H2: {
+                            label: "Burn rate and costs published",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
+                        },
+                        H3: {
+                            label: "Financial gains predictions published",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
+                        },
+                        H4: {
+                            label: "Company has strategic partnerships",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
+                        },
+                        H5: {
+                            label: "Company explains its advantages over competition",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
+                        },
+                        H6: {
+                            label: "Company presents a sales/marketing plan",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
+                        }
+                    }
+                },
+                Buzz: {
+                    sectionTitle: "Buzz",
+                    items: {
+                        E1: {
+                            label: "Total community size compared to other coins",
+                            sublabel: "Facebook, Twitter, YouTube, Reddit",
+                            description: "<div><strong>60</strong> 99th-percentile</div><div><strong>50</strong> 95th-percentile</div><div><strong>40</strong> 85th-percentile</div><div><strong>30</strong> 50th-percentile</div><div><strong>20</strong> 30th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        }
+                    }
+                },
+                Coin: {
+                    sectionTitle: "Coin strength",
+                    items: {
+                        G1: {
+                            label: "Transactions per second compared to other coins",
+                            description: "<div><strong>8</strong> 95th-percentile</div><div><strong>6</strong> 75th-percentile</div><div><strong>4</strong> 50th-percentile</div><div><strong>2</strong> 30rd-percentile</div><div><strong>1</strong> 15th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        },
+                        G2: {
+                            label: 'What is their coin emission rate? Is the coin"s inflation under control?',
+                            description: "<div><strong>30</strong> No new tokens created<div><strong>30</strong> Deflationary through token burning<div><strong>15</strong> Emitted in proportion to amount of network activity<div><strong>15</strong> 2nd round might occur<div><strong>0</strong>  Company can decide </div>"
+                        },
+                        G3: {
+                            label: "Is the coin among the top traded coins for the past 3 months in terms of transaction volumes?",
+                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        },
+                        G4: {
+                            label: "Is the coin among the top traded coins for the past 3 months in terms of market capitalization?",
+                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        },
+                        G5: {
+                            label: "Has the coin outperformed the rest of the market trend since it started trading?",
+                            description: "<div><strong>13</strong> 99th-percentile</div><div><strong>12</strong> 95th-percentile</div><div><strong>10</strong> 85th-percentile</div><div><strong>5</strong> 50th-percentile</div><div><strong>3</strong> 30th-percentile</div><div><strong>2</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        },
+                        G6: {
+                            label: "Does the founding team reserve a decent amount of coin to themselves?",
+                            description: "<div><strong>15</strong> 0-5%<div><strong>10</strong> 5-10%<div><strong>5</strong> 10-20%<div><strong>2</strong> 0%<div><strong>0</strong> 20%+ </div>"
+                        }
+                    }
+                },
                 Communication: {
-                    sectionTitle: "Open communication channels",
+                    sectionTitle: "Communication",
                     items: {
                         A1: {
                             label: "Ability to contact the company via: Slack, Telegram or ICQ",
@@ -761,8 +846,52 @@
                         }
                     }
                 },
+                GitHub: {
+                    sectionTitle: "GitHub",
+                    items: {
+                        J1: {
+                            label: "Github community size compared to other coins",
+                            sublabel: "Stars, Forks, Watchers",
+                            description: "</div><div><strong>40</strong> 99th-percentile</div><div><strong>30</strong> 95th-percentile</div><div><strong>20</strong> 85th-percentile</div><div><strong>15</strong> 50th-percentile</div><div><strong>10</strong> 30th-percentile</div><div><strong>5</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        },
+                        J2: {
+                            label: "Github activity tempo",
+                            sublabel: "Statistical mean of 4 week SMAs for commits over 49 weeks, compared to other coins",
+                            description: "<div><strong>60</strong> 90th-percentile</div><div><strong>50</strong> 67th-percentile</div><div><strong>40</strong> 57th-percentile</div><div><strong>30</strong> 53rd-percentile</div><div><strong>20</strong> 40th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        }
+                    }
+                },
+                Product: {
+                    sectionTitle: "Product",
+                    items: {
+                        F1: {
+                            label: "Product development status (i.e. stage)",
+                            description: "<div><strong>50</strong> Fully working product</div><div><strong>40</strong> Beta version</div><div><strong>30</strong> Alpha version</div><div><strong>25</strong> Prototype / MVP</div><div><strong>20</strong> Demo only<div><strong>10</strong> Just an Idea</div><div><strong>0</strong> Unknown </div>"
+                        },
+                        F2: {
+                            label: "Have they open sourced their code?",
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        },
+                        F3: {
+                            label: "Have they published a Product roadmap?",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        },
+                        F4: {
+                            label: "Is their Product roadmap up to date?",
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        },
+                        F5: {
+                            label: "Product age (Todayâ€™s date - Release date)",
+                            description: "<div><strong>10</strong>  5+ years</div><div><strong>8</strong>  1+ years</div><div><strong>6</strong>  6+ months</div><div><strong>4</strong>   3+ months</div><div><strong>2</strong>   1+ months</div><div><strong>1</strong>   < 1 month</div><div><strong>0</strong>   future </div>"
+                        },
+                        F6: {
+                            label: "Have they published a Whitepaper?",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        }
+                    }
+                },
                 Social: {
-                    sectionTitle: "Activity on social media",
+                    sectionTitle: "Social Media",
                     items: {
                         B1: {
                             label: "Activity on Blog",
@@ -826,214 +955,16 @@
                         }
                     }
                 },
-                Advisors: {
-                    sectionTitle: "Advisory board strength",
-                    items: {
-                        D1: {
-                            label: "Advisors have bios on the website",
-                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
-                        },
-                        D2: {
-                            label: "Advisors have social media links on the website",
-                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
-                        },
-                        D3: {
-                            label: "2+ advisors have managed multi million dollar companies",
-                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO </div>"
-                        }
-                    }
-                },
-                GitHub: {
-                    sectionTitle: "GitHub",
-                    items: {
-                        J1: {
-                            label: "Github community size compared to other coins",
-                            sublabel: "Stars, Forks, Watchers",
-                            description: "</div><div><strong>40</strong> 99th-percentile</div><div><strong>30</strong> 95th-percentile</div><div><strong>20</strong> 85th-percentile</div><div><strong>15</strong> 50th-percentile</div><div><strong>10</strong> 30th-percentile</div><div><strong>5</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        },
-                        J2: {
-                            label: "Github activity tempo",
-                            sublabel: "Statistical mean of 4 week SMAs for commits over 49 weeks, compared to other coins",
-                            description: "<div><strong>60</strong> 90th-percentile</div><div><strong>50</strong> 67th-percentile</div><div><strong>40</strong> 57th-percentile</div><div><strong>30</strong> 53rd-percentile</div><div><strong>20</strong> 40th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        }
-                    }
-                },
-                Buzz: {
-                    sectionTitle: "Brand awareness/Buzz",
-                    items: {
-                        E1: {
-                            label: "Total community size compared to other coins",
-                            sublabel: "Facebook, Twitter, YouTube, Reddit",
-                            description: "<div><strong>60</strong> 99th-percentile</div><div><strong>50</strong> 95th-percentile</div><div><strong>40</strong> 85th-percentile</div><div><strong>30</strong> 50th-percentile</div><div><strong>20</strong> 30th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        }
-                    }
-                },
-                Product: {
-                    sectionTitle: "Product strength",
-                    items: {
-                        F1: {
-                            label: "Product development status (i.e. stage)",
-                            description: "<div><strong>50</strong> Fully working product</div><div><strong>40</strong> Beta version</div><div><strong>30</strong> Alpha version</div><div><strong>25</strong> Prototype / MVP</div><div><strong>20</strong> Demo only<div><strong>10</strong> Just an Idea</div><div><strong>0</strong> Unknown </div>"
-                        },
-                        F2: {
-                            label: "Have they open sourced their code?",
-                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        },
-                        F3: {
-                            label: "Have they published a Product roadmap?",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        },
-                        F4: {
-                            label: "Is their Product roadmap up to date?",
-                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        },
-                        F5: {
-                            label: "Product age (Todayâ€™s date - Release date)",
-                            description: "<div><strong>10</strong>  5+ years</div><div><strong>8</strong>  1+ years</div><div><strong>6</strong>  6+ months</div><div><strong>4</strong>   3+ months</div><div><strong>2</strong>   1+ months</div><div><strong>1</strong>   < 1 month</div><div><strong>0</strong>   future </div>"
-                        },
-                        F6: {
-                            label: "Have they published a Whitepaper?",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        }
-                    }
-                },
-                Coin: {
-                    sectionTitle: "Coin strength",
-                    items: {
-                        G1: {
-                            label: "Transactions per second compared to other coins",
-                            description: "<div><strong>8</strong> 95th-percentile</div><div><strong>6</strong> 75th-percentile</div><div><strong>4</strong> 50th-percentile</div><div><strong>2</strong> 30rd-percentile</div><div><strong>1</strong> 15th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        },
-                        G2: {
-                            label: 'What is their coin emission rate? Is the coin"s inflation under control?',
-                            description: "<div><strong>30</strong> No new tokens created<div><strong>30</strong> Deflationary through token burning<div><strong>15</strong> Emitted in proportion to amount of network activity<div><strong>15</strong> 2nd round might occur<div><strong>0</strong>  Company can decide </div>"
-                        },
-                        G3: {
-                            label: "Is the coin among the top traded coins for the past 3 months in terms of transaction volumes?",
-                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        },
-                        G4: {
-                            label: "Is the coin among the top traded coins for the past 3 months in terms of market capitalization?",
-                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        },
-                        G5: {
-                            label: "Has the coin outperformed the rest of the market trend since it started trading?",
-                            description: "<div><strong>13</strong> 99th-percentile</div><div><strong>12</strong> 95th-percentile</div><div><strong>10</strong> 85th-percentile</div><div><strong>5</strong> 50th-percentile</div><div><strong>3</strong> 30th-percentile</div><div><strong>2</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        },
-                        G6: {
-                            label: "Does the founding team reserve a decent amount of coin to themselves?",
-                            description: "<div><strong>15</strong> 0-5%<div><strong>10</strong> 5-10%<div><strong>5</strong> 10-20%<div><strong>2</strong> 0%<div><strong>0</strong> 20%+ </div>"
-                        }
-                    }
-                },
-                Business: {
-                    sectionTitle: "Business/Company strength",
-                    items: {
-                        H1: {
-                            label: "Financial statements published",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
-                        },
-                        H2: {
-                            label: "Burn rate and costs published",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
-                        },
-                        H3: {
-                            label: "Financial gains predictions published",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
-                        },
-                        H4: {
-                            label: "Company has strategic partnerships",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
-                        },
-                        H5: {
-                            label: "Company explains its advantages over competition",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
-                        },
-                        H6: {
-                            label: "Company presents a sales/marketing plan",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong> NO </div>"
-                        }
-                    }
-                }
             },
             decentralized: {
-                Communication: {
-                    sectionTitle: "Open communication channels",
-                    items: {
-                        A1: {
-                            label: "Ability to contact the company via: Slack, Telegram or ICQ",
-                            description: "<div><strong>70</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
-                        },
-                        A2: {
-                            label: "Ability to contact the company via: Contact form or Email",
-                            description: "<div><strong>30</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
-                        }
-                    }
-                },
-                Social: {
-                    sectionTitle: "Activity on social media",
-                    items: {
-                        B1: {
-                            label: "Activity on Blog",
-                            sublabel: "Are they posting every 10 days or less?",
-                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO</div>"
-                        },
-                        B2: {
-                            label: "Activity on Facebook",
-                            sublabel: "Are they posting every 3 days or less?",
-                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
-                        },
-                        B3: {
-                            label: "Activity on Twitter",
-                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
-                        },
-                        B4: {
-                            label: "Do they have a YouTube channel?",
-                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
-                        },
-                        B5: {
-                            label: "Activity on Youtube",
-                            sublabel: "Are they posting every 7 days or less?",
-                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
-                        }
-                    }
-                },
+               
                 Buzz: {
-                    sectionTitle: "Brand awareness/Buzz",
+                    sectionTitle: "Buzz",
                     items: {
                         E1: {
                             label: "Total community size compared to other coins",
                             sublabel: "Facebook, Twitter, YouTube, Reddit",
                             description: "<div><strong>100</strong> 99th-percentile</div><div><strong>90</strong> 95th-percentile</div><div><strong>80</strong> 85th-percentile</div><div><strong>50</strong> 50th-percentile</div><div><strong>30</strong> 30th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        }
-                    }
-                },
-                Product: {
-                    sectionTitle: "Product strength",
-                    items: {
-                        F1: {
-                            label: "Product development status (i.e. stage)",
-                            description: "<div><strong>50</strong> Fully working product</div><div><strong>40</strong> Beta version</div><div><strong>30</strong> Alpha version</div><div><strong>25</strong> Prototype / MVP</div><div><strong>20</strong> Demo only<div><strong>10</strong> Just an Idea</div><div><strong>0</strong> Unknown </div>"
-                        },
-                        F2: {
-                            label: "Have they open sourced their code?",
-                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        },
-                        F3: {
-                            label: "Have they published a Product roadmap?",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        },
-                        F4: {
-                            label: "Is their Product roadmap up to date?",
-                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        },
-                        F5: {
-                            label: "Product age (Todayâ€™s date - Release date)",
-                            description: "<div><strong>10</strong>  5+ years</div><div><strong>8</strong>  1+ years</div><div><strong>6</strong>  6+ months</div><div><strong>4</strong>   3+ months</div><div><strong>2</strong>   1+ months</div><div><strong>1</strong>   < 1 month</div><div><strong>0</strong>   future </div>"
-                        },
-                        F6: {
-                            label: "Have they published a Whitepaper?",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
                         }
                     }
                 },
@@ -1061,11 +992,9 @@
                             description: "<div><strong>20</strong> 99th-percentile</div><div><strong>18</strong> 95th-percentile</div><div><strong>16</strong> 85th-percentile</div><div><strong>8</strong> 50th-percentile</div><div><strong>6</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
                         }
                     }
-                }
-            },
-            "semi-centralized": {
+                },
                 Communication: {
-                    sectionTitle: "Open communication channels",
+                    sectionTitle: "Communication",
                     items: {
                         A1: {
                             label: "Ability to contact the company via: Slack, Telegram or ICQ",
@@ -1077,8 +1006,165 @@
                         }
                     }
                 },
+               
+                Product: {
+                    sectionTitle: "Product",
+                    items: {
+                        F1: {
+                            label: "Product development status (i.e. stage)",
+                            description: "<div><strong>50</strong> Fully working product</div><div><strong>40</strong> Beta version</div><div><strong>30</strong> Alpha version</div><div><strong>25</strong> Prototype / MVP</div><div><strong>20</strong> Demo only<div><strong>10</strong> Just an Idea</div><div><strong>0</strong> Unknown </div>"
+                        },
+                        F2: {
+                            label: "Have they open sourced their code?",
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        },
+                        F3: {
+                            label: "Have they published a Product roadmap?",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        },
+                        F4: {
+                            label: "Is their Product roadmap up to date?",
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        },
+                        F5: {
+                            label: "Product age (Todayâ€™s date - Release date)",
+                            description: "<div><strong>10</strong>  5+ years</div><div><strong>8</strong>  1+ years</div><div><strong>6</strong>  6+ months</div><div><strong>4</strong>   3+ months</div><div><strong>2</strong>   1+ months</div><div><strong>1</strong>   < 1 month</div><div><strong>0</strong>   future </div>"
+                        },
+                        F6: {
+                            label: "Have they published a Whitepaper?",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        }
+                    }
+                },
                 Social: {
-                    sectionTitle: "Activity on social media",
+                    sectionTitle: "Social Media",
+                    items: {
+                        B1: {
+                            label: "Activity on Blog",
+                            sublabel: "Are they posting every 10 days or less?",
+                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO</div>"
+                        },
+                        B2: {
+                            label: "Activity on Facebook",
+                            sublabel: "Are they posting every 3 days or less?",
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
+                        },
+                        B3: {
+                            label: "Activity on Twitter",
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong> NO</div>"
+                        },
+                        B4: {
+                            label: "Do they have a YouTube channel?",
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
+                        },
+                        B5: {
+                            label: "Activity on Youtube",
+                            sublabel: "Are they posting every 7 days or less?",
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong> NO</div>"
+                        }
+                    }
+                },
+                
+            },
+            "semi-centralized": {
+
+                Advisors: {
+                    sectionTitle: "Advisors",
+                    items: {
+                        D1: {
+                            label: "Advisors have bios on the website",
+                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
+                        },
+                        D2: {
+                            label: "Advisors have social media links on the website",
+                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
+                        },
+                        D3: {
+                            label: "2+ advisors have managed multi million dollar companies",
+                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO </div>"
+                        }
+                    }
+                },
+                Buzz: {
+                    sectionTitle: "Buzz",
+                    items: {
+                        E1: {
+                            label: "Total community size compared to other coins",
+                            sublabel: "Facebook, Twitter, YouTube, Reddit",
+                            description: "<div><strong>100</strong> 99th-percentile</div><div><strong>90</strong> 95th-percentile</div><div><strong>80</strong> 85th-percentile</div><div><strong>50</strong> 50th-percentile</div><div><strong>30</strong> 30th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        }
+                    }
+                },
+                Coin: {
+                    sectionTitle: "Coin strength",
+                    items: {
+                        G1: {
+                            label: "Transactions per second compared to other coins",
+                            description: "<div><strong>8</strong> 95th-percentile</div><div><strong>6</strong> 75th-percentile</div><div><strong>4</strong> 50th-percentile</div><div><strong>2</strong> 30rd-percentile</div><div><strong>1</strong> 15th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        },
+                        G2: {
+                            label: 'What is their coin emission rate? Is the coin"s inflation under control?',
+                            description: "<div><strong>30</strong> No new tokens created<div><strong>30</strong> Deflationary through token burning<div><strong>15</strong> Emitted in proportion to amount of network activity<div><strong>15</strong> 2nd round might occur<div><strong>0</strong>  Company can decide </div>"
+                        },
+                        G3: {
+                            label: "Is the coin among the top traded coins for the past 3 months in terms of transaction volumes?",
+                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        },
+                        G4: {
+                            label: "Is the coin among the top traded coins for the past 3 months in terms of market capitalization?",
+                            description: "<div><strong>25</strong> 99th-percentile</div><div><strong>24</strong> 95th-percentile</div><div><strong>22</strong> 85th-percentile</div><div><strong>18</strong> 50th-percentile</div><div><strong>9</strong> 30th-percentile</div><div><strong>5</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        },
+                        G5: {
+                            label: "Has the coin outperformed the rest of the market trend since it started trading?",
+                            description: "<div><strong>20</strong> 99th-percentile</div><div><strong>18</strong> 95th-percentile</div><div><strong>16</strong> 85th-percentile</div><div><strong>8</strong> 50th-percentile</div><div><strong>6</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
+                        }
+                    }
+                },
+                Communication: {
+                    sectionTitle: "Communication",
+                    items: {
+                        A1: {
+                            label: "Ability to contact the company via: Slack, Telegram or ICQ",
+                            description: "<div><strong>70</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
+                        },
+                        A2: {
+                            label: "Ability to contact the company via: Contact form or Email",
+                            description: "<div><strong>30</strong> ANY NOT EMPTY</div><div><strong>0</strong> ALL EMPTY</div>"
+                        }
+                    }
+                },
+              
+                Product: {
+                    sectionTitle: "Product",
+                    items: {
+                        F1: {
+                            label: "Product development status (i.e. stage)",
+                            description: "<div><strong>50</strong> Fully working product</div><div><strong>40</strong> Beta version</div><div><strong>30</strong> Alpha version</div><div><strong>25</strong> Prototype / MVP</div><div><strong>20</strong> Demo only<div><strong>10</strong> Just an Idea</div><div><strong>0</strong> Unknown </div>"
+                        },
+                        F2: {
+                            label: "Have they open sourced their code?",
+                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        },
+                        F3: {
+                            label: "Have they published a Product roadmap?",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        },
+                        F4: {
+                            label: "Is their Product roadmap up to date?",
+                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        },
+                        F5: {
+                            label: "Product age (Todayâ€™s date - Release date)",
+                            description: "<div><strong>10</strong>  5+ years</div><div><strong>8</strong>  1+ years</div><div><strong>6</strong>  6+ months</div><div><strong>4</strong>   3+ months</div><div><strong>2</strong>   1+ months</div><div><strong>1</strong>   < 1 month</div><div><strong>0</strong>   future </div>"
+                        },
+                        F6: {
+                            label: "Have they published a Whitepaper?",
+                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
+                        }
+                    }
+                },
+                Social: {
+                    sectionTitle: "Social Media",
                     items: {
                         B1: {
                             label: "Activity on Blog",
@@ -1130,87 +1216,8 @@
                         }
                     }
                 },
-                Advisors: {
-                    sectionTitle: "Advisory board strength",
-                    items: {
-                        D1: {
-                            label: "Advisors have bios on the website",
-                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
-                        },
-                        D2: {
-                            label: "Advisors have social media links on the website",
-                            description: "<div><strong>25</strong> YES</div><div><strong>0</strong> NO </div>"
-                        },
-                        D3: {
-                            label: "2+ advisors have managed multi million dollar companies",
-                            description: "<div><strong>50</strong> YES</div><div><strong>0</strong> NO </div>"
-                        }
-                    }
-                },
-                Buzz: {
-                    sectionTitle: "Brand awareness/Buzz",
-                    items: {
-                        E1: {
-                            label: "Total community size compared to other coins",
-                            sublabel: "Facebook, Twitter, YouTube, Reddit",
-                            description: "<div><strong>100</strong> 99th-percentile</div><div><strong>90</strong> 95th-percentile</div><div><strong>80</strong> 85th-percentile</div><div><strong>50</strong> 50th-percentile</div><div><strong>30</strong> 30th-percentile</div><div><strong>10</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        }
-                    }
-                },
-                Product: {
-                    sectionTitle: "Product strength",
-                    items: {
-                        F1: {
-                            label: "Product development status (i.e. stage)",
-                            description: "<div><strong>50</strong> Fully working product</div><div><strong>40</strong> Beta version</div><div><strong>30</strong> Alpha version</div><div><strong>25</strong> Prototype / MVP</div><div><strong>20</strong> Demo only<div><strong>10</strong> Just an Idea</div><div><strong>0</strong> Unknown </div>"
-                        },
-                        F2: {
-                            label: "Have they open sourced their code?",
-                            description: "<div><strong>20</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        },
-                        F3: {
-                            label: "Have they published a Product roadmap?",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        },
-                        F4: {
-                            label: "Is their Product roadmap up to date?",
-                            description: "<div><strong>5</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        },
-                        F5: {
-                            label: "Product age (Todayâ€™s date - Release date)",
-                            description: "<div><strong>10</strong>  5+ years</div><div><strong>8</strong>  1+ years</div><div><strong>6</strong>  6+ months</div><div><strong>4</strong>   3+ months</div><div><strong>2</strong>   1+ months</div><div><strong>1</strong>   < 1 month</div><div><strong>0</strong>   future </div>"
-                        },
-                        F6: {
-                            label: "Have they published a Whitepaper?",
-                            description: "<div><strong>10</strong> YES</div><div><strong>0</strong>  NO </div>"
-                        }
-                    }
-                },
-                Coin: {
-                    sectionTitle: "Coin strength",
-                    items: {
-                        G1: {
-                            label: "Transactions per second compared to other coins",
-                            description: "<div><strong>8</strong> 95th-percentile</div><div><strong>6</strong> 75th-percentile</div><div><strong>4</strong> 50th-percentile</div><div><strong>2</strong> 30rd-percentile</div><div><strong>1</strong> 15th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        },
-                        G2: {
-                            label: 'What is their coin emission rate? Is the coin"s inflation under control?',
-                            description: "<div><strong>30</strong> No new tokens created<div><strong>30</strong> Deflationary through token burning<div><strong>15</strong> Emitted in proportion to amount of network activity<div><strong>15</strong> 2nd round might occur<div><strong>0</strong>  Company can decide </div>"
-                        },
-                        G3: {
-                            label: "Is the coin among the top traded coins for the past 3 months in terms of transaction volumes?",
-                            description: "<div><strong>17</strong> 99th-percentile</div><div><strong>16</strong> 95th-percentile</div><div><strong>14</strong> 85th-percentile</div><div><strong>10</strong> 50th-percentile</div><div><strong>7</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        },
-                        G4: {
-                            label: "Is the coin among the top traded coins for the past 3 months in terms of market capitalization?",
-                            description: "<div><strong>25</strong> 99th-percentile</div><div><strong>24</strong> 95th-percentile</div><div><strong>22</strong> 85th-percentile</div><div><strong>18</strong> 50th-percentile</div><div><strong>9</strong> 30th-percentile</div><div><strong>5</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        },
-                        G5: {
-                            label: "Has the coin outperformed the rest of the market trend since it started trading?",
-                            description: "<div><strong>20</strong> 99th-percentile</div><div><strong>18</strong> 95th-percentile</div><div><strong>16</strong> 85th-percentile</div><div><strong>8</strong> 50th-percentile</div><div><strong>6</strong> 30th-percentile</div><div><strong>4</strong> 10th-percentile</div><div><strong>0</strong> 0-10th percentile </div>"
-                        }
-                    }
-                }
+                
+               
             }
         })
 

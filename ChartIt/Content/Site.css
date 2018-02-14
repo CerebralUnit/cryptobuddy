@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+﻿@import url('https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans');
 html {
     height: 100%;
 }
@@ -16,6 +16,9 @@ body {
 }
 tr.showIfLast {
 display:none;
+}
+text {
+    font-family: 'Montserrat', sans-serif;
 }
 tr.showIfLast:last-child{
     display:table-row;
@@ -1137,11 +1140,33 @@ dl > dl {
     background: #0e151d;
     border: 8px solid #0d1013;
     width: 33.333333%;
-    padding: 16px 16px 0;
+    padding: 0 16px 0;
+    position: relative;
+    min-height: 636px;
 }
-dt.section-title.ng-binding {
+dt.section-title {
     padding: 0 0 16px;
-    font-size: 125%;
+    font-size: 302%;
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
+    text-transform: uppercase;
+    padding: 0;
+    height: 45px;
+    line-height: 57px;
+    letter-spacing: -4px;
+    margin: -8px -16px 0;
+    opacity: 1;
+    position: absolute;
+    z-index: 11;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 240px;
+    padding-bottom: 0;
+    color: #0e151d;
+    padding-right: 4px;
 }
 .fw-progress-wrapper {
     background: #000;
@@ -1154,39 +1179,41 @@ dt.section-title.ng-binding {
 
 }
 dt.c100 {
-    flex: 0;
-    display: block;
-    min-width: 0 !important;
+    overflow: hidden;
+    min-height: 220px;
     padding-left: 0 !important;
     flex: 0;
-    display: block;
     min-width: 0 !important;
-    padding-left: 0 !important;
     float: none;
     display: flex;
     align-items: center;
     justify-content: center;
     width: auto;
     margin: 0 -16px 16px;
-    padding: 29px 0;
+    padding: 0;
     background-color: #000 !important;
     border-radius: 0;
     height: auto;
     position: relative;
+    background: linear-gradient(to bottom, #fafeff14 2px, #000 2px);
 }
 .c100:after {
     position: absolute;
-    top: 0.315em;
+    top: -27%;
+    transform: rotate(-10deg);
     display: block;
     content: " ";
+    background: linear-gradient(to top, #b4d6ff3d, rgba(255,255,255,0) 59%);
+    opacity: 0.65;
+    height: 173px;
+    left: -80%;
+    right: -2%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     border-radius: 50%;
-    background-color: whitesmoke;
-    width: 0.84em;
-    height: 0.84em;
+    width: auto;
     -webkit-transition-property: all;
     -moz-transition-property: all;
     -o-transition-property: all;
@@ -1302,26 +1329,38 @@ span.ref-label {
 .sub-score {
     display: block;
     /* float: left; */
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
     background: #1fecff;
     text-align: center;
+    position: relative;
     font-size: 80%;
     margin-right: 16px;
-    color: #000;
-    border-radius: 50%;
+    color: #9eff20;
+    border-radius: 0;
+    background: #00000000 !important;
     flex: 1;
-    max-width: 40px;
+    max-width: 80px;
+    /* display: flex; */
+    align-items: center;
+    /* justify-content: center; */
+    height: 70px;
+    font-size: 133%;
+    font-weight: bold;
+    font-family: Montserrat;
+    padding: 21px 6px;
+    border-right: 1px solid #ffffff05;
+    /* padding-right: 16px; */
+    margin: -16px 16px -16px -16px;
+    text-align: center;
+    overflow: hidden;
 }
     .sub-score.good {
-        background: #9EFF20
+        color: #9EFF20
     }
     .sub-score.okay {
-        background: orange
+        color: orange
     }
     .sub-score.bad {
-        background: #ff207d
+        color: #ff207d
     }
 .sub {
     display: flex; 
@@ -1376,4 +1415,18 @@ a.btn.btn-primary.no-und {
     text-transform: uppercase;
     font-size: 80%;
     margin-bottom: 8px;
+}
+
+.bad g tspan:nth-child(2) {
+    fill: #ff207d;
+}
+.good g tspan:nth-child(2) {
+    fill: #9EFF20;
+}
+.okay g tspan:nth-child(2) {
+    fill: #f57100;
+}
+
+dt svg {
+    margin-top: -9px !important
 }
