@@ -1445,7 +1445,43 @@ a.btn.btn-primary.no-und {
 dt svg {
     margin-top: -9px !important
 }
-
+dl.total-score {
+    flex: 1 1 100%;
+    min-height: 0;
+    border: none;
+    margin: 0 -8px 8px;
+}
+    dl.total-score > dt.c100 {
+        margin: 0 -16px;
+    }
+    dl.total-score > dt.section-title {
+        color: #0d1013
+    }
+.tab-panel.scores-panel {
+    padding-top: 0;
+}
+.details-button {
+    flex: 1 1 100%;
+    margin-top: -50px;
+    padding: 0;
+    z-index: 55;
+}
+    .details-button > a.btn.btn-primary.no-und {
+ 
+        float: right;
+        background: transparent;
+        height: 40px;
+        display: block;
+        line-height: 40px;
+        text-align: center;
+        display: inline-block;
+        padding: 0 16px;
+        color: #21ebff;
+        text-transform: uppercase;
+        font-size: 100%;
+        margin-bottom: 8px;
+        border-radius: 3px;
+    }
 @media (max-width: 420px) {
 
 

@@ -171,7 +171,14 @@
                                 </dt>
                             </dl>
                             <div class="clearfix details-button">
-                                <a class="btn btn-primary no-und" href="" ng-click="toggleAllWhys()" analytics-on="click" analytics-event="Toggle full score explanations">Show all details</a>
+                                <a class="btn btn-primary no-und" href="" ng-click="toggleAllWhys()" analytics-on="click" analytics-event="Toggle full score explanations">
+                                    <span ng-if="allWhys">
+                                        Hide
+                                    </span>
+                                    <span ng-if="!allWhys">
+                                        Show
+                                    </span>  all details
+                                </a>
                             </div>
                             <dl ng-repeat-start="section in coinScoreLabels" ng-if="Utils.keys(scoreDetails[section.section]).length">
 
