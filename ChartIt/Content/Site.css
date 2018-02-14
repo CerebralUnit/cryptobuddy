@@ -1209,7 +1209,7 @@ dt.c100 {
     transform: rotate(-10deg);
     display: block;
     content: " ";
-    background: linear-gradient(to top, #b4d6ff3d, rgba(255,255,255,0) 59%);
+    background: linear-gradient(to top, rgba(180, 214, 255, 0.24), rgba(255,255,255,0) 59%);
     opacity: 0.65;
     height: 173px;
     left: -80%;
@@ -1361,7 +1361,7 @@ span.ref-label {
     margin-right: 16px;
     color: #9eff20;
     border-radius: 0;
-    background: #00000000 !important;
+    background: transparent !important;
     flex: 1;
     max-width: 80px;
     /* display: flex; */
@@ -1370,9 +1370,9 @@ span.ref-label {
     height: 70px;
     font-size: 133%;
     font-weight: bold;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     padding: 21px 6px;
-    border-right: 1px solid #ffffff05;
+    border-right: 1px solid rgba(255, 255, 255, 0.02);
     /* padding-right: 16px; */
     margin: -16px 16px -16px -16px;
     text-align: center;
