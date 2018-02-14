@@ -499,11 +499,14 @@ nvd3 .nv-x .tick line {
     min-height: 600px;
     height: 600px !important;
 }
-.chart-wrapper {
+#main-chart {
     background: #0d1013;
-    min-height: 660px;
-    padding: 16px; 
+    height: 657px;
+    padding: 3px;
 }
+    #main-chart iframe {
+        background: #000;
+    }
 select {
     background: #262d33;
     color: #fff;
@@ -1481,6 +1484,25 @@ dl.total-score {
         font-size: 100%;
         margin-bottom: 8px;
         border-radius: 3px;
+    }
+.chart-wrapper, .tab-panel.chart {
+    padding: 0;
+}
+.tradingview-widget-container, .tradingview-widget-container > div:first-child {
+    height: 100%;
+    min-height: 600px;
+    position: relative;
+}
+    .tradingview-widget-container > div:first-child > div:first-child {
+        position: absolute;
+        box-sizing: content-box;
+        left: 0;
+        right: 0;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        font-family: Arial,sans-serif;
+        top: 0;
+        bottom: 0;
     }
 @media (max-width: 420px) {
 

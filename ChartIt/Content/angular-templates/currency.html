@@ -88,9 +88,12 @@
                     <li ng-click="bottomTabs.panel = 'rating'" ng-class="{'is-active': bottomTabs.panel === 'rating'}"><a>Rating</a></li>
                 </ul>
             </div>
-            <div class="tab-panel" ng-class="{active: bottomTabs.panel === 'charts'}">
+            <div class="tab-panel chart" ng-class="{active: bottomTabs.panel === 'charts'}">
                 <div class="chart-wrapper">
-                    <stock-chart id="test" options="config.stockChart" style="width:100%; height:600px;" ng-if="$parent.state.isLoaded"></stock-chart>
+                  
+                        <div id="main-chart" ng-if="tradingViewSucceeded !== false"></div>  
+              
+                        <stock-chart id="test" options="config.stockChart" style="width:100%; height:600px;" ng-if="$parent.state.isLoaded && tradingViewSucceeded === false"></stock-chart> 
                 </div>
             </div>
             <div id="sentiment-tab" class=" tab-panel" ng-class="{active: bottomTabs.panel === 'sentiment'}"> 

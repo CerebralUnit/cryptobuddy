@@ -384,14 +384,21 @@ namespace ChartIt.Data
                     Response.Add("Research", new Dictionary<string, object>());
                     Response.Add("market", new Dictionary<string, object>());
                     Response.Add("github", new Dictionary<string, object>());
-                    Response["Overall"].Add("Total", jsonObj["total_score"].Value<int>());
-                    foreach (var v in github)
-                    {
-                        var key = v.Key;
-                        var val = v.Value == null || v.Value.Type == JTokenType.Null ? String.Empty : v.Value.Value<object>();
 
-                        Response["github"].Add(key, val);
+                    if (jsonObj["total_score"] != null && jsonObj["total_score"].Type != JTokenType.Null)
+                        Response["Overall"].Add("Total", jsonObj["total_score"].Value<int>());
+
+                    if (github != null)
+                    {
+                        foreach (var v in github)
+                        {
+                            var key = v.Key;
+                            var val = v.Value == null || v.Value.Type == JTokenType.Null ? String.Empty : v.Value.Value<object>();
+
+                            Response["github"].Add(key, val);
+                        }
                     }
+               
 
                     foreach (var v in market)
                     {

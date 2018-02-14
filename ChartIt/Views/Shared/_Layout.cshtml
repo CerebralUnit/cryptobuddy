@@ -63,7 +63,7 @@
     <script src="~/Scripts/amcharts.js"></script>
     <script src="~/Scripts/serial.js"></script>
     <script src="~/Scripts/amstock.js"></script>
-
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.8/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.8/angular-animate.min.js"></script>
@@ -110,15 +110,15 @@
 
     <script>
 
-       
+
 
         var cb = angular.module('cryptobuddy', ['ngRoute', 'ngTouch', 'ngAnimate', 'ngSanitize', 'tableSort', 'nvd3', 'amCharts', 'ui.bootstrap']).run(function ($rootScope) {
-         
+
             $rootScope.Utils = {
                 keys: Object.keys
             }
 
-        
+
         })
             .config(['tableSortConfigProvider', function (tableSortConfigProvider) {
                  /* Template Tokens - all are replaced by Angular expressions
@@ -1393,11 +1393,19 @@
         }])
         cb.controller('currencyCtrl', function ($scope, $http, $interval, $routeParams, $sce, $q, $timeout, coinScoreLabels, maxScores, scoreReferences, $filter, fieldLabels) {
 
+            
             $scope.$parent.state.isLoaded = false;
 
             $scope.id = $routeParams.id;
 
             $scope.symbol = $routeParams.symbol;
+         
+            
+               
+                    
+            
+ 
+           
 
             $scope.meta = {};
 
@@ -1765,14 +1773,15 @@
 
                                 });
                             }
-                            
+
                         }
                     }
 
 
                 }, function () { });
             }
-
+            $scope.tradingViewChart = null;
+            $scope.tradingViewSucceeded = null;
             function getMetadata() {
 
                 $http.get('/api/getcoinmeta?symbol=' + $scope.symbol + '&id=' + $scope.id).then(
@@ -1818,10 +1827,41 @@
                         }
                         $scope.$parent.state.isLoaded = true;
 
-                        $timeout(function () {
-                            initSentiment();
+                        window.addEventListener("message", function (data) {
+                            if (data.data.indexOf('widgetReady') > -1) {
+                                $scope.tradingViewSucceeded = true;
+                            }
+                        }, false);
 
+                       var topLevelSymbols = ['BTC', 'ETH', 'LTC', 'ETC']
+                        
+
+                        $timeout(function () {
+                            $scope.tradingViewChart = new TradingView.widget(
+                                {
+                                    "autosize": true,
+                                    "symbol": topLevelSymbols.indexOf($scope.symbol.toUpperCase()) ? $scope.symbol.toUpperCase() + "USD" : $scope.symbol.toUpperCase() + "BTC",
+                                    "interval": "240",
+                                    "timezone": "Etc/UTC",
+                                    "theme": "Dark",
+                                    "style": "1",
+                                    "locale": "en",
+                                    "toolbar_bg": "rgba(0, 0, 0, 1)",
+                                    "enable_publishing": false,
+                                    "hideideas": true,
+                                    "container_id": "main-chart"
+                                });
+                             
+                        }, 100)
+
+                        $timeout(function () {
+                                initSentiment();
+                              
                         }, 1000);
+                        $timeout(function () {
+                            if ($scope.tradingViewSucceeded === null)
+                                $scope.tradingViewSucceeded = false;
+                        }, 3000)
                     },
                     function (msg) {
                         $scope.$parent.state.isLoaded = true;
