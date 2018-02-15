@@ -1369,11 +1369,10 @@ dl.total-score {
         }
 
     .cb-ticker .rank-cell {
-        padding: 13px 0 0 16px;
         float: left;
         position: relative;
-        padding: 0;
-        margin-right: 5px;
+        padding: 0 !important;
+        margin-right: -5px;
     }
 
     .filtering {
@@ -1506,11 +1505,12 @@ dl.total-score {
     }
 
     .cb-ticker .price-cell.usd,
-    .cb-ticker .price-cell.btc {
+    .cb-ticker .price-cell.btc,
+    td.price-cell, td.name-cell {
         padding-bottom: 0;
         min-height: 45px;
     }
-
+ 
     td.name-cell img {
         float: right;
         padding-left: 4px;

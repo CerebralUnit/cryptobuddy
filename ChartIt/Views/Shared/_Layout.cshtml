@@ -150,7 +150,7 @@
                                     "<span ng-if='FILTERED_COUNT !==  TOTAL_COUNT'>{{FILTERED_COUNT | number}} {{FILTERED_COUNT === 1 ? ITEM_NAME_SINGULAR : ITEM_NAME_PLURAL}} (filtered from {{TOTAL_COUNT  | number}})</span>" +
                                     "</small> " +
                                     "<nav class='pagination' role='navigation' aria-label='pagination'>" +
-                                    "<ul class='pagination-list' uib-pagination style='vertical-align:middle;' ng-if='ITEMS_PER_PAGE <  TOTAL_COUNT' ng-model='CURRENT_PAGE_NUMBER' total-items='FILTERED_COUNT' boundary-links='true' items-per-page='ITEMS_PER_PAGE' max-size='5' force-ellipses='true'></ul>" +
+                                    "<ul class='pagination-list' uib-pagination style='vertical-align:middle;' ng-if='ITEMS_PER_PAGE <  TOTAL_COUNT' ng-model='CURRENT_PAGE_NUMBER' total-items='FILTERED_COUNT' boundary-links='true' items-per-page='ITEMS_PER_PAGE' max-size='4' force-ellipses='true'></ul>" +
                                     "</nav>" +
                                 "</div>";
             tableSortConfigProvider.paginationTemplate = pagerString;
