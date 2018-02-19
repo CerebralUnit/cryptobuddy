@@ -1,15 +1,46 @@
-﻿<div> 
+﻿<div>
     <style>
         .container {
-        
             width: 100%;
-            max-width: 100%; 
+            max-width: 100%;
         }
     </style>
+
     <select ng-model="tickerState.conversion" class="currency-select">
         <option value="USD">USD</option>
-        <option value="BTC">BTC</option> 
+        <option value="BTC">BTC</option>
     </select>
+    <span class="advanced-filter-btn">
+        <a href ng-click="advancedFiltering.enabled = true" ng-if="!advancedFiltering.enabled">Show Advanced Filters</a>
+        <a href ng-click="advancedFiltering.enabled = false; removeAllAdvancedFilters();"  ng-if="advancedFiltering.enabled">Hide Advanced Filters</a>
+    </span>
+    <div class='filtering fa fa-search search-wrapper'>
+
+        <input type='text' placeholder='filter {{ITEM_NAME_PLURAL}}' ng-model='customFilters.name' />
+
+    </div>
+    <div class="advanced-filtering" ng-show="advancedFiltering.enabled">
+        <div class="clearfix">
+
+            <a href class="add-filter" ng-click="addAdvancedFilter()">New Filter</a>
+            <a href class="add-filter" ng-click="removeAllAdvancedFilters()" ng-if="advancedFiltering.filters.length > 1">Clear</a>
+
+            <div class="advanced-filters">
+                <div class="advanced-filter" ng-repeat="filter in advancedFiltering.filters">
+                    <span class="filter-and" ng-if="$index > 0">And </span>
+                    <select ng-options="item.value as item.text for item in advancedFiltering.filterProperties" ng-model="filter.property">
+                        <option value="" disabled selected>Select a Property...</option>
+                    </select>
+                    <select class="operator-select" ng-options="operator for operator in advancedFiltering.filterOperator" ng-model="filter.operator"></select>
+                    <input type="text" name="name" ng-model="filter.value" />
+
+
+                    <a href class="removeFilter" ng-click="removeAdvancedFilter($index)" ng-if="$index > 0">&times;</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <table class="cb-ticker table" ts-filter-fields="Id,Name,Symbol" ts-no-data-text="Nothing to see here..." ts-wrapper ts-display-filtering="true" ts-filter-function="customFilterFn" ts-no-data-text="Nothing to see here!">
         <thead>
             <tr>
@@ -18,7 +49,7 @@
                 <th ts-criteria="PriceUsd" ng-show="tickerState.conversion === 'USD'">Price USD</th>
                 <th ts-criteria="PriceBtc" ng-show="tickerState.conversion === 'BTC'">Price BTC</th>
                 <th ts-criteria="MarketCapUsd">Market Cap</th>
-                <th ts-criteria="Volume24hUsd">Volume</th> 
+                <th ts-criteria="Volume24hUsd">Volume</th>
                 <th ts-criteria="ATH">ATH</th>
                 <th ts-criteria="ATH/PriceUsd">Next ATH</th>
                 <th ts-criteria="LastATH">Last ATH</th>
@@ -30,7 +61,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="coin in ticker track by coin.Name" ts-repeat ng-tap="goTo('#/currency/{{coin.Id}}/{{coin.Symbol}}')">
+            <tr ng-repeat="coin in ticker track by coin.Id" ts-repeat ng-tap="goTo('#/currency/{{coin.Id}}/{{coin.Symbol}}')">
                 <td class="rank-cell"><span>{{coin.Rank}}</span></td>
                 <td class="name-cell">
                     <img class="crypto-logo" width="24" height="24" ng-src="https://files.coinmarketcap.com/static/img/coins/32x32/{{ urlFriendly(coin.Id) }}.png" alt="{{coin.Name}}" />
@@ -71,7 +102,7 @@
                     <span class="mobile-label">Age: </span><div class="clearfix" ng-bind-html="daysToYMD(coin.DaysOld)"></div>
                 </td>
                 <td class="rating-cell" ng-if="scores.hasOwnProperty(coin.Id)">
-                    <span class="mobile-label" >Rating: </span>
+                    <span class="mobile-label">Rating: </span>
                     <div class="clearfix rating-value">{{coin.Score.toFixed(2)}}</div>
                     <div class="rating-bar">
                         <div class="rating-bar-fill" style=" background-color: {{ coin.Score < 60 ? '#ff207d' : '#9EFF20'}}; transform: scaleX({{coin.Score/100}});"></div>

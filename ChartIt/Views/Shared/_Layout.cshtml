@@ -133,12 +133,12 @@
              * ITEM_NAME_PLURAL    - The plural version of the name of the items being iterated over
              */
                 var filterString =  " <div class='filtering fa fa-search search-wrapper'>" +
-                                        "<input type='text' placeholder='filter {{ITEM_NAME_PLURAL}}' ng-model='FILTER_STRING' />"+
+                                        "<input type='text' placeholder='filter {{ITEM_NAME_PLURAL}}' ng-model='customFilters.name' />"+
                                      "</div>"
                 tableSortConfigProvider.perPageOptions = [20, 50, 100]
                 tableSortConfigProvider.perPageDefault = 20
 
-                tableSortConfigProvider.filterTemplate = filterString;
+                //tableSortConfigProvider.filterTemplate = filterString;
                 var pagerString = "<div class='table-footer'>" +
 
 
@@ -1273,6 +1273,95 @@
             refreshTicker();
             $scope.tickerState = {
                 conversion: 'USD'
+            }
+            $scope.customFilters = {
+                name: ""
+            }
+            $scope.advancedFiltering = {
+                enabled: false,
+                filters: [{
+                    property: '',
+                    operator: '=',
+                    value: ''
+                }],
+                filterProperties: [
+                    { value: 'PriceUsd', text: 'Price USD' }, 
+                    { value: 'MarketCapUsd', text: 'Market Cap' }, 
+                    { value: 'Volume24hUsd', text: 'Volume' }, 
+                    { value: 'ATH', text: 'ATH' }, 
+                    { value: 'LastATH', text: 'Last ATH'}, 
+                    { value: 'PercentChange1h', text: 'Change (1h)' }, 
+                    { value: 'PercentChange24h', text: 'Change (24h)' }, 
+                    { value: 'PercentChange7d', text: 'Change (1w)' }, 
+                    { value: 'DaysOld', text: 'Age (days)' }, 
+                    { value: 'Score', text: 'Rating' }],
+                filterOperator: ['=', 
+                    '<', '>', 'contains']
+            };
+            
+            $scope.addAdvancedFilter = function () {
+                $scope.advancedFiltering.filters.push({
+                    property: '',
+                    operator: '='
+                })
+            }
+            $scope.removeAdvancedFilter = function (i) { 
+                $scope.advancedFiltering.filters.splice(i, 1);      
+            }
+            $scope.removeAllAdvancedFilters = function () {
+                $scope.advancedFiltering.filters = [{
+                    property: '',
+                    operator: '=',
+                    value: ''
+                }]
+            }
+            $scope.customFilterFn = function (item) {
+                var passedAdvancedFilters = true;
+
+                if ($scope.advancedFiltering.filters && $scope.advancedFiltering.filters.length && $scope.advancedFiltering.filters[0].property.length && $scope.advancedFiltering.filters[0].value.length) {
+
+                    $scope.advancedFiltering.filters.map(function (filter) {
+                        if (filter.property && filter.property.length && filter.value && filter.value.length) {
+                            switch (filter.operator) {
+                                case '=':
+                                    if (item[filter.property] !== filter.value) {
+                                        passedAdvancedFilters = false;
+                                    } 
+                                    break;
+                                case '>':
+                                    if (!item[filter.property] || parseFloat(item[filter.property]) <= parseFloat(filter.value)) {
+                                        passedAdvancedFilters = false;
+                                    } 
+                                    break;
+                                case '<':
+                                    if (!item[filter.property] || parseFloat(item[filter.property]) >= parseFloat(filter.value)) {
+                                        passedAdvancedFilters = false;
+                                    } 
+                                    break;
+                                case 'contains':
+                                    if (item[filter.property].toLowerCase().indexOf(filter.value.toLowerCase()) === -1 ) {
+                                        passedAdvancedFilters = false;
+                                    } 
+                                    break; 
+                            }
+                        }
+                });
+
+                }
+                if (passedAdvancedFilters && $scope.customFilters.name == "") {
+                    return item;
+                }
+                else if (
+                    passedAdvancedFilters &&
+                    (
+                    item.Name.toLowerCase().indexOf($scope.customFilters.name.toLowerCase()) > -1 || 
+                    item.Symbol.toLowerCase().indexOf($scope.customFilters.name.toLowerCase()) > -1 ||
+                    item.Id.toLowerCase().indexOf($scope.customFilters.name.toLowerCase()) > -1
+                )) {
+                    return true; 
+                } else {
+                    return false; 
+                }
             }
             $scope.daysToYMD = function humanise(days) {
                 if (!days)

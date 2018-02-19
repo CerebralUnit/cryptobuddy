@@ -510,6 +510,40 @@ nvd3 .nv-x .tick line {
     min-height: 600px;
     height: 600px !important;
 }
+.advanced-filter {
+    margin-bottom: 16px;
+}
+    .advanced-filter:after{
+        display:table;
+        content: ' ';
+        clear:both;
+    } 
+    .advanced-filter:first-child {
+        margin-left: 37px;
+    }
+    .advanced-filter:last-child{
+        margin-bottom:0;
+    }
+.filter-and {
+    display: block;
+    float: left;
+    width: 37px;
+    height: 37px;
+    line-height: 37px;
+}
+.advanced-filter-btn {
+    float: right;
+    display: block;
+    height: 37px;
+    line-height: 37px;
+    padding: 0 16px;
+    background: #262d33;
+    margin-left: 16px;
+    border-radius: 3px;
+}
+.advanced-filters{
+    float: left;
+}
 #main-chart {
     background: #0d1013;
     height: 657px;
@@ -518,13 +552,50 @@ nvd3 .nv-x .tick line {
     #main-chart iframe {
         background: #000;
     }
-select {
+.advanced-filtering {
+    background: #0d1013;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.night a.removeFilter {
+    width: 37px;
+    height: 37px;
+    line-height: 37px;
+    text-align: center;
+    display: block;
+    float: right;
+    border: 1px solid #262d33;
+    border-radius: 3px;
+    margin-left: 5px;
+    color: #fff;
+    background: #000;
+}
+.add-filter {
+    float: right;
+    height: 37px;
+    line-height: 37px;
+    padding: 0 16px;
+    background: #262d33;
+    border-radius: 3px;
+    color: #fff;
+    margin-left:16px;
+}
+select, input[type=text] {
     background: #262d33;
     color: #fff;
     height: 37px;
     border-radius: 3px;
     border: none;
     padding: 0 6px;
+}
+.advanced-filter select,
+.advanced-filter input{
+    float:left;
+    margin-right:6px;
+}
+select.operator-select {
+font-size:18px;
 }
 nav.pagination {
     float: right;
